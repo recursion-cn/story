@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block css-area %}
+<link rel="stylesheet" href="/assets/css/edit.css">
+{% end %}
+{% block main %}
+<div class="main container-fluid clearfix edit-panel">
+    <label><h3>编辑文章</h3></label>
+    <div class="row">
+        <div class="col-md-12">
+            <textarea class="form-control" rows="23" autofocus></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-9">
+            <button class="btn btn-primary btn-block">发布</button>
+        </div>
+    </div>
+</div>
+{% end %}

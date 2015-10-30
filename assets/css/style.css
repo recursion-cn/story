@@ -1,0 +1,69 @@
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  padding: 78px 0 0;
+  font: 12px "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, Helvetica, Arial, sans-serif;
+  background-color: #eceff1;
+}
+input.form-control,
+textarea.form-control {
+  outline: none;
+  border-radius: 0;
+}
+textarea.form-control {
+  resize: none;
+  border-color: #e1e1e1;
+}
+.header {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #2b85c5;
+}
+.header .navbar-default {
+  width: 62%;
+  max-height: 50px;
+  margin: 0 auto;
+  background-color: #2b85c5;
+}
+.header .navbar-default .navbar-header a:hover {
+  color: #fff;
+}
+.header .navbar-default .navbar-nav li:hover {
+  background-color: #36698e;
+}
+.header .navbar-default .navbar-nav li a:hover {
+  color: #fff;
+}
+.header .navbar-fixed-top {
+  border: 0;
+}
+.header .navbar-header a,
+.header .nav.navbar-nav a {
+  color: #fff;
+}
+.main {
+  width: 60%;
+  height: 100%;
+  margin: 0 auto;
+  padding-bottom: 100px;
+}
+.main-body,
+.main-side {
+  min-height: 100px;
+  background-color: #ffffff;
+  border: 1px solid #e1e1e1;
+}
+@media screen and (max-width: 1200px) {
+  .main {
+    width: 100%;
+  }
+}
+::selection {
+  background-color: #16a588;
+  color: #fff;
+}

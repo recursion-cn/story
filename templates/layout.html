@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta charset="UTF-8">
+    <title>Ring</title>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    {% block css-area %}{% end %}
+</head>
+<body>
+    <div class="header">
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand">Recursion</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/records">纪录</a>
+                        </li>
+                        <li>
+                            <a href="/records/edit">写文章</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            {% if not current_user %}
+                                <a href="/users/login">登录</a>
+                            {% else %}
+                                <a href="/users/profile/{{ current_user.id }}">{{ current_user.nick }}</a>
+                            {% end %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block main %} Ring  {% end %}
+</body>
+<script type="text/javascript" src="/assets/dist/js/dep.js"></script>
+<script type="text/javascript" src="/assets/dist/js/app.js"></script>
+{% block js-area  %}
+{% end %}
+</html>
