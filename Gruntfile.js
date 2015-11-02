@@ -16,10 +16,10 @@ module.exports = function(grunt) {
                 files: ['assets/less/*.less'],
                 tasks: ['less']
             },
-            /*js: {
+            js: {
                 files: ['assets/js/*.js'],
                 tasks: ['webpack']
-            }*/
+            }
         }
 
     });
