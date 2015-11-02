@@ -14,7 +14,7 @@ get the records list
 class ListHandler(baseHandler.RequestHandler):
 
     def get(self):
-        query = 'select id, name, inventory, title from product where active = 1'
+        query = 'select id, title, content, created, updated from tb_post where visible = 1'
         records = db.query(query)
 
         self.render('index.html', records=records)

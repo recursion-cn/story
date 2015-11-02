@@ -1,3 +1,16 @@
 .edit-panel .row {
   margin-bottom: 10px;
 }
+.edit-panel .editor-area .editor-header {
+  height: 30px;
+}
+.edit-panel .editor-area .editor-body {
+  border: 1px solid #e1e1e1;
+}
+.edit-panel .editor-area textarea {
+  border: 0;
+}
+.edit-panel .editor-area textarea:focus,
+.edit-panel .editor-area textarea.form-control:focus {
+  box-shadow: none;
+}
