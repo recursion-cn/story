@@ -20,9 +20,23 @@ class ListHandler(baseHandler.RequestHandler):
         self.render('index.html', records=records)
 
 """
-direct to the edit page 
+direct to the edit page
 """
 class EditHandler(baseHandler.RequestHandler):
-    
-    def get(self):
-        self.render('edit.html')
+
+    def get(self, record_id=None):
+        get_categories = 'select id, name from tb_category where visible = 1'
+        categories = db.query(get_categories)
+
+        self.render('edit.html', categories=categories)
+
+"""
+create new record/post
+"""
+class NewHandler(baseHandler.RequestHandler):
+
+    def post(self):
+        title = self.get_body_argument('title')
+        content = self.get_body_argument('content')
+        category_id = self.get_body_argument('category')
+        pass
