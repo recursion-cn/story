@@ -1,21 +1,49 @@
 @import "variable.less";
 .edit-panel {
+    position: relative;
     .row {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+    }
+    .nav-tabs {
+        border-color: #ccc;
+    }
+    .nav-tabs>li.active>a {
+        border-color: #ccc;
+        border-bottom-color: transparent;
     }
     .editor-area {
+        position: relative;
         .editor-header {
             height: 30px;
+            display: none;
         }
         .editor-body {
-            border: 1px solid #e1e1e1;
+            border: 1px solid #ccc;
+            border-top: 0;
+            border-radius: 0 0 3px 3px;
         }
-        textarea {
+        textarea.form-control {
+            padding: 20px 15px 30px;
+            color: #000;
             border: 0;
+            box-shadow: none;
         }
         textarea:focus,
         textarea.form-control:focus {
             box-shadow: none;
+        }
+    }
+    .editor-preview {
+        position: relative;
+        display: none;
+        .preview-body {
+            min-height: 500px;
+            padding: 20px 15px 30px;
+            border: 1px solid #ccc;
+            border-top: 0;
+            border-radius: 0 0 3px 3px;
+            font-size: 13px;
+            background-color: @white;
         }
     }
 }

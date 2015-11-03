@@ -6,3 +6,5 @@
  */
 
 'use strict'
+
+require('expose?$!expose?jQuery!jquery');

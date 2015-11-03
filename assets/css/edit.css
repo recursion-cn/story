@@ -1,16 +1,48 @@
+.edit-panel {
+  position: relative;
+}
 .edit-panel .row {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+}
+.edit-panel .nav-tabs {
+  border-color: #ccc;
+}
+.edit-panel .nav-tabs > li.active > a {
+  border-color: #ccc;
+  border-bottom-color: transparent;
+}
+.edit-panel .editor-area {
+  position: relative;
 }
 .edit-panel .editor-area .editor-header {
   height: 30px;
+  display: none;
 }
 .edit-panel .editor-area .editor-body {
-  border: 1px solid #e1e1e1;
+  border: 1px solid #ccc;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
 }
-.edit-panel .editor-area textarea {
+.edit-panel .editor-area textarea.form-control {
+  padding: 20px 15px 30px;
+  color: #000;
   border: 0;
+  box-shadow: none;
 }
 .edit-panel .editor-area textarea:focus,
 .edit-panel .editor-area textarea.form-control:focus {
   box-shadow: none;
+}
+.edit-panel .editor-preview {
+  position: relative;
+  display: none;
+}
+.edit-panel .editor-preview .preview-body {
+  min-height: 500px;
+  padding: 20px 15px 30px;
+  border: 1px solid #ccc;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+  font-size: 13px;
+  background-color: #ffffff;
 }
