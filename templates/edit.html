@@ -14,7 +14,7 @@
                 </ul>
             </div>
             <div class="editor-body">
-                <textarea class="form-control" rows="23" autofocus></textarea>
+                <textarea id="editor" class="form-control" rows="23" autofocus></textarea>
             </div>
         </div>
     </div>
@@ -24,4 +24,7 @@
         </div>
     </div>
 </div>
+{% end %}
+{% block js-area %}
+<script src="/assets/dist/js/edit.js" type="text/javascript"></script>
 {% end %}
