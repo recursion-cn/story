@@ -5,9 +5,10 @@
 {% end %}
 {% block main %}
 <div class="main container-fluid clearfix edit-panel">
+    <label><h3>编辑文章</h3></label>
     <div class="row">
         <div class="col-md-12">
-            <input class="form-control" type="text" placeholder="输入文章标题">
+            <input class="form-control" type="text" placeholder="输入文章标题" autofocus>
         </div>
     </div>
     <ul class="nav nav-tabs">
@@ -18,7 +19,7 @@
         <div class="col-md-12">
             <div class="editor-header" id="wmd-button-bar"></div>
             <div class="editor-body">
-                <textarea id="wmd-input" class="form-control" rows="23" autofocus></textarea>
+                <textarea id="wmd-input" class="form-control" rows="23"></textarea>
             </div>
         </div>
     </div>

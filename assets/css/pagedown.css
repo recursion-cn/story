@@ -1,7 +1,12 @@
 blockquote {
-	border-left: 2px solid #888;
+	border-left: 2px solid #038D98;
 	padding-left: 5px;
-	background: #d0f0ff;
+	background: #fff;
+}
+
+code {
+    display: inline-block;
+    padding: 10px;
 }
 
 .wmd-button-bar 
