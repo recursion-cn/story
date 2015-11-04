@@ -6,6 +6,7 @@
 
 import baseHandler
 from modules.db import db
+import datetime
 
 """
 get the records list
@@ -35,8 +36,22 @@ create new record/post
 """
 class NewHandler(baseHandler.RequestHandler):
 
-    def post(self):
+    def post(self, user_id=1):
         title = self.get_body_argument('title')
         content = self.get_body_argument('content')
         category_id = self.get_body_argument('category')
-        pass
+        is_draft = self.get_body_argument('draft')
+
+        if title and content and category_id:
+            sql = 'insert into tb_post (title, content, user_id, category_id, visible, created) values (%s, %s, %s, %s, %s, %s)'
+            now = datetime.datetime.now()
+            post_id = db.insert(sql, title, content, long(user_id), int(category_id), int(is_draft), now)
+            if post_id:
+                self.write({'success': True})
+                self.finish()
+                return
+            self.write({'success': False})
+            self.finish()
+            return
+        self.write({'success': False})
+        self.finish()

@@ -11,6 +11,41 @@ const converter = new Markdown.Converter();
 const editor = new Markdown.Editor(converter);
 editor.run();
 
+const getPost = function() {
+    let post = {};
+    post.category = $('select[name="category"]').val();
+    post.title = $('input[name="title"]').val();
+    post.content = $('textarea[name="content"]').val();
+    console.log(post);
+    return post;
+};
+
+const validatePost = function(post) {
+    let validate = {valid: true};
+    for (let key in post) {
+        let value = post[key];
+        if (!value || !$.trim(value)) {
+            validate.valid = false;
+            validate.msg = key + '不允许为空';
+            return validate;
+        }
+        if (key === 'title' && key.length > 100) {
+            validate.valid = false;
+            validate.msg = '标题超过100个字符';
+            return validate;
+        }
+    }
+    validate.data = post;
+    return validate;
+};
+
+const submitPost = function(post) {
+    const url = '/records/create';
+    $.post(url, post, function(data) {
+        console.log(data);
+    });
+};
+
 $('body').on('click', '.switch-editor-mode', function(e) {
     const mode = $(this).data('mode');
     $('.switch-editor-mode').removeClass('active');
@@ -21,5 +56,25 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     } else if (mode === 'preview') {
         $('.editor-area').hide();
         $('.editor-preview').show();
+    }
+}).on('click', '.submit-btn', function(e) {
+    // 立即发布
+    e.preventDefault();
+    const validateResult = validatePost(getPost());
+    if (validateResult.valid) {
+        validateResult.data.draft = 0;
+        submitPost(validateResult.data);
+    } else {
+        // TODO
+    }
+}).on('click', '.draft-btn', function(e) {
+    // 存为草稿
+    e.preventDefault();
+    const validateResult = validatePost(getPost());
+    if (validateResult.valid) {
+        validateResult.data.draft = 1;
+        submitPost(validateResult.data);
+    } else {
+        // TODO
     }
 });
