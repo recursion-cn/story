@@ -1,10 +1,18 @@
 {% extends "layout.html" %}
+{% block css-area %}
+<link rel="stylesheet" href="/assets/css/post.css">
+{% end %}
 {% block main %}
 {% import markdown %}
 <div class="main container-fluid clearfix">
     <div class="main-body col-md-8">
         <div class="single-post">
-            {% raw markdown.markdown(post.content) %}
+            <div class="title">
+                <h3>{{ post.title }}</h3>
+            </div>
+            <div class="content">
+                {% raw markdown.markdown(post.content) %}
+            </div>
         </div>
     </div>
     <div class="main-side col-md-3 visible-lg-block visible-md-block pull-right"></div>
