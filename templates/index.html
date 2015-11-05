@@ -5,7 +5,12 @@
         {% for post in posts %}
         <div class="post">
             <div class="post-header">
-                <a href={{ "/posts/" + str(post.id) }}><h3>{{ post.title }}</h3></a>
+                <a class="title" href={{ "/posts/" + str(post.id) }}><h3>{{ post.title }}</h3></a>
+                <div class="info">
+                    <a class="author" href={{ "/users/" + str(post.user_id) }}>{{ post.author.nick }}</a>
+                    <span>最后发布于</span>
+                    <span>{{ post.last_modified }}</span>
+                </div>
             </div>
             <div class="post-body">
                 {{ post.summary }}

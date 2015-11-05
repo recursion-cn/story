@@ -17,17 +17,28 @@ get the posts list
 class ListHandler(baseHandler.RequestHandler):
 
     def get(self):
-        query = 'select id, title, content, created, updated from tb_post where visible = 1'
+        query = 'select id, title, content, user_id, category_id, created, updated from tb_post where visible = 1 order by if(updated is NULL, created, updated) desc'
         posts = db.query(query)
+        users_id = []
         if posts:
             for post in posts:
                 _html = markdown.markdown(post.content)
                 soup = BeautifulSoup(_html, 'html.parser')
                 _text = soup.get_text()
-                print _text
+                if not post['user_id'] in users_id:
+                    users_id.append(str(post['user_id']))
                 if _text and len(_text) > 200:
                     _text = _text[0:200] + '...'
                 post['summary'] = _text
+                post['last_modified'] = post['created']
+                if post['updated']:
+                    post['last_modified'] = post['updated']
+            select_uses = 'select id, nick from tb_user where id in (' + ','.join(users_id) + ')'
+            users = db.query(select_uses)
+            for post in posts:
+                for user in users:
+                    if post['user_id'] == user['id']:
+                        post['author'] = user
 
         self.render('index.html', posts=posts)
 
