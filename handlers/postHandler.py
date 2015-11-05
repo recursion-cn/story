@@ -7,6 +7,7 @@
 import baseHandler
 from modules.db import db
 import datetime
+import markdown
 
 """
 get the posts list
@@ -19,6 +20,17 @@ class ListHandler(baseHandler.RequestHandler):
         posts = db.query(query)
 
         self.render('index.html', posts=posts)
+
+"""
+get single post by id
+"""
+class PostHandler(baseHandler.RequestHandler):
+
+    def get(self, id):
+        query = 'select id, title, content, visible, created, updated from tb_post where id = %s'
+        post = db.get(query, id)
+        #post.content = markdown.markdown(post.content)
+        self.render('post.html', post=post)
 
 """
 direct to the edit page

@@ -10,6 +10,7 @@ STATIC_PATH = os.path.join(os.path.dirname(__file__), 'assets')
 
 settings = {
     'autoreload': True,
+    'autoscape': None,
     'debug': True,
     'compress_response': True,
     'template_path': TEMPLATE_PATH,

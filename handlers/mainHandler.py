@@ -9,4 +9,4 @@ import baseHandler
 class MainHandler(baseHandler.RequestHandler):
 
     def get(self):
-        self.redirect('/records')
+        self.redirect('/posts')

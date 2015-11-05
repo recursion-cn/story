@@ -4,8 +4,9 @@ import handlers.postHandler as post
 
 urls = [
     (r'/', main.MainHandler),
-    (r'/records', post.ListHandler),
-    (r'/records/edit', post.EditHandler),
-    (r'/records/create', post.NewHandler),
+    (r'/posts', post.ListHandler),
+    (r'/posts/(\d+)', post.PostHandler),
+    (r'/posts/edit', post.EditHandler),
+    (r'/posts/create', post.NewHandler),
     (r'.*', base.RequestHandler),
 ]

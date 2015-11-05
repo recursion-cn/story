@@ -40,7 +40,7 @@ const validatePost = function(post) {
 };
 
 const submitPost = function(post) {
-    const url = '/records/create';
+    const url = '/posts/create';
     $.post(url, post, function(data) {
         console.log(data);
     });
