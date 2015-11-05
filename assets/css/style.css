@@ -56,6 +56,13 @@ textarea.form-control {
   min-height: 100px;
   background-color: #ffffff;
 }
+.post .post-header a {
+  color: #000;
+}
+.post .post-body {
+  line-height: 1.7em;
+  color: #666;
+}
 .footer {
   width: 100%;
   height: 100px;
@@ -64,6 +71,7 @@ textarea.form-control {
   bottom: 0;
   border-top: 1px solid #eee;
   text-align: center;
+  background-color: #ffffff;
 }
 .footer .info {
   padding-top: 10px;

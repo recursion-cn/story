@@ -8,6 +8,7 @@ import baseHandler
 from modules.db import db
 import datetime
 import markdown
+from bs4 import BeautifulSoup
 
 """
 get the posts list
@@ -18,6 +19,15 @@ class ListHandler(baseHandler.RequestHandler):
     def get(self):
         query = 'select id, title, content, created, updated from tb_post where visible = 1'
         posts = db.query(query)
+        if posts:
+            for post in posts:
+                _html = markdown.markdown(post.content)
+                soup = BeautifulSoup(_html, 'html.parser')
+                _text = soup.get_text()
+                print _text
+                if _text and len(_text) > 200:
+                    _text = _text[0:200] + '...'
+                post['summary'] = _text
 
         self.render('index.html', posts=posts)
 
