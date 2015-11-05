@@ -9,16 +9,16 @@ from modules.db import db
 import datetime
 
 """
-get the records list
-@return records list
+get the posts list
+@return posts list
 """
 class ListHandler(baseHandler.RequestHandler):
 
     def get(self):
         query = 'select id, title, content, created, updated from tb_post where visible = 1'
-        records = db.query(query)
+        posts = db.query(query)
 
-        self.render('index.html', records=records)
+        self.render('index.html', posts=posts)
 
 """
 direct to the edit page
@@ -32,7 +32,7 @@ class EditHandler(baseHandler.RequestHandler):
         self.render('edit.html', categories=categories)
 
 """
-create new record/post
+create new post
 """
 class NewHandler(baseHandler.RequestHandler):
 
@@ -40,12 +40,12 @@ class NewHandler(baseHandler.RequestHandler):
         title = self.get_body_argument('title')
         content = self.get_body_argument('content')
         category_id = self.get_body_argument('category')
-        is_draft = self.get_body_argument('draft')
+        visible = 1 - int(self.get_body_argument('draft'))
 
         if title and content and category_id:
             sql = 'insert into tb_post (title, content, user_id, category_id, visible, created) values (%s, %s, %s, %s, %s, %s)'
             now = datetime.datetime.now()
-            post_id = db.insert(sql, title, content, long(user_id), int(category_id), int(is_draft), now)
+            post_id = db.insert(sql, title, content, long(user_id), int(category_id), int(visible), now)
             if post_id:
                 self.write({'success': True})
                 self.finish()
