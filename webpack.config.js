@@ -5,7 +5,7 @@ module.exports = {
     entry: {
         app: './assets/js/app.js',
         edit: './assets/js/edit.js',
-        //login: './assets/js/login.js',
+        login: './assets/js/login.js',
         //post: './assets/js/post.js'
     },
     output: {

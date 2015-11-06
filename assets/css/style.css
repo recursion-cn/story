@@ -98,6 +98,12 @@ textarea.form-control {
     width: 100%;
   }
 }
+.msg-area {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
 .btn-main {
   color: #fff;
   background-color: #038d98;

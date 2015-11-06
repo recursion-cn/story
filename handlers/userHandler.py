@@ -21,15 +21,15 @@ class LoginHandler(baseHandler.RequestHandler):
             self.write({'success': False, 'error_code': constants.error_code['miss_nick_or_password']})
             self.finish()
             return
-        member = db.get('select id, nick, password from tb_user where nick = %s', nick)
+        user = db.get('select id, nick, password from tb_user where nick = %s', nick)
 
-        if member:
+        if user:
             md5 = hashlib.md5()
             md5.update(password)
-            password_md5 = md5.hexdigest()
-            if member.password == password_md5:
+            password_md5 = md5.hexdigest().upper()
+            if user.password.upper() == password_md5:
                 self.set_secure_cookie('current_user', nick, 10)
-                self.write({'success': True, 'data': member})
+                self.write({'success': True, 'data': user})
                 self.finish()
                 return
         self.write({'success': False, 'error_code': constants.error_code['member_not_exist']})
