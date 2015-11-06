@@ -30,9 +30,7 @@ class ListHandler(baseHandler.RequestHandler):
                 if _text and len(_text) > 200:
                     _text = _text[0:200] + '...'
                 post['summary'] = _text
-                post['last_modified'] = post['created']
-                if post['updated']:
-                    post['last_modified'] = post['updated']
+                post['last_modified'] = post['updated'] if post['updated'] else post['created']
             select_uses = 'select id, nick from tb_user where id in (' + ','.join(users_id) + ')'
             users = db.query(select_uses)
             for post in posts:
@@ -41,6 +39,20 @@ class ListHandler(baseHandler.RequestHandler):
                         post['author'] = user
 
         self.render('index.html', posts=posts)
+
+"""
+get user's drafts
+"""
+class DraftListHandler(baseHandler.RequestHandler):
+
+    def get(self):
+        query = 'select id, title, content, created, updated from tb_post where user_id = %s and visible = 0 order by if(updated is NULL, created, updated) desc'
+        drafts = db.query(query, self.current_user.id)
+        for draft in drafts:
+            draft['author'] = self.current_user
+            draft['last_modified'] = draft['updated'] if draft['updated'] else draft['created']
+
+        self.render('index.html', posts=drafts)
 
 """
 get single post by id
