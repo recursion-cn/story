@@ -9,6 +9,8 @@ module.exports = function(grunt) {
                     'assets/css/style.css': 'assets/less/style.less',
                     'assets/css/edit.css': 'assets/less/edit.less',
                     'assets/css/post.css': 'assets/less/post.less',
+                    'assets/css/login.css': 'assets/less/login.less',
+                    'assets/css/signup.css': 'assets/less/signup.less',
                 }
             }
         },

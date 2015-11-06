@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block css-area %}
+    <link href="/assets/css/login.css" rel="stylesheet">
+{% end %}
+{% block main %}
+    <div class="alert alert-danger msg-area error-msg" role="alert"></div>
+    <div class="login-panel">
+        <label>
+            <h3>用户登录</h3>
+        </label>
+        <form action="/users/login", method="POST">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-user"></span>
+                </span>
+                <input type="text" class="form-control" name="nick" placeholder="用户名/注册邮箱">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-lock"></span>
+                </span>
+                <input type="password" class="form-control" name="password" placeholder="密码, 6-18位">
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-block btn-main submit">登录</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    还没有账户？<a href="/users/signup">注册一个</a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% end %}
+{% block js-area %}
+    <script type="text/javascript" src="/assets/dist/js/login.js"></script>
+{% end %}

@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block css-area %}
+    <link href="/assets/css/profile.css" rel="stylesheet">
+{% end %}
+{% block main %}
+    <div class="main">
+        <div class="col-md-8 main-body">
+            {{user.nick}}
+        </div>
+        <div class="col-md-3 pull-right main-side"></div>
+    </div>
+{% end %}

@@ -98,6 +98,11 @@ textarea.form-control {
     width: 100%;
   }
 }
+.btn-main {
+  color: #fff;
+  background-color: #038d98;
+  border-color: #0D7179;
+}
 ::selection {
   background-color: #038d98;
   color: #fff;
