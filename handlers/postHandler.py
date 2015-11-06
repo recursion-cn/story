@@ -9,6 +9,7 @@ from modules.db import db
 import datetime
 import markdown
 from bs4 import BeautifulSoup
+import tornado.web
 
 """
 get the posts list
@@ -38,21 +39,27 @@ class ListHandler(baseHandler.RequestHandler):
                     if post['user_id'] == user['id']:
                         post['author'] = user
 
-        self.render('index.html', posts=posts)
+        self.render('index.html', posts=posts, draft=False)
 
 """
 get user's drafts
 """
 class DraftListHandler(baseHandler.RequestHandler):
-
+    @tornado.web.authenticated
     def get(self):
-        query = 'select id, title, content, created, updated from tb_post where user_id = %s and visible = 0 order by if(updated is NULL, created, updated) desc'
+        query = 'select id, title, content, user_id, created, updated from tb_post where user_id = %s and visible = 0 order by if(updated is NULL, created, updated) desc'
         drafts = db.query(query, self.current_user.id)
         for draft in drafts:
             draft['author'] = self.current_user
             draft['last_modified'] = draft['updated'] if draft['updated'] else draft['created']
+            _html = markdown.markdown(draft.content)
+            soup = BeautifulSoup(_html, 'html.parser')
+            _text = soup.get_text()
+            if _text and len(_text) > 200:
+                _text = _text[0:200] + '...'
+            draft['summary'] = _text
 
-        self.render('index.html', posts=drafts)
+        self.render('index.html', posts=drafts, draft=True)
 
 """
 get single post by id
@@ -69,7 +76,7 @@ class PostHandler(baseHandler.RequestHandler):
 direct to the edit page
 """
 class EditHandler(baseHandler.RequestHandler):
-
+    @tornado.web.authenticated
     def get(self, record_id=None):
         get_categories = 'select id, name from tb_category where visible = 1'
         categories = db.query(get_categories)
@@ -80,7 +87,7 @@ class EditHandler(baseHandler.RequestHandler):
 create new post
 """
 class NewHandler(baseHandler.RequestHandler):
-
+    @tornado.web.authenticated
     def post(self, user_id=1):
         title = self.get_body_argument('title')
         content = self.get_body_argument('content')

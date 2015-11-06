@@ -106,6 +106,9 @@ textarea.form-control {
   text-indent: 1.7em;
   color: #666;
 }
+.draft .post-header .title {
+  color: orange;
+}
 .footer {
   width: 100%;
   height: 100px;
