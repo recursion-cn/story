@@ -47,6 +47,35 @@ textarea.form-control {
   opacity: .7;
   transition: opacity .2s;
 }
+.header .nav-user-panel.navbar-nav li {
+  min-width: 100px;
+  text-align: center;
+}
+.header .user-panel {
+  position: absolute;
+  z-index: 101;
+  width: 100%;
+  min-width: 100px;
+  min-height: 100px;
+  background-color: #13838c;
+  top: 0;
+  text-align: center;
+  border: 1px solid #0b808a;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 0 6px #0b808a;
+  display: none;
+}
+.header .user-panel .user-panel-header {
+  height: 50px;
+  line-height: 50px;
+}
+.header .user-panel .user-panel-body {
+  padding: 10px 0;
+}
+.header .user-panel .user-panel-body .user-link-item {
+  height: 30px;
+  line-height: 30px;
+}
 .main {
   width: 60%;
   margin: 0 auto;
