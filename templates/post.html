@@ -15,7 +15,7 @@
                 {% raw markdown.markdown(post.content) %}
             </div>
             <div class="fun">
-                {% if current_user.id == post.author.id %}
+                {% if current_user and current_user.id == post.author.id %}
                     <a href={{ '/users/edit/' + str(post.id) }}>编辑</a>
                 {% end %}
             </div>

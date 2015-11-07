@@ -64,6 +64,13 @@ class SignupHandler(baseHandler.RequestHandler):
         self.write({'success': False})
         self.finish()
 
+class LogoutHandler(baseHandler.RequestHandler):
+
+     def get(self):
+        current_url = self.request.headers.get('Referer') or r'/'
+        self.clear_cookie('current_user')
+        self.redirect(current_url)
+
 class ProfileHandler(baseHandler.RequestHandler):
     def get(self, id):
         user = db.get('select id, nick, created, updated from tb_user where id = %s', id)
