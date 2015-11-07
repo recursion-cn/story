@@ -82,8 +82,10 @@ class EditHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self, post_id=None):
         if post_id:
-            get_post = 'select id, title, content, category_id from tb_post where id = %s'
+            get_post = 'select id, title, content, user_id, category_id from tb_post where id = %s'
             post = db.get(get_post, post_id)
+            if post.user_id != self.current_user.id:
+                post = None
         get_categories = 'select id, name from tb_category where visible = 1'
         categories = db.query(get_categories)
 
