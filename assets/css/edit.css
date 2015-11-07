@@ -46,3 +46,7 @@
   font-size: 14px;
   background-color: #ffffff;
 }
+.edit-panel .editor-preview .preview-body img {
+  max-width: 100%;
+  max-height: 100%;
+}
