@@ -14,6 +14,11 @@
             <div class="content">
                 {% raw markdown.markdown(post.content) %}
             </div>
+            <div class="fun">
+                {% if current_user.id == post.author.id %}
+                    <a href={{ '/users/edit/' + str(post.id) }}>编辑</a>
+                {% end %}
+            </div>
         </div>
         <div class="post-pager" role="navigation">
             <ul class="pager">
@@ -24,4 +29,7 @@
     </div>
     <div class="main-side col-md-3 visible-lg-block visible-md-block pull-right"></div>
 </div>
+{% end %}
+{% block js-area %}
+<script type="text/javascript" src="/assets/dist/js/post.js"></script>
 {% end %}

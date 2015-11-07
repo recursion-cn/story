@@ -8,7 +8,11 @@
     <label><h3>编辑文章</h3></label>
     <div class="row">
         <div class="col-md-12">
+            {% if post %}
+            <input class="form-control" type="text" name="title" value={{ post.title }} placeholder="输入文章标题" autofocus>
+            {% else %}
             <input class="form-control" type="text" name="title" placeholder="输入文章标题" autofocus>
+            {% end %}
         </div>
     </div>
     <div class="row">
@@ -16,7 +20,11 @@
             <select class="form-control" name="category">
                     <option value="">选择文章目录</option>
                 {% for category in categories %}
+                    {% if post and post.category_id == category.id %}
+                    <option value={{ category.id }} selected="selected">{{ category.name }}</option>
+                    {% else %}
                     <option value={{ category.id }}>{{ category.name }}</option>
+                    {% end %}
                 {% end %}
             </select>
         </div>
@@ -29,7 +37,9 @@
         <div class="col-md-12">
             <div class="editor-header" id="wmd-button-bar"></div>
             <div class="editor-body">
-                <textarea id="wmd-input" name="content" class="form-control" rows="23"></textarea>
+                <textarea id="wmd-input" name="content" class="form-control" rows="23">
+                    {% if post %}{{ post.content }}{% end %}
+                </textarea>
             </div>
         </div>
     </div>

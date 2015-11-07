@@ -67,9 +67,12 @@ get single post by id
 class PostHandler(baseHandler.RequestHandler):
 
     def get(self, id):
-        query = 'select id, title, content, visible, created, updated from tb_post where id = %s'
+        query = 'select id, title, content, user_id, visible, created, updated from tb_post where id = %s'
         post = db.get(query, id)
-        #post.content = markdown.markdown(post.content)
+        query_author = 'select id, nick from tb_user where id = %s'
+        author = db.get(query_author, post.user_id)
+        post['author'] = author
+
         self.render('post.html', post=post)
 
 """
@@ -77,11 +80,14 @@ direct to the edit page
 """
 class EditHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
-    def get(self, record_id=None):
+    def get(self, post_id=None):
+        if post_id:
+            get_post = 'select id, title, content, category_id from tb_post where id = %s'
+            post = db.get(get_post, post_id)
         get_categories = 'select id, name from tb_category where visible = 1'
         categories = db.query(get_categories)
 
-        self.render('edit.html', categories=categories)
+        self.render('edit.html', categories=categories, post=post)
 
 """
 create new post
