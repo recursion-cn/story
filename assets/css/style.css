@@ -60,7 +60,6 @@ textarea.form-control {
   background-color: #13838c;
   top: 0;
   text-align: center;
-  border: 1px solid #0b808a;
   border-radius: 0 0 3px 3px;
   box-shadow: 0 1px 3px #0b808a;
   display: none;
@@ -68,10 +67,18 @@ textarea.form-control {
 .header .user-panel .user-panel-header {
   height: 50px;
   line-height: 50px;
+  border-bottom: 1px solid #067A86;
 }
 .header .user-panel .user-panel-body .user-link-item {
   height: 36px;
   line-height: 36px;
+  border-bottom: 1px solid #067A86;
+}
+.header .user-panel .user-panel-body .user-link-item:last-child {
+  border-bottom: none;
+}
+.header .user-panel .user-panel-body .user-link-item:hover {
+  background-color: #289EAB;
 }
 .main {
   width: 60%;
