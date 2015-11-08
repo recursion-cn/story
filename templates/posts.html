@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block main %}
+<div class="main container-fluid clearfix">
+    <div class="main-body col-md-8">
+        {% for post in posts %}
+        {% if draft %}
+        <div class="post draft">
+        {% else %}
+        <div class="post">
+        {% end %}
+            <div class="post-header">
+                <a class="title" href={{ "/posts/" + str(post.id) }}><h3>{{ post.title }}</h3></a>
+                <div class="info">
+                    <a class="author" href={{ "/users/" + str(post.author.id) }}>{{ post.author.nick }}</a>
+                    <span>最后发布于</span>
+                    <span class="text-info">{{ post.last_modified }}</span>
+                </div>
+            </div>
+            <div class="post-body">
+                {{ post.summary }}
+            </div>
+        </div>
+        {% end %}
+    </div>
+    <div class="main-side col-md-3 visible-lg-block visible-md-block pull-right"></div>
+</div>
+{% end %}
