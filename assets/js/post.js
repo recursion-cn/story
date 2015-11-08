@@ -20,3 +20,18 @@ const markImgsZoom = function($imgs) {
         console.log(item);
     });
 };
+
+const deletePost = function(id) {
+    $.ajax({
+        url: '/posts/delete/' + id,
+        type: 'DELETE',
+        success: function(result) {
+            console.log(result);
+        }
+    });
+};
+
+$('body').on('click', '#js-delete-post', function() {
+    const id = $(this).data('id');
+    deletePost(id);
+});

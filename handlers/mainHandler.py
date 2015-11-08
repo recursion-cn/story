@@ -9,4 +9,4 @@ import baseHandler
 class MainHandler(baseHandler.RequestHandler):
 
     def get(self):
-        self.redirect('/posts')
+        self.render('index.html', posts=None)

@@ -16,7 +16,9 @@ const getPost = function() {
     post.category = $('select[name="category"]').val();
     post.title = $('input[name="title"]').val();
     post.content = $('textarea[name="content"]').val();
-    console.log(post);
+    post._public = $('input[name="public"]:checked').val();
+    post.id = $('input[name="id"]').val();
+
     return post;
 };
 
@@ -24,7 +26,7 @@ const validatePost = function(post) {
     let validate = {valid: true};
     for (let key in post) {
         let value = post[key];
-        if (!value || !$.trim(value)) {
+        if (key !== '_public' && (!value || !$.trim(value))) {
             validate.valid = false;
             validate.msg = key + '不允许为空';
             return validate;
@@ -36,6 +38,7 @@ const validatePost = function(post) {
         }
     }
     validate.data = post;
+    
     return validate;
 };
 

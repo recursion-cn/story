@@ -2,6 +2,7 @@
 {% block main %}
 <div class="main container-fluid clearfix">
     <div class="main-body col-md-8">
+        {% if posts %}
         {% for post in posts %}
         {% if draft %}
         <div class="post draft">
@@ -20,6 +21,7 @@
                 {{ post.summary }}
             </div>
         </div>
+        {% end %}
         {% end %}
     </div>
     <div class="main-side col-md-3 visible-lg-block visible-md-block pull-right"></div>

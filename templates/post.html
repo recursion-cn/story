@@ -17,6 +17,7 @@
             <div class="fun">
                 {% if current_user and current_user.id == post.author.id %}
                     <a href={{ '/users/edit/' + str(post.id) }}>编辑</a>
+                    <a href="javascript:;" id="js-delete-post" data-id={{ post.id }}>删除</a>
                 {% end %}
             </div>
         </div>

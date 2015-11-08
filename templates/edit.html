@@ -29,6 +29,33 @@
             </select>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label>是否对外公开：</label>
+            {% if post and ord(post.public) %}
+            <label class="radio-inline">
+                <input name="public" type="radio" value="1" checked>是
+            </label>
+            <label class="radio-inline">
+                <input name="public" type="radio" value="0">否
+            </label>
+            {% elif post and not ord(post.public) %}
+            <label class="radio-inline">
+                <input name="public" type="radio" value="1">是
+            </label>
+            <label class="radio-inline">
+                <input name="public" type="radio" value="0" checked>否
+            </label>
+            {% elif not post %}
+            <label class="radio-inline">
+                <input name="public" type="radio" value="1">是
+            </label>
+            <label class="radio-inline">
+                <input name="public" type="radio" value="0" checked>否
+            </label>
+            {% end %}
+        </div>
+    </div>
     <ul class="nav nav-tabs">
         <li class="switch-editor-mode active" data-mode="edit" role="presentation"><a href="javascript:;">编辑</a></li>
         <li class="switch-editor-mode" data-mode="preview" role="presentation"><a href="javascript:;">预览</a></li>
@@ -48,6 +75,11 @@
             <div id="wmd-preview" class="preview-body"></div>
         </div>
     </div>
+    {% if post %}
+    <input type="hidden" name="id" value={{ post.id }}>
+    {% else %}
+    <input type="hidden" name="id" value="-1">
+    {% end %}
     <div class="row">
         <div class="col-md-1 col-md-offset-9">
             <button class="btn btn-default draft-btn">存为草稿</button>
