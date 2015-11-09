@@ -85,7 +85,11 @@
             <button class="btn btn-default draft-btn">存为草稿</button>
         </div>
         <div class="col-md-1">
+            {% if post %}
+            <button class="btn btn-main submit-btn">确认修改</button>
+            {% else %}
             <button class="btn btn-main submit-btn">立即发布</button>
+            {% end %}
         </div>
     </div>
 </div>
