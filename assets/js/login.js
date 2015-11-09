@@ -39,7 +39,7 @@ let validate = function(params, showErrorFun) {
             if (!v) {
                 result.pass = false;
                 result.msg = '用户名不能为空';
-                showErrorFun(result.msg);
+                showErrorFun('error', result.msg);
                 break;
             }
         }
@@ -48,7 +48,7 @@ let validate = function(params, showErrorFun) {
             if (!v || v.length < 6 || v.length > 18) {
                 result.pass = false;
                 result.msg = '密码长度应介于6到18个字符之间';
-                showErrorFun(result.msg);
+                showErrorFun('error', result.msg);
                 break;
             }
         }
@@ -65,14 +65,14 @@ let validate = function(params, showErrorFun) {
 /**
  * show error message on page
  */
-let showError = function(error) {
+/**let showError = function(error) {
     let errorMsgArea = $('.error-msg');
     errorMsgArea.html(error).fadeIn();
     let id = setTimeout(function() {
         errorMsgArea.fadeOut();
         clearTimeout(id);
     }, 3000);
-};
+};**/
 
 /**
  * hide error message from page
@@ -90,7 +90,6 @@ let login = function(params) {
         return;
     const url = '/users/login';
     const next = (getNext());
-    console.log(next);
     $.post(url, params.params, function(data) {
         if (data) {
             if (data.success) {
@@ -98,10 +97,10 @@ let login = function(params) {
                 //Utils.cookie.addCookie('current_user', member.nick, 7 * 24);
                 window.location.href = next;
             } else {
-                showError(ErrorCode[data.error_code]);
+                Utils.showMsg('error', ErrorCode[data.error_code]);
             }
         }
-    })
+    });
 };
 
 let getParams = function() {
@@ -116,6 +115,6 @@ let getParams = function() {
 $('body').on('click', 'button.submit', function(e) {
     e.preventDefault();
     hideError();
-    login(validate(getParams(), showError));
+    login(validate(getParams(), Utils.showMsg));
 });
 

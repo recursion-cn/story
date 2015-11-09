@@ -1,3 +1,7 @@
+.editor-main {
+  width: 96%;
+  margin: 0 auto;
+}
 .edit-panel {
   position: relative;
 }
@@ -19,8 +23,8 @@
   display: none;
 }
 .edit-panel .editor-area .editor-body {
+  height: 600px;
   border: 1px solid #ccc;
-  border-top: 0;
   border-radius: 0 0 3px 3px;
 }
 .edit-panel .editor-area textarea.form-control {
@@ -35,18 +39,20 @@
 }
 .edit-panel .editor-preview {
   position: relative;
-  display: none;
 }
 .edit-panel .editor-preview .preview-body {
-  min-height: 500px;
+  min-height: 600px;
   padding: 20px 15px 30px;
   border: 1px solid #ccc;
-  border-top: 0;
   border-radius: 0 0 3px 3px;
   font-size: 14px;
   background-color: #ffffff;
+  word-break: break-all;
 }
 .edit-panel .editor-preview .preview-body img {
   max-width: 100%;
   max-height: 100%;
+}
+.edit-panel .editor-footer {
+  margin-top: 20px;
 }

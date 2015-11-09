@@ -10,6 +10,8 @@ require('expose?$!expose?jQuery!jquery');
 const converter = new Markdown.Converter();
 const editor = new Markdown.Editor(converter);
 editor.run();
+const Utils = require('./utils.js');
+const referer = $('input[name="referer"]').val();
 
 const getPost = function() {
     let post = {};
@@ -38,14 +40,19 @@ const validatePost = function(post) {
         }
     }
     validate.data = post;
-    
+
     return validate;
 };
 
 const submitPost = function(post) {
     const url = '/posts/create';
     $.post(url, post, function(data) {
-        console.log(data);
+        if (data.success) {
+            Utils.showMsg('success', '文章发布成功');
+            window.location.href = referer;
+        } else {
+            Utils.showMsg('发布失败，请稍候重试');
+        }
     });
 };
 
@@ -68,7 +75,7 @@ $('body').on('click', '.switch-editor-mode', function(e) {
         validateResult.data.draft = 0;
         submitPost(validateResult.data);
     } else {
-        // TODO
+        Utils.showMsg('error', validateResult.msg);
     }
 }).on('click', '.draft-btn', function(e) {
     // 存为草稿
@@ -78,6 +85,6 @@ $('body').on('click', '.switch-editor-mode', function(e) {
         validateResult.data.draft = 1;
         submitPost(validateResult.data);
     } else {
-        // TODO
+        Utils.showMsg('error', validateResult.msg);
     }
 });

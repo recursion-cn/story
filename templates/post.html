@@ -14,6 +14,10 @@
             <div class="content">
                 {% raw markdown.markdown(post.content) %}
             </div>
+            <div class="assign">
+                <p><strong>{{ post.author.nick }}</strong></p>
+                <p><strong>{{ post.last_modified }}</strong></p>
+            </div>
             <div class="fun">
                 <ul class="list-inline">
                     {% if current_user and current_user.id == post.author.id %}

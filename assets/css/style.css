@@ -106,7 +106,7 @@ textarea.form-control {
   font-weight: bold;
 }
 .post .post-body {
-  line-height: 1.7em;
+  line-height: 1.7;
   text-indent: 1.7em;
   color: #666;
 }
@@ -148,6 +148,10 @@ textarea.form-control {
   color: #fff;
   background-color: #038d98;
   border-color: #0D7179;
+}
+.btn-main:hover {
+  color: #fff;
+  background-color: #0D7179;
 }
 ::selection {
   background-color: #038d98;

@@ -31,7 +31,11 @@ class LoginHandler(baseHandler.RequestHandler):
                 self.set_secure_cookie('current_user', nick, 10)
                 self.write({'success': True, 'data': user})
                 self.finish()
-                return
+            else:
+                self.write({'success': False, 'error_code': constants.error_code['wrong_password']})
+                self.finish()
+            return
+
         self.write({'success': False, 'error_code': constants.error_code['member_not_exist']})
         self.finish()
 

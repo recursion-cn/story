@@ -95,7 +95,9 @@ get single post by id
 class PostHandler(baseHandler.RequestHandler):
 
     def get(self, id):
-        query = 'select id, title, content, user_id, public, visible, created, updated from tb_post where id = %s and deleted = 0'
+        query = """select id, title, content, user_id, public, visible, if(updated is NULL, created, updated) as last_modified
+                 from tb_post where id = %s and deleted = 0
+                """
         post = db.get(query, id)
         if post:
             if not ord(post.public):
@@ -127,8 +129,9 @@ class EditHandler(baseHandler.RequestHandler):
                 post = _post
         get_categories = 'select id, name from tb_category where visible = 1'
         categories = db.query(get_categories)
+        referer = self.request.headers.get('Referer') or '/'
 
-        self.render('edit.html', categories=categories, post=post)
+        self.render('edit.html', categories=categories, post=post, referer=referer)
 
 """
 make the post be public

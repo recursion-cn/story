@@ -56,6 +56,26 @@ Utils.ajax = function(url, data, method) {
     });
 };
 
+/**
+ * show error/warning/sucess message on page
+ */
+Utils.showMsg = function(type, msg, timeout) {
+    if (!timeout) timeout = 3000;
+    let selector = '#js-msg-srea>.msg-area.success-msg';
+    switch (type) {
+        case 'error': selector = '.msg-area.error-msg'; break;
+        case 'warning': selector = '.msg-area.warning-msg'; break;
+        default: selector = '.msg-area.success-msg'; break;
+    }
+
+    let msgArea = $(selector);
+    msgArea.html(msg).fadeIn();
+    let id = setTimeout(function() {
+        msgArea.fadeOut();
+        clearTimeout(id);
+    }, timeout);
+};
+
 Utils.cookie = cookie;
 
 module.exports = Utils;
