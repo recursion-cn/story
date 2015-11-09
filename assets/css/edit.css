@@ -28,6 +28,7 @@
   border-radius: 0 0 3px 3px;
 }
 .edit-panel .editor-area textarea.form-control {
+  height: 100%;
   padding: 20px 15px 30px;
   color: #000;
   border: 0;

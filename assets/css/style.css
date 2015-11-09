@@ -140,6 +140,7 @@ textarea.form-control {
 }
 .msg-area {
   position: absolute;
+  z-index: 1000;
   width: 100%;
   text-align: center;
   display: none;

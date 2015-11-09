@@ -66,7 +66,7 @@
         <div class="editor-area col-md-6">
             <div class="editor-header" id="wmd-button-bar"></div>
             <div class="editor-body">
-                <textarea id="wmd-input" name="content" class="form-control" rows="23">
+                <textarea id="wmd-input" name="content" class="form-control">
                     {% if post %}{{ post.content }}{% end %}
                 </textarea>
             </div>
@@ -97,6 +97,7 @@
 {% end %}
 {% block js-area %}
 <script src="/assets/lib/pagedown/Markdown.Converter.js" type="text/javascript"></script>
+<script src="/assets/lib/pagedown/Markdown.Sanitizer.js" type="text/javascript"></script>
 <script src="/assets/lib/pagedown/Markdown.Editor.js" type="text/javascript"></script>
 <script src="/assets/dist/js/edit.js" type="text/javascript"></script>
 {% end %}

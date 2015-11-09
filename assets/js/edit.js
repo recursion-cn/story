@@ -8,7 +8,8 @@
 
 require('expose?$!expose?jQuery!jquery');
 const converter = new Markdown.Converter();
-const editor = new Markdown.Editor(converter);
+const safeConverter = Markdown.getSanitizingConverter();
+const editor = new Markdown.Editor(safeConverter);
 editor.run();
 const Utils = require('./utils.js');
 const referer = $('input[name="referer"]').val();
@@ -51,7 +52,7 @@ const submitPost = function(post) {
             Utils.showMsg('success', '文章发布成功');
             window.location.href = referer;
         } else {
-            Utils.showMsg('发布失败，请稍候重试');
+            Utils.showMsg('发布失败，请稍候试一试吧');
         }
     });
 };

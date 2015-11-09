@@ -8,9 +8,11 @@
 
 require('expose?$!expose?jQuery!jquery');
 const converter = new Markdown.Converter();
+const safeConverter = Markdown.getSanitizingConverter();
+const Utils = require('./utils.js');
 
 const parseMarkdown = function(md) {
-    return converter.makeHtml(md);
+    return safeConverter.makeHtml(md);
 };
 
 const renderMarkdown = function(mdHtml) {
@@ -43,7 +45,11 @@ const deletePost = function(id) {
         url: '/posts/delete/' + id,
         type: 'DELETE',
         success: function(result) {
-            console.log(result);
+            if (result.success) {
+                Utils.showMsg('success', '文章已删除');
+            } else {
+                Utils.showMsg('error', '文章删除失败，请稍候试一试吧');
+            }
         }
     });
 };
