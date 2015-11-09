@@ -98,11 +98,19 @@ class PostHandler(baseHandler.RequestHandler):
         query = 'select id, title, content, user_id, public, visible, created, updated from tb_post where id = %s and deleted = 0'
         post = db.get(query, id)
         if post:
+            if not ord(post.public):
+                if not self.current_user:
+                    raise tornado.web.HTTPError(403)
+                    return
+                elif self.current_user.id != post.user_id:
+                    raise tornado.web.HTTPError(403)
+                    return
             query_author = 'select id, nick from tb_user where id = %s'
             author = db.get(query_author, post.user_id)
             post['author'] = author
         else:
             raise tornado.web.HTTPError(404)
+
         self.render('post.html', post=post)
 
 """

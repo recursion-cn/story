@@ -19,7 +19,9 @@ class RequestHandler(tornado.web.RequestHandler):
         return current_user
 
     def write_error(self, status_code, **kwargs):
-        if status_code == 404:
+        if status_code == 403:
+            self.render('403.html')
+        elif status_code == 404:
             self.render('404.html')
         elif status_code == 500:
             self.render('500.html')
