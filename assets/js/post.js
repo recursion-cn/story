@@ -25,7 +25,7 @@ const render = function() {
     $('#js-content-template').remove();
 };
 
-render();
+//render();
 
 /**
  * find all <img/> tags from post

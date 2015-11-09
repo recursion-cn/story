@@ -16,7 +16,8 @@ settings = {
     'static_path': STATIC_PATH,
     'static_url_prefix': '/assets/',
     'login_url': r'/users/login',
-    'cookie_secret': '7BDF5B8CB6C45F17EC11F0DBED858A67'
+    'cookie_secret': '7BDF5B8CB6C45F17EC11F0DBED858A67',
+    'white_tags_list': [u'p', u'h1', u'h2', u'h3', u'h4', u'h5', u'h6', u'a', u'strong', u'code', u'br', u'ul', u'li', u'hr', u'ol', u'dl', u'dd']
 }
 
 database = {

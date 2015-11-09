@@ -8,8 +8,10 @@ import baseHandler
 from modules.db import db
 import datetime
 import markdown
+import bleach
 from bs4 import BeautifulSoup
 import tornado.web
+from settings import settings
 
 """
 get the public posts list
@@ -110,6 +112,7 @@ class PostHandler(baseHandler.RequestHandler):
             query_author = 'select id, nick from tb_user where id = %s'
             author = db.get(query_author, post.user_id)
             post['author'] = author
+            post.content = bleach.clean(markdown.markdown(post.content), tags=settings['white_tags_list'])
         else:
             raise tornado.web.HTTPError(404)
 
