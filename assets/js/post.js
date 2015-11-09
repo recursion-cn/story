@@ -7,6 +7,23 @@
 'use strict'
 
 require('expose?$!expose?jQuery!jquery');
+const converter = new Markdown.Converter();
+
+const parseMarkdown = function(md) {
+    return converter.makeHtml(md);
+};
+
+const renderMarkdown = function(mdHtml) {
+    $('#js-content').html(mdHtml);
+};
+
+const render = function() {
+    const md = $('#js-content-template').html();
+    renderMarkdown(parseMarkdown(md));
+    $('#js-content-template').remove();
+};
+
+render();
 
 /**
  * find all <img/> tags from post
