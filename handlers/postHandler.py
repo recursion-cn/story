@@ -112,7 +112,7 @@ class PostHandler(baseHandler.RequestHandler):
             query_author = 'select id, nick from tb_user where id = %s'
             author = db.get(query_author, post.user_id)
             post['author'] = author
-            post.content = bleach.clean(markdown.markdown(post.content), tags=settings['white_tags_list'])
+            post.content = bleach.clean(markdown.markdown(post.content), tags=settings['white_tags_list'], attributes=settings['white_attrs_list'])
         else:
             raise tornado.web.HTTPError(404)
 
