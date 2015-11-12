@@ -36,4 +36,4 @@ class IndexHandler(baseHandler.RequestHandler):
                     post['summary'] = _text
                     post['author'] = user
 
-        self.render('index.html', posts=posts, draft=None)
+        self.render('index.html', posts=posts)
