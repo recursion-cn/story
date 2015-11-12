@@ -67,7 +67,7 @@ class ListHandler(baseHandler.RequestHandler):
                 post['last_modified'] = post['updated'] if post['updated'] else post['created']
                 post['author'] = self.current_user
 
-        self.render('posts.html', posts=posts, draft=False)
+        self.render('posts.html', posts=posts)
 
 """
 get curent user's drafts, need login.
@@ -89,7 +89,7 @@ class DraftListHandler(baseHandler.RequestHandler):
                 _text = _text[0:200] + '...'
             draft['summary'] = _text
 
-        self.render('index.html', posts=drafts, draft=True)
+        self.render('drafts.html', drafts=drafts)
 
 """
 get single post by id

@@ -2,18 +2,18 @@
 {% block main %}
 <div class="main container-fluid clearfix">
     <div class="main-body col-md-8">
-        {% for post in posts %}
-        <div class="post">
+        {% for draft in drafts %}
+        <div class="post draft">
             <div class="post-header">
-                <a class="title" href={{ "/posts/" + str(post.id) }}><h3>{{ post.title }}</h3></a>
+                <a class="title" href={{ "/posts/" + str(draft.id) }}><h3>{{ draft.title }}</h3></a>
                 <div class="info">
-                    <a class="author" href={{ "/users/" + str(post.author.id) }}>{{ post.author.nick }}</a>
+                    <a class="author" href={{ "/users/" + str(draft.author.id) }}>{{ draft.author.nick }}</a>
                     <span>最后发布于</span>
-                    <span class="text-info">{{ post.last_modified }}</span>
+                    <span class="text-info">{{ draft.last_modified }}</span>
                 </div>
             </div>
             <div class="post-body">
-                {{ post.summary }}
+                {{ draft.summary }}
             </div>
         </div>
         {% end %}
