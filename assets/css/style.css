@@ -46,7 +46,9 @@ textarea.form-control {
 .header .navbar-fixed-top {
   border: 0;
 }
-.header .navbar-header a,
+.header .navbar-header a {
+  color: #fff;
+}
 .header .nav.navbar-nav a {
   color: #fff;
   opacity: .7;
