@@ -66,9 +66,7 @@
         <div class="editor-area col-md-6">
             <div class="editor-header" id="wmd-button-bar"></div>
             <div class="editor-body">
-                <textarea id="wmd-input" name="content" class="form-control">
-                    {% if post %}{{ post.content }}{% end %}
-                </textarea>
+                <textarea id="wmd-input" name="content" class="form-control">{% if post %}{{ post.content }}{% end %}</textarea>
             </div>
             <div class="editor-footer clearfix">
                 <div class="pull-right">
