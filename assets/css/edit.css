@@ -49,6 +49,8 @@
   font-size: 14px;
   background-color: #ffffff;
   word-break: break-all;
+  line-height: 1.7;
+  text-indent: 1.7em;
 }
 .edit-panel .editor-preview .preview-body img {
   max-width: 100%;
@@ -59,4 +61,13 @@
 }
 .edit-panel .editor-footer button.btn {
   margin-right: 15px;
+}
+.btns-dialog {
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  bottom: 0;
+  z-index: 9999;
+  opacity: .8;
+  background-color: #333;
 }
