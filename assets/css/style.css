@@ -160,6 +160,15 @@ textarea.form-control {
   color: #fff;
   background-color: #0D7179;
 }
+.btn-orange {
+  color: #fff;
+  background-color: #E06130;
+  border-color: #BF491C;
+}
+.btn-orange:hover {
+  color: #fff;
+  background-color: #BF491C;
+}
 ::selection {
   background-color: #038d98;
   color: #fff;

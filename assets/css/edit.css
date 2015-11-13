@@ -57,3 +57,6 @@
 .edit-panel .editor-footer {
   margin-top: 20px;
 }
+.edit-panel .editor-footer button.btn {
+  margin-right: 15px;
+}

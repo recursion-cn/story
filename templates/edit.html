@@ -70,11 +70,9 @@
                     {% if post %}{{ post.content }}{% end %}
                 </textarea>
             </div>
-            <div class="editor-footer">
-                <div class="col-md-2 col-md-offset-8">
-                    <button class="btn btn-default draft-btn">存为草稿</button>
-                </div>
-                <div class="col-md-1">
+            <div class="editor-footer clearfix">
+                <div class="pull-right">
+                    <button class="btn btn-orange draft-btn">存为草稿</button>
                     {% if post %}
                     <button class="btn btn-main submit-btn">确认修改</button>
                     {% else %}
