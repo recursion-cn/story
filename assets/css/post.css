@@ -8,6 +8,7 @@
 }
 .single-post .content {
   line-height: 1.7;
+  text-indent: 1.7em;
   word-break: break-all;
 }
 .single-post .content img {
