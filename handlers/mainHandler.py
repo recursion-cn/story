@@ -20,6 +20,7 @@ class IndexHandler(baseHandler.RequestHandler):
         posts = None
         if not nick:
             self.render('index.html')
+            return
 
         select_user = 'select id, nick from tb_user where nick = %s'
         user = db.get(select_user, nick)
