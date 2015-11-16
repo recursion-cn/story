@@ -16,6 +16,7 @@ from settings import settings
 """
 get the public posts list
 """
+
 class PublicListHandler(baseHandler.RequestHandler):
 
     def get(self):
@@ -52,6 +53,7 @@ get the current user's posts list, need login.
 class ListHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
+        self.application.haha = 'dddddddddd'
         query = """select id, title, content, category_id, created, updated from tb_post
                  where visible = 1 and deleted = 0 and user_id = %s order by if(updated is NULL, created, updated) desc
                 """
