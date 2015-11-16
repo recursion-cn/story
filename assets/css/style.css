@@ -134,10 +134,15 @@ textarea.form-control {
   background-color: #f8f8f8;
 }
 .footer .info {
+  color: #000;
   padding-top: 10px;
 }
 .footer .copy {
+  color: #000;
   padding-top: 5px;
+}
+.footer .footer-links {
+  display: inline-block;
 }
 @media screen and (max-width: 1200px) {
   .main {
