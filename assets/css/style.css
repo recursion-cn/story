@@ -129,9 +129,9 @@ textarea.form-control {
   margin: 0 auto;
   position: absolute;
   bottom: 0;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #e1e1e1;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #f8f8f8;
 }
 .footer .info {
   padding-top: 10px;
