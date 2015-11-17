@@ -120,6 +120,10 @@ textarea.form-control {
 .post .post-body img {
   max-width: 650px;
 }
+.post-pagination {
+  width: 136px;
+  margin: 20px 0 30px 130px;
+}
 .draft .post-header .title {
   color: orange;
 }
@@ -165,6 +169,17 @@ textarea.form-control {
 .btn-main:hover {
   color: #fff;
   background-color: #0D7179;
+}
+.btn-page {
+  height: 45px;
+  color: #fff;
+  background-color: #33B7C1;
+  border-color: #1396A0;
+  border-radius: 0;
+}
+.btn-page:hover {
+  color: #fff;
+  background-color: #1396A0;
 }
 .btn-orange {
   color: #fff;

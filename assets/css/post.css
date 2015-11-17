@@ -6,9 +6,11 @@
   margin-bottom: 18px;
   border-bottom: 1px dashed #e0e0e0;
 }
+.single-post .title h3 {
+  display: inline-block;
+}
 .single-post .content {
   line-height: 1.7;
-  /*text-indent: 1.7em;*/
   word-break: break-all;
 }
 .single-post .content img {

@@ -11,6 +11,9 @@
         <div class="single-post">
             <div class="title">
                 <h3>{{ post.title }}</h3>
+                {% if not ord(post.visible) %}
+                <span class="label label-danger">草稿</span>
+                {% end %}
             </div>
             <div class="content" id="js-content">{% raw post.content %}</div>
             <div class="assign">
