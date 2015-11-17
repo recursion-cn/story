@@ -8,7 +8,7 @@
 }
 .single-post .content {
   line-height: 1.7;
-  text-indent: 1.7em;
+  /*text-indent: 1.7em;*/
   word-break: break-all;
 }
 .single-post .content img {
@@ -17,11 +17,11 @@
 }
 .single-post .assign {
   padding: 10px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px dashed #e0e0e0;
   text-indent: 1.7em;
 }
 .single-post .fun {
-  padding: 3px 0;
+  padding: 5px;
 }
 .main-body .post-pager {
   width: 86%;
