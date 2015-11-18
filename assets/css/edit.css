@@ -59,7 +59,7 @@
   max-height: 100%;
 }
 .edit-panel .editor-footer {
-  margin-top: 20px;
+  margin: 20px 0;
 }
 .edit-panel .editor-footer button.btn {
   margin-right: 15px;

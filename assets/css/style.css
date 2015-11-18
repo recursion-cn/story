@@ -97,7 +97,6 @@ textarea.form-control {
   background-color: #ffffff;
 }
 .post {
-  width: 86%;
   padding-bottom: 26px;
 }
 .post .post-header {
@@ -122,7 +121,7 @@ textarea.form-control {
 }
 .post-pagination {
   width: 136px;
-  margin: 20px 0 30px 130px;
+  margin: 20px auto 30px;
 }
 .draft .post-header .title {
   color: orange;
@@ -150,6 +149,9 @@ textarea.form-control {
   display: inline-block;
 }
 @media screen and (max-width: 1200px) {
+  .header .navbar-default {
+    width: 100%;
+  }
   .main {
     width: 100%;
   }
