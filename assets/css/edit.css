@@ -15,6 +15,9 @@
   border-color: #ccc;
   border-bottom-color: transparent;
 }
+.edit-panel .editor-notice {
+  padding: 5px 18px;
+}
 .edit-panel .editor-area {
   position: relative;
 }
