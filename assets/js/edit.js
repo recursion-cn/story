@@ -50,7 +50,10 @@ const submitPost = function(post) {
     $.post(url, post, function(data) {
         if (data.success) {
             Utils.showMsg('success', '文章发布成功');
-            window.location.href = referer;
+            setTimeout(function() {
+                window.location.href = referer;
+            }, 2000);
+            //window.location.href = referer;
         } else {
             Utils.showMsg('发布失败，请稍候试一试吧');
         }

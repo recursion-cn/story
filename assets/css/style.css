@@ -161,6 +161,9 @@ textarea.form-control {
   text-align: center;
   display: none;
 }
+.msg-area .alert {
+  border-radius: 0;
+}
 .btn-main {
   color: #fff;
   background-color: #038d98;
