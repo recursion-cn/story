@@ -2,6 +2,6 @@ tornado == 4.2.1
 MySQL-python == 1.2.5
 torndb == 0.3
 redis == 2.10.5
-marndown == 2.6.3
+markdown == 2.6.3
 beautifulsoup4 == 4.4.1
 bleach == 1.4.2
