@@ -6,12 +6,14 @@
 
 import baseHandler
 from modules.db import db
+import modules.utils
 import datetime
 import markdown
 import bleach
 from bs4 import BeautifulSoup
 import tornado.web
 from settings import settings
+import json
 
 """
 get the public posts list
@@ -91,6 +93,36 @@ class DraftListHandler(baseHandler.RequestHandler):
             draft['summary'] = _text
 
         self.render('drafts.html', drafts=drafts)
+
+class ListApiHandler(baseHandler.RequestHandler):
+    @tornado.web.authenticated
+    def get(self, offset=0, size=10):
+        res = None
+        args = self.request.arguments
+        offset = args.get('offset') and args.get('offset')[0] or offset
+        size = args.get('size') and args.get('size')[0] or size
+
+        query = """
+                select id, title, content, user_id, created, updated from tb_post
+                where user_id = %s and deleted = 0 and visible = 0 order by if(updated is NULL, created, updated) desc
+                limit %s, %s
+                """
+        posts = db.query(query, self.current_user.id, int(offset), int(size))
+        if posts:
+            for post in posts:
+                _html = markdown.markdown(post.content)
+                soup = BeautifulSoup(_html, 'html.parser')
+                _text = soup.get_text()
+                if _text and len(_text) > 200:
+                    _text = _text[0:200] + '...'
+                post['summary'] = _text
+                post['last_modified'] = post['updated'] if post['updated'] else post['created']
+                post['author'] = self.current_user
+            posts = json.dumps(posts, cls=modules.utils.JSONEncoder)
+            res = {'data': posts}
+
+        self.write(res)
+        self.finish()
 
 """
 get single post by id
