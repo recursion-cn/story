@@ -31,12 +31,12 @@
                                         <a href="javascript:;">{{ current_user.nick }}</a>
                                     </div>
                                     <div class="user-panel-body">
-                                        <div class="user-link-item"><a href="/users/edit">写文章</a></div>
+                                        <div class="user-link-item"><a href="/users/edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 写文章</a></div>
                                         <div class="user-link-item"><a href={{ "/site/" + current_user.nick }}>我的主页</a></div>
                                         <div class="user-link-item"><a href="/users/draft">我的草稿</a></div>
                                         <div class="user-link-item"><a href="/users/profile">我的资料</a></div>
-                                        <div class="user-link-item"><a href="/users/setting">设置</a></div>
-                                        <div class="user-link-item"><a href="/users/exit">退出</a></div>
+                                        <div class="user-link-item"><a href="/users/setting"><span class="glyphicon glyphicon-cog"></span> 设置</a></div>
+                                        <div class="user-link-item"><a href="/users/exit"><span class="glyphicon glyphicon-log-out"></span> 退出</a></div>
                                     </div>
                                 </div>
                             {% end %}
