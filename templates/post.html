@@ -24,8 +24,8 @@
             <div class="fun">
                 <ul class="list-inline">
                     {% if current_user and current_user.id == post.author.id %}
-                        <li><span class="glyphicon glyphicon-edit"></span> <a href={ '/users/edit/' + str(post.id) }>编辑</a></li>
-                        <li><span class="glyphicon glyphicon-trash"></span> <a href="javascript:;" id="js-delete-post" data-id={ post.id }>删除</a></li>
+                        <li><span class="glyphicon glyphicon-edit"></span> <a href={{ '/users/edit/' + str(post.id) }}>编辑</a></li>
+                        <li><span class="glyphicon glyphicon-trash"></span> <a href="javascript:;" id="js-delete-post" data-id={{ post.id }}>删除</a></li>
                     {% end %}
                 </ul>
             </div>

@@ -41,11 +41,12 @@ const dataBind = function(data) {
     $(fragment).insertBefore('.post-pagination');
 };
 
-$('body').on('mouseover', '.nav-user-panel', e =>
-    $(this).find('.user-panel').fadeIn()
-).on('mouseleave', '.nav-user-panel', e =>
-    $(this).find('.user-panel').fadeOut()
-).on('click', '#js-load-more', e => {
+$('body').on('mouseover', '.nav-user-panel', (e) => {
+    $('.nav-user-panel').find('.user-panel').fadeIn()
+}
+).on('mouseleave', '.nav-user-panel', (e) =>
+    $('.nav-user-panel').find('.user-panel').fadeOut()
+).on('click', '#js-load-more', (e) => {
     const params = getPaginationParams()
     pagination(params.offset, params.size)
 });
