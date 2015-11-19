@@ -99,13 +99,12 @@ textarea.form-control {
 .post {
   padding-bottom: 26px;
 }
-.post .post-header {
-  height: 63px;
-}
 .post .post-header .title {
   color: #000;
+  display: inline-block;
 }
 .post .post-header .info {
+  height: 20px;
   padding-left: 5px;
 }
 .post .post-header .info .author {

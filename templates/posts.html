@@ -1,26 +1,32 @@
 {% extends "layout.html" %}
 {% block main %}
 <div class="main container-fluid clearfix">
-    <div class="main-body col-md-6">
-        {% for post in posts %}
-        <div class="post">
-            <div class="post-header">
-                <div>
-                    <a class="title" href={{ "/posts/" + str(post.id) }}><h3>{{ post.title }}</h3></a>
+    <div class="row">
+        <div class="main-body col-md-6">
+            {% for post in posts %}
+            <div class="post container-fluid">
+                <div class="post-header row">
+                    <div class="col-md-12">
+                        <a class="title" href={{ "/posts/" + str(post.id) }}><h3>{{ post.title }}</h3></a>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="info">
+                            <a class="author" href={{ "/users/" + str(post.author.id) }}>{{ post.author.nick }}</a>
+                            <span>最后发布于</span>
+                            <span class="text-info">{{ post.last_modified }}</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="info">
-                    <a class="author" href={{ "/users/" + str(post.author.id) }}>{{ post.author.nick }}</a>
-                    <span>最后发布于</span>
-                    <span class="text-info">{{ post.last_modified }}</span>
+                <div class="row">
+                    <div class="post-body col-md-12">
+                        {{ post.summary }}
+                    </div>
                 </div>
             </div>
-            <div class="post-body">
-                {{ post.summary }}
+            {% end %}
+            <div class="post-pagination">
+                <button class="btn btn-page btn-block" id="js-load-more"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 点击查看更多</button>
             </div>
-        </div>
-        {% end %}
-        <div class="post-pagination">
-            <button class="btn btn-page btn-block" id="js-load-more"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 点击查看更多</button>
         </div>
     </div>
     <div class="main-side col-md-3 visible-lg-block visible-md-block pull-right"></div>
