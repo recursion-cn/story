@@ -104,8 +104,7 @@ textarea.form-control {
   display: inline-block;
 }
 .post .post-header .info {
-  height: 20px;
-  padding-left: 5px;
+  padding: 0 0 5px 5px;
 }
 .post .post-header .info .author {
   font-weight: bold;
