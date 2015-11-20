@@ -139,12 +139,8 @@ textarea.form-control {
   padding-top: 10px;
 }
 .footer .copy {
-  display: inline-block;
   color: #000;
-  padding-top: 10px;
-}
-.footer .footer-links {
-  display: inline-block;
+  padding-top: 15px;
 }
 @media screen and (max-width: 1200px) {
   .header .navbar-default {
