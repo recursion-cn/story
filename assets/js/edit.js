@@ -52,7 +52,7 @@ const submitPost = function(post) {
             Utils.showMsg('success', '文章发布成功');
             setTimeout(function() {
                 window.location.href = referer;
-            }, 2000);
+            }, 3000);
             //window.location.href = referer;
         } else {
             Utils.showMsg('发布失败，请稍候试一试吧');

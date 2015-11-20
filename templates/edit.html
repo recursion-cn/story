@@ -4,8 +4,6 @@
 <link rel="stylesheet" href="/assets/css/edit.css">
 {% end %}
 {% block main %}
-<div class="alert alert-danger msg-area error-msg" role="alert"></div>
-<div class="alert alert-success msg-area success-msg" role="alert"></div>
 <div class="editor-main container-fluid clearfix edit-panel">
     <label><h3>编辑文章</h3></label>
     <div class="row">
@@ -18,22 +16,21 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <select class="form-control" name="category">
-                    <option value="">选择文章目录</option>
+        <div class="col-md-3">
+            <label class="text-muted">选择文章目录：</label>
+            <select class="category" name="category">
+                <option value="">选择文章目录</option>
                 {% for category in categories %}
-                    {% if post and post.category_id == category.id %}
-                    <option value={{ category.id }} selected="selected">{{ category.name }}</option>
-                    {% else %}
-                    <option value={{ category.id }}>{{ category.name }}</option>
-                    {% end %}
+                {% if post and post.category_id == category.id %}
+                <option value={{ category.id }} selected="selected">{{ category.name }}</option>
+                {% else %}
+                <option value={{ category.id }}>{{ category.name }}</option>
+                {% end %}
                 {% end %}
             </select>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label>是否对外公开：</label>
+        <div class="col-md-3">
+            <label class="text-muted">是否对外公开：</label>
             {% if post and ord(post.public) %}
             <label class="radio-inline">
                 <input name="public" type="radio" value="1" checked>是
@@ -58,6 +55,33 @@
             {% end %}
         </div>
     </div>
+    <!--div class="row">
+        <div class="col-md-12">
+            <label class="text-muted">是否对外公开：</label>
+            {% if post and ord(post.public) %}
+            <label class="radio-inline">
+                <input name="public" type="radio" value="1" checked>是
+            </label>
+            <label class="radio-inline">
+                <input name="public" type="radio" value="0">否
+            </label>
+            {% elif post and not ord(post.public) %}
+            <label class="radio-inline">
+                <input name="public" type="radio" value="1">是
+            </label>
+            <label class="radio-inline">
+                <input name="public" type="radio" value="0" checked>否
+            </label>
+            {% elif not post %}
+            <label class="radio-inline">
+                <input name="public" type="radio" value="1" checked>是
+            </label>
+            <label class="radio-inline">
+                <input name="public" type="radio" value="0">否
+            </label>
+            {% end %}
+        </div>
+    </div-->
     <!--ul class="nav nav-tabs">
         <li class="switch-editor-mode active" data-mode="edit" role="presentation"><a href="javascript:;">编辑</a></li>
         <li class="switch-editor-mode" data-mode="preview" role="presentation"><a href="javascript:;">预览</a></li>

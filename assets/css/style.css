@@ -151,11 +151,13 @@ textarea.form-control {
   }
 }
 .msg-area {
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   width: 100%;
   text-align: center;
   display: none;
+  top: 50px;
+  border-radius: 0;
 }
 .msg-area .alert {
   border-radius: 0;
@@ -165,7 +167,8 @@ textarea.form-control {
   background-color: #038d98;
   border-color: #0D7179;
 }
-.btn-main:hover {
+.btn-main:hover,
+.btn-main:focus {
   color: #fff;
   background-color: #0D7179;
 }
@@ -186,7 +189,8 @@ textarea.form-control {
   background-color: #E06130;
   border-color: #BF491C;
 }
-.btn-orange:hover {
+.btn-orange:hover,
+.btn-orange:focus {
   color: #fff;
   background-color: #BF491C;
 }
