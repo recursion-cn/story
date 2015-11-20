@@ -55,11 +55,21 @@ get the current user's posts list, need login.
 class ListHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
+        size = 10
+        needPagination = False
+        args = self.request.arguments
+        if args.get('size'):
+            size = int(args.get('size')[0])
+        count_posts = 'select count(1) count from tb_post where visible = 1 and deleted = 0 and user_id = %s'
+        _count = db.get(count_posts, self.current_user.id)
+        count = _count.count
         query = """select id, title, content, category_id, created, updated from tb_post
                  where visible = 1 and deleted = 0 and user_id = %s order by if(updated is NULL, created, updated) desc
+                 limit 0, %s
                 """
-        posts = db.query(query, str(self.current_user.id))
+        posts = db.query(query, self.current_user.id, size)
         if posts:
+            needPagination = True if count > len(posts) else False
             for post in posts:
                 _html = markdown.markdown(post.content)
                 soup = BeautifulSoup(_html, 'html.parser')
@@ -70,7 +80,7 @@ class ListHandler(baseHandler.RequestHandler):
                 post['last_modified'] = post['updated'] if post['updated'] else post['created']
                 post['author'] = self.current_user
 
-        self.render('posts.html', posts=posts)
+        self.render('posts.html', posts=posts, pageSize=size, needPagination=int(needPagination))
 
 """
 get curent user's drafts, need login.
@@ -78,6 +88,10 @@ get curent user's drafts, need login.
 class DraftListHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
+        size = 10
+        args = self.request.arguments
+        if args.get('size'):
+            size = int(args.get('size')[0])
         query = """select id, title, content, user_id, created, updated from tb_post
                  where user_id = %s and deleted = 0 and visible = 0 order by if(updated is NULL, created, updated) desc
                 """
@@ -97,18 +111,24 @@ class DraftListHandler(baseHandler.RequestHandler):
 class ListApiHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self, offset=0, size=10):
-        res = None
+        res = {'data': None}
+        needPagination = False
         args = self.request.arguments
         offset = args.get('offset') and args.get('offset')[0] or offset
         size = args.get('size') and args.get('size')[0] or size
 
+        count_posts = 'select count(1) as count from tb_post where visible = 1 and deleted = 0 and user_id = %s'
+        _count = db.get(count_posts, self.current_user.id)
+        count = _count.count
+
         query = """
                 select id, title, content, user_id, created, updated from tb_post
-                where user_id = %s and deleted = 0 and visible = 0 order by if(updated is NULL, created, updated) desc
+                where user_id = %s and deleted = 0 and visible = 1 order by if(updated is NULL, created, updated) desc
                 limit %s, %s
                 """
         posts = db.query(query, self.current_user.id, int(offset), int(size))
         if posts:
+            needPagination = True if count > (int(offset) + int(size)) else False
             for post in posts:
                 _html = markdown.markdown(post.content)
                 soup = BeautifulSoup(_html, 'html.parser')
@@ -119,7 +139,7 @@ class ListApiHandler(baseHandler.RequestHandler):
                 post['last_modified'] = post['updated'] if post['updated'] else post['created']
                 post['author'] = self.current_user
             posts = json.dumps(posts, cls=modules.utils.JSONEncoder)
-            res = {'data': posts}
+            res = {'res': {'data': posts, 'needPagination': needPagination}}
 
         self.write(res)
         self.finish()

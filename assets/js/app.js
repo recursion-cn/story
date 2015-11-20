@@ -10,18 +10,20 @@
 require('expose?$!expose?jQuery!jquery');
 
 const getPaginationParams = function() {
-    const offset = $('#js-load-more').data('offset');
-    const size = $('#js-load-more').data('size');
+    const page = $('#js-load-more').data('page');
+    const pageSize = $('#js-load-more').data('size');
 
-    return {offset: offset, size: size};
+    return {page: page, pageSize: pageSize};
 };
 
-const pagination = function(offset, size) {
-    const url = '/api/posts?offset=' + offset + '&size=' + size;
+const pagination = function(page, pageSize) {
+    const offset = (page - 1) * pageSize;
+    const url = '/api/posts?offset=' + offset + '&size=' + pageSize;
     $.get(url, res => {
-        if (res) {
-            const data = JSON.parse(res.data);
+        if (res && res.res && res.res.data) {
+            const data = JSON.parse(res.res.data);
             dataBind(data);
+            showOrHidePagination(res.res.needPagination);
         }
     });
 };
@@ -38,7 +40,16 @@ const dataBind = function(data) {
         fragment.appendChild(template.get(0));
     }
 
+    const currentPage = $('#js-load-more').data('page');
+    $('#js-load-more').data('page', currentPage + 1);
+
     $(fragment).insertBefore('.post-pagination');
+};
+
+const showOrHidePagination = function(bol) {
+    if (!bol) {
+        $('#js-load-more').parent().hide();
+    }
 };
 
 $('body').on('mouseover', '.nav-user-panel', (e) => {
@@ -48,5 +59,6 @@ $('body').on('mouseover', '.nav-user-panel', (e) => {
     $('.nav-user-panel').find('.user-panel').fadeOut()
 ).on('click', '#js-load-more', (e) => {
     const params = getPaginationParams()
-    pagination(params.offset, params.size)
+    const page = params.page + 1;
+    pagination(page, params.pageSize)
 });
