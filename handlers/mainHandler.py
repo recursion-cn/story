@@ -25,18 +25,28 @@ class IndexHandler(baseHandler.RequestHandler):
         select_user = 'select id, nick from tb_user where nick = %s'
         user = db.get(select_user, nick)
         if user:
+            size = 10
+            needPagination = False
+            args = self.request.arguments
+            if args.get('size'):
+                size = int(args.get('size')[0])
+            count_posts = 'select count(1) count from tb_post where visible = 1 and deleted = 0 and public = 1 and user_id = %s'
+            _count = db.get(count_posts, self.current_user.id)
+            count = _count.count
             select_posts = """select id, title, content, user_id, category_id, created, updated,
-                        if(updated is NULL, created, updated) as last_modified from tb_post where
-                        user_id = %s and public = 1 and visible = 1
+                        if(updated is NULL, created, updated) last_modified from tb_post where
+                        user_id = %s and public = 1 and visible = 1 order by last_modified desc limit 0, %s
                     """
-            posts = db.query(select_posts, user.id)
-            for post in posts:
-                _html = markdown.markdown(post.content)
-                soup = BeautifulSoup(_html, 'html.parser')
-                _text = soup.get_text()
-                if _text and len(_text) > 200:
-                    _text = _text[0:200] + '...'
-                post['summary'] = _text
-                post['author'] = user
+            posts = db.query(select_posts, user.id, size)
+            if posts:
+                needPagination = True if count > len(posts) else False
+                for post in posts:
+                    _html = markdown.markdown(post.content)
+                    soup = BeautifulSoup(_html, 'html.parser')
+                    _text = soup.get_text()
+                    if _text and len(_text) > 200:
+                        _text = _text[0:200] + '...'
+                    post['summary'] = _text
+                    post['author'] = user
 
-        self.render('posts.html', posts=posts, draft=None)
+            self.render('main.html', posts=posts, pageSize=size, needPagination=int(needPagination))

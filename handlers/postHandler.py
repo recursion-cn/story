@@ -227,7 +227,6 @@ class InsertOrUpdateHandler(baseHandler.RequestHandler):
 
         if title and content and category_id:
             now = datetime.datetime.now()
-            print (post_id != -1)
             if post_id != -1:
                 sql = 'update tb_post set title = %s, content = %s, public = %s, visible = %s, category_id = %s, updated = %s where id = %s and deleted = 0'
                 num = db.update(sql, title, content, int(post_public), int(visible), int(category_id), now, post_id)
