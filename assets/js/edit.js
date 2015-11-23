@@ -7,6 +7,8 @@
 'use strict'
 
 require('expose?$!expose?jQuery!jquery');
+require('bootstrap');
+
 const converter = new Markdown.Converter();
 const safeConverter = Markdown.getSanitizingConverter();
 const editor = new Markdown.Editor(safeConverter);
@@ -104,4 +106,20 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     console.log(value)
     $(this).addClass('btn-danger');
     $('input[name="privacy"]').val(value);
+}).on('click', '#js-add-cate', function() {
+    const template = '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-title"></div><div class="popover-content"></div></div>';
+    const content = '<div class="form-group">'
+                    + '<div class="input-group">'
+                    + '<div class="input-group-addon">目录名称</div>'
+                    + '<input type="text" name="new-cate" class="form-control"/>'
+                    + '</div></div>'
+                    + '<div class="form-group clearfix">'
+                    + '<div class="row pull-right">'
+                    + '<div class="col-md-1">'
+                    + '<button class="btn btn-warning btn-sm">取消</button>'
+                    + '</div>'
+                    + '<div class="col-md-1">'
+                    + '<button class="btn btn-main btn-sm">添加</button>'
+                    + '</div></div>';
+    $(this).popover({html: true, template: template, title: '添加目录', content: content});
 });
