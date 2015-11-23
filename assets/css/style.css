@@ -202,6 +202,9 @@ textarea.form-control {
   color: #fff;
   background-color: #BF491C;
 }
+.btn:focus {
+  outline: none;
+}
 .label-beta {
   margin-left: 3px;
   border: 1px solid #0C6F77;
