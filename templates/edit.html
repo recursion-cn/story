@@ -8,11 +8,14 @@
     <label><h3>编辑文章</h3></label>
     <div class="row">
         <div class="col-md-12">
-            {% if post %}
-            <input class="form-control" type="text" name="title" value={{ post.title }} placeholder="输入文章标题" autofocus>
-            {% else %}
-            <input class="form-control" type="text" name="title" placeholder="输入文章标题" autofocus>
-            {% end %}
+            <div class="form-group">
+                {% if post %}
+                <input class="form-control" type="text" name="title" value={{ post.title }} placeholder="输入文章标题" autofocus>
+                {% else %}
+                <input class="form-control" type="text" name="title" placeholder="输入文章标题" autofocus>
+                {% end %}
+                <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true"></span>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -39,7 +42,7 @@
                 {% end %}
             </div>
             <div class="create-cate">
-                <button id="js-add-cate" class="btn btn-default btn-sm" data-container="body" data-toggle="popover" data-placement="bottom">添加新目录</button>
+                <button id="js-add-cate" class="btn btn-default btn-sm" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="click">添加新目录</button>
             </div>
         </div>
     </div>

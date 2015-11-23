@@ -8,13 +8,19 @@
 
 require('expose?$!expose?jQuery!jquery');
 require('bootstrap');
-
-const converter = new Markdown.Converter();
-const safeConverter = Markdown.getSanitizingConverter();
-const editor = new Markdown.Editor(safeConverter);
-editor.run();
 const Utils = require('./utils.js');
 const referer = $('input[name="referer"]').val();
+
+const init = function() {
+    initMarkdownEditor();
+};
+
+const initMarkdownEditor = function() {
+    const converter = new Markdown.Converter();
+    const safeConverter = Markdown.getSanitizingConverter();
+    const editor = new Markdown.Editor(safeConverter);
+    editor.run();
+};
 
 const getPost = function() {
     let post = {};
@@ -62,6 +68,10 @@ const submitPost = function(post) {
     });
 };
 
+$(function() {
+    init();
+});
+
 $('body').on('click', '.switch-editor-mode', function(e) {
     const mode = $(this).data('mode');
     $('.switch-editor-mode').removeClass('active');
@@ -107,19 +117,19 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     $(this).addClass('btn-danger');
     $('input[name="privacy"]').val(value);
 }).on('click', '#js-add-cate', function() {
-    const template = '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-title"></div><div class="popover-content"></div></div>';
+    const template = '<div class="popover new-cate-popover" role="tooltip"><div class="arrow"></div><div class="popover-title"></div><div class="popover-content"></div></div>';
     const content = '<div class="form-group">'
                     + '<div class="input-group">'
                     + '<div class="input-group-addon">目录名称</div>'
-                    + '<input type="text" name="new-cate" class="form-control"/>'
+                    + '<input type="text" name="new-cate" class="form-control input-sm"/>'
+                    + '<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>'
                     + '</div></div>'
                     + '<div class="form-group clearfix">'
-                    + '<div class="row pull-right">'
-                    + '<div class="col-md-1">'
-                    + '<button class="btn btn-warning btn-sm">取消</button>'
-                    + '</div>'
-                    + '<div class="col-md-1">'
+                    + '<div class="pull-right">'
+                    + '<!--button class="btn btn-warning btn-sm" id="js-new-cate-btn-hide">取消</button-->'
                     + '<button class="btn btn-main btn-sm">添加</button>'
-                    + '</div></div>';
+                    + '</div>';
     $(this).popover({html: true, template: template, title: '添加目录', content: content});
+}).on('click', '#js-new-cate-btn-hide', function() {
+    $('#js-add-cate')
 });

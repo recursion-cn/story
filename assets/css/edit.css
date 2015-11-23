@@ -16,6 +16,9 @@
 .right-switch {
   box-shadow: 0 0 5px #ccc;
 }
+.new-cate-popover button {
+  margin-left: 5px;
+}
 .edit-panel {
   position: relative;
 }
