@@ -221,7 +221,7 @@ class InsertOrUpdateHandler(baseHandler.RequestHandler):
         content = self.get_body_argument('content')
         category_id = self.get_body_argument('category')
         user_id = self.current_user.id
-        post_public = self.get_body_argument('_public')
+        post_public = self.get_body_argument('privacy')
         post_id = int(self.get_body_argument('id'))
         visible = 1 - int(self.get_body_argument('draft'))
 

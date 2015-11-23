@@ -16,43 +16,80 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-12">
             <label class="text-muted">选择文章目录：</label>
-            <select class="category" name="category">
-                <option value="">选择文章目录</option>
+            <div class="select-cate" id="js-select-cate">
+                <!--select class="category" name="category">
+                    <option value="">选择文章目录</option>
+                    {% for category in categories %}
+                    {% if post and post.category_id == category.id %}
+                    <option value={{ category.id }} selected="selected">{{ category.name }}</option>
+                    {% else %}
+                    <option value={{ category.id }}>{{ category.name }}</option>
+                    {% end %}
+                    {% end %}
+                </select-->
                 {% for category in categories %}
-                {% if post and post.category_id == category.id %}
-                <option value={{ category.id }} selected="selected">{{ category.name }}</option>
-                {% else %}
-                <option value={{ category.id }}>{{ category.name }}</option>
+                    {% if post and post.category_id == category.id %}
+                    <button class="btn btn-info btn-sm" data-id={{ category.id }}>{{ category.name }}</button>
+                    <input type="hidden" name="category" value={{ category.id }}>
+                    {% else %}
+                    <button class="btn btn-default btn-sm" data-id={{ category.id }}>{{ category.name }}</button>
+                    {% end %}
                 {% end %}
-                {% end %}
-            </select>
+            </div>
+            <div class="create-cate"><button id="js-add-cate" class="btn btn-default btn-sm">添加新目录</a></div>
         </div>
-        <div class="col-md-3">
-            <label class="text-muted">是否对外公开：</label>
-            {% if post and ord(post.public) %}
-            <label class="radio-inline">
-                <input name="public" type="radio" value="1" checked>是
-            </label>
-            <label class="radio-inline">
-                <input name="public" type="radio" value="0">否
-            </label>
-            {% elif post and not ord(post.public) %}
-            <label class="radio-inline">
-                <input name="public" type="radio" value="1">是
-            </label>
-            <label class="radio-inline">
-                <input name="public" type="radio" value="0" checked>否
-            </label>
-            {% elif not post %}
-            <label class="radio-inline">
-                <input name="public" type="radio" value="1" checked>是
-            </label>
-            <label class="radio-inline">
-                <input name="public" type="radio" value="0">否
-            </label>
-            {% end %}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="select-privacy" id="js-select-privacy">
+                <label class="text-muted">是否对外公开：</label>
+                {% if post and ord(post.public) %}
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-danger btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
+                    <button type="button" class="btn btn-default btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
+                </div>
+                <input type="hidden" name="privacy" value="1">
+                {% elif post and not ord(post.public) %}
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
+                    <button type="button" class="btn btn-danger btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
+                </div>
+                <input type="hidden" name="privacy" value="0">
+                {% elif not post %}
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
+                    <button type="button" class="btn btn-default btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
+                </div>
+                <input type="hidden" name="privacy" value="-1">
+                {% end %}
+
+                <!--
+                {% if post and ord(post.public) %}
+                <label class="radio-inline">
+                    <input name="public" type="radio" value="1" checked>是
+                </label>
+                <label class="radio-inline">
+                    <input name="public" type="radio" value="0">否
+                </label>
+                {% elif post and not ord(post.public) %}
+                <label class="radio-inline">
+                    <input name="public" type="radio" value="1">是
+                </label>
+                <label class="radio-inline">
+                    <input name="public" type="radio" value="0" checked>否
+                </label>
+                {% elif not post %}
+                <label class="radio-inline">
+                    <input name="public" type="radio" value="1" checked>是
+                </label>
+                <label class="radio-inline">
+                    <input name="public" type="radio" value="0">否
+                </label>
+                {% end %}
+                -->
+            </div>
         </div>
     </div>
     <!--div class="row">
@@ -114,6 +151,7 @@
     <input type="hidden" name="id" value={{ post.id }}>
     {% else %}
     <input type="hidden" name="id" value="-1">
+    <input type="hidden" name="category" value="-1">
     {% end %}
 </div>
 <!--div class="btns-dialog container-fluid"></div-->

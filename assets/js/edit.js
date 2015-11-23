@@ -16,10 +16,10 @@ const referer = $('input[name="referer"]').val();
 
 const getPost = function() {
     let post = {};
-    post.category = $('select[name="category"]').val();
+    post.category = $('input[name="category"]').val();
     post.title = $('input[name="title"]').val();
     post.content = $('textarea[name="content"]').val();
-    post._public = $('input[name="public"]:checked').val();
+    post.privacy = $('input[name="privacy"]').val();
     post.id = $('input[name="id"]').val();
 
     return post;
@@ -29,7 +29,7 @@ const validatePost = function(post) {
     let validate = {valid: true};
     for (let key in post) {
         let value = post[key];
-        if (key !== '_public' && (!value || !$.trim(value))) {
+        if (key !== 'privacy' && (!value || !$.trim(value))) {
             validate.valid = false;
             validate.msg = key + '不允许为空';
             return validate;
@@ -91,4 +91,17 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     } else {
         Utils.showMsg('error', validateResult.msg);
     }
+}).on('click', '#js-select-cate>button', function() {
+    // 选择文章目录
+    $('#js-select-cate>button').removeClass('btn-info').addClass('btn-default');
+    $(this).addClass('btn-info');
+    const categoryId = $(this).data('id');
+    $('input[name="category"]').val(categoryId);
+}).on('click', '#js-select-privacy button', function() {
+    // 选择是否公开发布
+    $('#js-select-privacy button').removeClass('btn-danger').addClass('btn-default');
+    const value = $(this).data('value');
+    console.log(value)
+    $(this).addClass('btn-danger');
+    $('input[name="privacy"]').val(value);
 });

@@ -2,6 +2,20 @@
   width: 96%;
   margin: 0 auto;
 }
+.select-cate,
+.create-cate,
+.select-privacy {
+  display: inline-block;
+}
+.select-cate button,
+.create-cate button,
+.select-privacy button {
+  box-shadow: 0 0 3px #ccc;
+}
+.left-switch,
+.right-switch {
+  box-shadow: 0 0 5px #ccc;
+}
 .edit-panel {
   position: relative;
 }
