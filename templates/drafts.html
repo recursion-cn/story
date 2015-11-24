@@ -9,7 +9,7 @@
                 <div class="info">
                     <a class="author" href={{ "/users/" + str(draft.author.id) }}>{{ draft.author.nick }}</a>
                     <span>最后发布于</span>
-                    <span class="text-info">{{ draft.last_modified }}</span>
+                    <span class="text-info" data-toggle="tooltip" data-placement="bottom" title={{ draft.last_modified }}>{{ draft.last_modified }}</span>
                 </div>
             </div>
             <div class="post-body">

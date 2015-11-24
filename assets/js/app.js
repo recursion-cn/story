@@ -8,6 +8,7 @@
 'use strict'
 
 require('expose?$!expose?jQuery!jquery');
+require('bootstrap');
 
 const getPaginationParams = function() {
     const page = $('#js-load-more').data('page');
@@ -51,6 +52,18 @@ const showOrHidePagination = function(bol) {
         $('#js-load-more').parent().hide();
     }
 };
+
+const initDateTooltip = function() {
+    $('span[data-toggle="tooltip"]').tooltip();
+};
+
+const init = function() {
+    initDateTooltip();
+};
+
+$(function() {
+    init();
+});
 
 $('body').on('mouseover', '.nav-user-panel', (e) => {
     $('.nav-user-panel').find('.user-panel').fadeIn()
