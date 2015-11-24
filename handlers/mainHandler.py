@@ -31,7 +31,7 @@ class IndexHandler(baseHandler.RequestHandler):
             if args.get('size'):
                 size = int(args.get('size')[0])
             count_posts = 'select count(1) count from tb_post where visible = 1 and deleted = 0 and public = 1 and user_id = %s'
-            _count = db.get(count_posts, self.current_user.id)
+            _count = db.get(count_posts, user.id)
             count = _count.count
             select_posts = """select id, title, content, user_id, category_id, created, updated,
                         if(updated is NULL, created, updated) last_modified from tb_post where
