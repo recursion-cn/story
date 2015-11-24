@@ -70,6 +70,7 @@ const submitPost = function(post) {
 
 $(function() {
     init();
+    window.editorChanged = false;
 });
 
 $('body').on('click', '.switch-editor-mode', function(e) {
@@ -132,4 +133,15 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     $(this).popover({html: true, template: template, title: '添加目录', content: content});
 }).on('click', '#js-new-cate-btn-hide', function() {
     $('#js-add-cate')
+}).on('input', 'input[name="title"]', function() {
+    editorChanged = true;
+}).on('input', 'textarea', function() {
+    editorChanged = true;
+    console.log(editorChanged);
+});
+
+$(window).on('beforeunload', function(e) {
+    if (editorChanged) {
+        return false;
+    }
 });

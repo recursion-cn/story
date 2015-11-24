@@ -7,6 +7,8 @@
 'use strict'
 
 require('expose?$!expose?jQuery!jquery');
+require('bootstrap');
+
 const converter = new Markdown.Converter();
 const safeConverter = Markdown.getSanitizingConverter();
 const Utils = require('./utils.js');
@@ -54,7 +56,31 @@ const deletePost = function(id) {
     });
 };
 
-$('body').on('click', '#js-delete-post', function() {
-    const id = $(this).data('id');
+const initDeleteConfirmTooltip = function() {
+    const title = '确实要删除这篇文章吗？';
+    const content = '<div class="row" id="js-delete-confirm">'
+                    + '<div class="col-md-6">'
+                    + '<button class="btn btn-default btn-sm cancel-btn">取消</button>'
+                    + '</div>'
+                    + '<div class="col-md-6">'
+                    + '<button class="btn btn-danger btn-sm sure-btn">确定</button>'
+                    + '</div>'
+                    + '</div>';
+    const template = '<div class="popover" role="tooltip"><div class="popover-title"></div><div class="popover-content"></div></div>';
+    $('#js-delete-post').popover({html: true, title: title, content: content});
+};
+
+$(function() {
+    //initDeleteConfirmTooltip();
+});
+
+$('body').on('click', '#js-delete-confirm .cancel-btn', function() {
+    //const id = $('#js-delete-post').data('id');
+    //deletePost(id);
+}).on('click', '#js-delete-post', function() {
+    $('#js-delete-confirm-modal').modal({show: true});
+}).on('click', '#js-delete-confirm-modal .confirm-btn', function() {
+    const id = $('#js-delete-post').data('id');
     deletePost(id);
+    $('#js-delete-confirm-modal').modal('hide');
 });

@@ -24,8 +24,15 @@
             <div class="fun">
                 <ul class="list-inline">
                     {% if current_user and current_user.id == post.author.id %}
-                        <li><span class="glyphicon glyphicon-edit"></span> <a href={{ '/users/edit/' + str(post.id) }}>编辑</a></li>
-                        <li><span class="glyphicon glyphicon-trash"></span> <a href="javascript:;" id="js-delete-post" data-id={{ post.id }}>删除</a></li>
+                        <li>
+                            <span class="glyphicon glyphicon-edit"></span>
+                            <a href={{ '/users/edit/' + str(post.id) }}>编辑</a>
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-trash"></span>
+                            <!--a href="javascript:;" id="js-delete-post" data-id={{ post.id }} data-toggle="popover" data-placement="top">删除</a-->
+                            <a href="javascript:;" id="js-delete-post" data-id={{ post.id }}>删除</a>
+                        </li>
                     {% end %}
                 </ul>
             </div>
@@ -39,6 +46,28 @@
     </div>
     <div class="main-side col-md-3 visible-lg-block visible-md-block pull-right">
         {% include sidebar.html %}
+    </div>
+</div>
+<div class="modal fade" id="js-delete-confirm-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong class="modal-title">确实要删除这篇文章吗？</strong>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                        <button class="btn btn-danger btn-sm confirm-btn">确定</button>
+                    </div>
+                </div>
+            </div>
+            <!--div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-main">添加</button>
+            </div-->
+        </div>
     </div>
 </div>
 {% end %}
