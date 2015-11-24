@@ -68,8 +68,25 @@ const submitPost = function(post) {
     });
 };
 
+const initCreateCatePopover = function() {
+    const template = '<div class="popover new-cate-popover" role="tooltip"><div class="arrow"></div><div class="popover-title"></div><div class="popover-content"></div></div>';
+    const content = '<div class="form-group">'
+                    + '<div class="input-group">'
+                    + '<div class="input-group-addon">目录名称</div>'
+                    + '<input type="text" name="new-cate" class="form-control input-sm"/>'
+                    + '<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>'
+                    + '</div></div>'
+                    + '<div class="form-group clearfix">'
+                    + '<div class="pull-right">'
+                    + '<!--button class="btn btn-warning btn-sm" id="js-new-cate-btn-hide">取消</button-->'
+                    + '<button class="btn btn-main btn-sm">添加</button>'
+                    + '</div>';
+    $('#js-add-cate').popover({html: true, template: template, title: '添加目录', content: content});
+};
+
 $(function() {
     init();
+    initCreateCatePopover();
     window.editorChanged = false;
 });
 
@@ -114,23 +131,10 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     // 选择是否公开发布
     $('#js-select-privacy button').removeClass('btn-danger').addClass('btn-default');
     const value = $(this).data('value');
-    console.log(value)
     $(this).addClass('btn-danger');
     $('input[name="privacy"]').val(value);
 }).on('click', '#js-add-cate', function() {
-    const template = '<div class="popover new-cate-popover" role="tooltip"><div class="arrow"></div><div class="popover-title"></div><div class="popover-content"></div></div>';
-    const content = '<div class="form-group">'
-                    + '<div class="input-group">'
-                    + '<div class="input-group-addon">目录名称</div>'
-                    + '<input type="text" name="new-cate" class="form-control input-sm"/>'
-                    + '<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>'
-                    + '</div></div>'
-                    + '<div class="form-group clearfix">'
-                    + '<div class="pull-right">'
-                    + '<!--button class="btn btn-warning btn-sm" id="js-new-cate-btn-hide">取消</button-->'
-                    + '<button class="btn btn-main btn-sm">添加</button>'
-                    + '</div>';
-    $(this).popover({html: true, template: template, title: '添加目录', content: content});
+    // todo
 }).on('click', '#js-new-cate-btn-hide', function() {
     $('#js-add-cate')
 }).on('input', 'input[name="title"]', function() {
@@ -144,4 +148,6 @@ $(window).on('beforeunload', function(e) {
     if (editorChanged) {
         return false;
     }
+}).on('scroll', function() {
+    //
 });
