@@ -146,7 +146,7 @@ $('body').on('click', '.switch-editor-mode', function(e) {
 
 $(window).on('beforeunload', function(e) {
     if (editorChanged) {
-        return false;
+        return '您有未保存的编辑内容';
     }
 }).on('scroll', function() {
     //
