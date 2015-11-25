@@ -33,7 +33,7 @@ textarea.form-control {
     width: 100%;
     height: 50px;
     background-color: @blue;
-    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+    //box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
     .navbar-default {
         width: 62%;
         max-height: 50px;
@@ -47,9 +47,17 @@ textarea.form-control {
             color: #fff;
             opacity: 1;
         }
+        .navbar-collapse.collapse {
+            position: relative;
+            top: -2px;
+            border-top: 0;
+        }
         .sm-menu-bar {
+            margin-top: 0;
             text-align: center;
-            background-color: rgba(3, 141, 152, .9);
+            //background-color: rgba(3, 141, 152, 1);
+            background-color: @blue;
+            border-top: 1px solid #087C86;
             .nav.navbar-nav {
                 a {
                     padding-top: 5px;

@@ -27,7 +27,6 @@ textarea.form-control {
   width: 100%;
   height: 50px;
   background-color: #038d98;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
 }
 .header .navbar-default {
   width: 62%;
@@ -43,9 +42,16 @@ textarea.form-control {
   color: #fff;
   opacity: 1;
 }
+.header .navbar-default .navbar-collapse.collapse {
+  position: relative;
+  top: -2px;
+  border-top: 0;
+}
 .header .navbar-default .sm-menu-bar {
+  margin-top: 0;
   text-align: center;
-  background-color: rgba(3, 141, 152, 0.9);
+  background-color: #038d98;
+  border-top: 1px solid #087C86;
 }
 .header .navbar-default .sm-menu-bar .nav.navbar-nav a {
   padding-top: 5px;
