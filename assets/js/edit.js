@@ -53,17 +53,21 @@ const validatePost = function(post) {
     return validate;
 };
 
-const submitPost = function(post) {
+const submitPost = function(post, asDraft) {
     const url = '/posts/create';
     $.post(url, post, function(data) {
         if (data.success) {
-            Utils.showMsg('success', '文章发布成功');
+            let successTip = '文章发布成功';
+            if (asDraft) successTip = '已经保存为草稿';
+            Utils.showMsg('success', successTip);
             setTimeout(function() {
                 window.location.href = referer;
             }, 3000);
             //window.location.href = referer;
         } else {
-            Utils.showMsg('发布失败，请稍候试一试吧');
+            let failedTip = 'Oops，文章发布失败了，喝杯咖啡再试一下';
+            if (asDraft) failedTip = 'Oops，草稿保存失败了，喝杯咖啡再试一下';
+            Utils.showMsg(failedTip);
         }
     });
 };
@@ -108,6 +112,7 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     if (validateResult.valid) {
         validateResult.data.draft = 0;
         submitPost(validateResult.data);
+        editorChanged = false;
     } else {
         Utils.showMsg('error', validateResult.msg);
     }
@@ -117,7 +122,8 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     const validateResult = validatePost(getPost());
     if (validateResult.valid) {
         validateResult.data.draft = 1;
-        submitPost(validateResult.data);
+        submitPost(validateResult.data, true);
+        editorChanged = false;
     } else {
         Utils.showMsg('error', validateResult.msg);
     }

@@ -49,4 +49,4 @@ class IndexHandler(baseHandler.RequestHandler):
                     post['summary'] = _text
                     post['author'] = user
 
-            self.render('main.html', posts=posts, pageSize=size, needPagination=int(needPagination))
+            self.render('main.html', user=user, posts=posts, pageSize=size, needPagination=int(needPagination))
