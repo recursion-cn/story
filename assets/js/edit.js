@@ -80,7 +80,7 @@ const initCreateCatePopover = function() {
                     + '<div class="input-group">'
                     + '<div class="input-group-addon">目录名称</div>'
                     + '<input type="text" name="new-cate" class="form-control input-sm"/>'
-                    + '<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>'
+                    + '<span class="glyphicon form-control-feedback" aria-hidden="true"></span>'
                     + '</div></div>'
                     + '<div class="form-group clearfix">'
                     + '<div class="pull-left cate-msg-area"></div>'
@@ -124,7 +124,6 @@ const categoryExist = function(data) {
             if (res.exist) {
                 inputElement.closest('.form-group').addClass('has-error').removeClass('has-success');
                 inputElement.next().removeClass('glyphicon-ok').addClass('glyphicon-remove');
-                console.log(inputElement.closest('.popover'))
                 inputElement.closest('.popover').find('.cate-msg-area').html('<span class="text-danger">目录已经存在了</span>');
             } else {
                 inputElement.closest('.form-group').addClass('has-success').removeClass('has-error');
@@ -201,12 +200,14 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     editorChanged = true;
 }).on('click', '.js-btn-add-cate', function() {
     const cate = getInputCategory();
+    if ('' === $.trim(cate)) return;
     const data = {cate_name: cate};
     addCategory(data);
 }).on('input', 'input[name="new-cate"]', function() {
     clearTimeout(timer);
     timer = setTimeout(function() {
         const cate = getInputCategory();
+        if ('' === $.trim(cate)) return;
         const data = {cate_name: cate};
         categoryExist(data);
     }, 300);
