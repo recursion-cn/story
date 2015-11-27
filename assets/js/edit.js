@@ -60,9 +60,11 @@ const submitPost = function(post, asDraft) {
             let successTip = '文章发布成功';
             if (asDraft) successTip = '已经保存为草稿';
             Utils.showMsg('success', successTip);
-            setTimeout(function() {
-                window.location.href = referer;
-            }, 3000);
+            if (!asDraft) {
+                setTimeout(function() {
+                    window.location.href = referer;
+                }, 3000);
+            }
             //window.location.href = referer;
         } else {
             let failedTip = 'Oops，文章发布失败了，喝杯咖啡再试一下';
@@ -83,9 +85,29 @@ const initCreateCatePopover = function() {
                     + '<div class="form-group clearfix">'
                     + '<div class="pull-right">'
                     + '<!--button class="btn btn-warning btn-sm" id="js-new-cate-btn-hide">取消</button-->'
-                    + '<button class="btn btn-main btn-sm">添加</button>'
+                    + '<button class="btn btn-main btn-sm js-btn-add-cate">添加</button>'
                     + '</div>';
     $('#js-add-cate').popover({html: true, template: template, title: '添加目录', content: content});
+};
+
+const getInputCategory = function() {
+    return $('input[name="new-cate"]').val();
+};
+
+const addCategory = function(data) {
+    const url = '/category/add';
+    $.post(url, data, function(res) {
+        if (res && res.success) {
+            addCategoryElement(res.category_id, data.cate_name);
+            $('#js-add-cate').popover('hide');
+        }
+    });
+};
+
+const addCategoryElement = function(cate_id, cate_name) {
+    const element = $('<button class="btn btn-default btn-sm"></button>');
+    element.data('id', cate_id).text(cate_name);
+    $('#js-select-cate').append(element);
 };
 
 $(function() {
@@ -147,7 +169,10 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     editorChanged = true;
 }).on('input', 'textarea', function() {
     editorChanged = true;
-    console.log(editorChanged);
+}).on('click', '.js-btn-add-cate', function() {
+    const cate = getInputCategory();
+    const data = {cate_name: cate};
+    addCategory(data);
 });
 
 $(window).on('beforeunload', function(e) {

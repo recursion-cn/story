@@ -1,0 +1,27 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#
+# author victor li nianchaoli@msn.cn
+# date 2015/11/27
+
+import baseHandler
+import tornado.web
+from modules.db import db
+import constants
+
+class AddCategoryHandler(baseHandler.RequestHandler):
+    @tornado.web.authenticated
+    def post(self):
+        category = self.get_body_argument('cate_name')
+        if category:
+            query_exist = 'select count(*) count from tb_category where name = %s and user_id = %s'
+            num = db.get(query_exist, category, self.current_user.id)
+            if num and num.count:
+                self.write({'success': False, 'error_code': constants.error_code['category_already_exist']})
+                self.finish()
+                return
+            query_new = 'insert into tb_category (name, user_id, visible) values (%s, %s, %s)'
+            id = db.insert(query_new, category, self.current_user.id, 1)
+            if id:
+                self.write({'success': True, 'category_id': id})
+                self.finish()

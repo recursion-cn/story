@@ -183,8 +183,8 @@ class EditHandler(baseHandler.RequestHandler):
             _post = db.get(get_post, post_id)
             if _post and _post.user_id == self.current_user.id:
                 post = _post
-        get_categories = 'select id, name from tb_category where visible = 1'
-        categories = db.query(get_categories)
+        get_categories = 'select id, name from tb_category where visible = 1 and user_id = %s'
+        categories = db.query(get_categories, self.current_user.id)
         referer = self.request.headers.get('Referer') or '/'
 
         self.render('edit.html', categories=categories, post=post, referer=referer)

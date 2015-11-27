@@ -2,6 +2,7 @@ import handlers.baseHandler as base
 import handlers.mainHandler as main
 import handlers.postHandler as post
 import handlers.userHandler as user
+import handlers.categoryHandler as cate
 
 urls = [
     (r'/', main.IndexHandler),
@@ -17,5 +18,6 @@ urls = [
     (r'/posts/(\d+)', post.PostHandler),
     (r'/posts/create', post.InsertOrUpdateHandler),
     (r'/posts/delete/(\d+)', post.DeleteHandler),
+    (r'/category/add', cate.AddCategoryHandler),
     (r'.*', base.RequestHandler),
 ]
