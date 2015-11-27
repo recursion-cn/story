@@ -83,6 +83,7 @@ const initCreateCatePopover = function() {
                     + '<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>'
                     + '</div></div>'
                     + '<div class="form-group clearfix">'
+                    + '<div class="pull-left cate-msg-area"></div>'
                     + '<div class="pull-right">'
                     + '<!--button class="btn btn-warning btn-sm" id="js-new-cate-btn-hide">取消</button-->'
                     + '<button class="btn btn-main btn-sm js-btn-add-cate">添加</button>'
@@ -96,10 +97,15 @@ const getInputCategory = function() {
 
 const addCategory = function(data) {
     const url = '/category/add';
+    const inputElement = $('input[name="new-cate"]');
     $.post(url, data, function(res) {
         if (res && res.success) {
             addCategoryElement(res.category_id, data.cate_name);
             $('#js-add-cate').popover('hide');
+        } else if (!res.success) {
+            // TODO
+            inputElement.closest('.form-group').addClass('has-error');
+            inputElement.next().removeClass('glyphicon-ok').addClass('glyphicon-remove');
         }
     });
 };
@@ -108,6 +114,30 @@ const addCategoryElement = function(cate_id, cate_name) {
     const element = $('<button class="btn btn-default btn-sm"></button>');
     element.data('id', cate_id).text(cate_name);
     $('#js-select-cate').append(element);
+};
+
+const categoryExist = function(data) {
+    const url = '/category/exist';
+    const inputElement = $('input[name="new-cate"]');
+    $.get(url, data, function(res) {
+        if (res && res.success) {
+            if (res.exist) {
+                inputElement.closest('.form-group').addClass('has-error').removeClass('has-success');
+                inputElement.next().removeClass('glyphicon-ok').addClass('glyphicon-remove');
+                console.log(inputElement.closest('.popover'))
+                inputElement.closest('.popover').find('.cate-msg-area').html('<span class="text-danger">目录已经存在了</span>');
+            } else {
+                inputElement.closest('.form-group').addClass('has-success').removeClass('has-error');
+                inputElement.next().removeClass('glyphicon-remove').addClass('glyphicon-ok');
+                inputElement.closest('.popover').find('.cate-msg-area').html('');
+            }
+        } else if (!res.success) {
+            // TODO
+            inputElement.closest('.form-group').addClass('has-error').removeClass('has-success');
+            inputElement.next().removeClass('glyphicon-ok').addClass('glyphicon-remove');
+            inputElement.closest('.popover').find('.cate-msg-area').html('<span class="text-danger">Oops，数据请求异常</span>');
+        }
+    });
 };
 
 $(function() {
@@ -173,7 +203,16 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     const cate = getInputCategory();
     const data = {cate_name: cate};
     addCategory(data);
+}).on('input', 'input[name="new-cate"]', function() {
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+        const cate = getInputCategory();
+        const data = {cate_name: cate};
+        categoryExist(data);
+    }, 300);
 });
+
+let timer;
 
 $(window).on('beforeunload', function(e) {
     if (editorChanged) {

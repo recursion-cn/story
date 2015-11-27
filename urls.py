@@ -18,6 +18,7 @@ urls = [
     (r'/posts/(\d+)', post.PostHandler),
     (r'/posts/create', post.InsertOrUpdateHandler),
     (r'/posts/delete/(\d+)', post.DeleteHandler),
+    (r'/category/exist', cate.IsCategoryExistHandler),
     (r'/category/add', cate.AddCategoryHandler),
     (r'.*', base.RequestHandler),
 ]

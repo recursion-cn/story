@@ -9,6 +9,24 @@ import tornado.web
 from modules.db import db
 import constants
 
+class IsCategoryExistHandler(baseHandler.RequestHandler):
+    @tornado.web.authenticated
+    def get(self):
+        category = self.get_query_argument('cate_name')
+        if category:
+            query_exist = 'select count(*) count from tb_category where name = %s and user_id = %s'
+            num = db.get(query_exist, category, self.current_user.id)
+            if num and num.count:
+                self.write({'success': True, 'exist': True})
+                self.finish()
+                return
+            elif not num.count:
+                self.write({'success': True, 'exist': False})
+                self.finish()
+                return
+        self.write({'success': False, 'error_code': constants.error_code['parameter_missing']})
+        self.finish()
+
 class AddCategoryHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
