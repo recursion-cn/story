@@ -47,8 +47,9 @@ class SignupHandler(baseHandler.RequestHandler):
         nick = self.get_body_argument('nick')
         password = self.get_body_argument('password')
         password_confirm = self.get_body_argument('password_confirm')
+        invite_code = self.get_body_argument('invite_code')
         nick = nick.strip()
-        if nick and password and password_confirm:
+        if nick and password and password_confirm and invite_code:
             length = len(password)
             if length >= 6 and length <= 18 and password == password_confirm:
                 query_exist = 'select count(1) count from tb_user where nick = %s'
@@ -57,19 +58,26 @@ class SignupHandler(baseHandler.RequestHandler):
                     self.write({'success': False, 'error_code': constants.error_code['user_has_exist']})
                     self.finish()
                     return
-                md5 = hashlib.md5()
-                md5.update(password)
-                password_md5 = md5.hexdigest()
-                now = datetime.datetime.now()
-                insert_sql = 'insert into tb_user (nick, password, created) values (%s, %s, %s)'
-                try:
-                    member_id = db.insert(insert_sql, nick, password_md5, now)
-                    self.write({'success': True})
+                query_invite_code = 'select count(1) count from tb_invite where code = %s'
+                code_num = db.get(query_invite_code, invite_code)
+                if code_num and code_num.count:
+                    md5 = hashlib.md5()
+                    md5.update(password)
+                    password_md5 = md5.hexdigest()
+                    now = datetime.datetime.now()
+                    insert_sql = 'insert into tb_user (nick, password, created) values (%s, %s, %s)'
+                    try:
+                        member_id = db.insert(insert_sql, nick, password_md5, now)
+                        self.write({'success': True})
+                        self.finish()
+                        return
+                    except:
+                        pass
+                        # TODO add log
+                elif not code_num.count:
+                    self.write({'success': False, 'error_code': constants.error_code['invite_code_not_exist']})
                     self.finish()
                     return
-                except:
-                    pass
-                    # TODO add log
 
         self.write({'success': False})
         self.finish()
