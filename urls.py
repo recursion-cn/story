@@ -20,5 +20,6 @@ urls = [
     (r'/posts/delete/(\d+)', post.DeleteHandler),
     (r'/category/exist', cate.IsCategoryExistHandler),
     (r'/category/add', cate.AddCategoryHandler),
+    (r'/invite', main.InviteHandler),
     (r'.*', base.RequestHandler),
 ]

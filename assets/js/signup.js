@@ -58,9 +58,9 @@ const signup = function(data) {
     const url = '/users/signup';
     $.post(url, data, function(res) {
         if (res && res.success) {
-            Utils.showMsg('success', '注册成功');
+            Utils.showMsg('success', '注册成功，3秒后将跳转到登录页面');
             setTimeout(function() {
-                //window.location.href = '/';
+                window.location.href = '/users/login';
             }, 3000);
         } else if (!res.success) {
             Utils.showMsg('error', ErrorCode[res.error_code]);

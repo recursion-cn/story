@@ -4,6 +4,7 @@
 # author victor li nianchaoli@msn.cn
 # date 2015/10/17
 
+import tornado.web
 import baseHandler
 from modules.db import db
 import markdown
@@ -50,3 +51,10 @@ class IndexHandler(baseHandler.RequestHandler):
                     post['author'] = user
 
             self.render('main.html', user=user, posts=posts, pageSize=size, needPagination=int(needPagination))
+
+class InviteHandler(baseHandler.RequestHandler):
+    @tornado.web.authenticated
+    def get(self):
+        query_invite_record = 'select id, invitee_id, code, created from tb_invite where inviter_id = %s'
+        records = db.query(query_invite_record, self.current_user.id)
+        self.render('invite.html', records=records)
