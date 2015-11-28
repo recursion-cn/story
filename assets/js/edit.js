@@ -112,7 +112,7 @@ const addCategory = function(data) {
 
 const addCategoryElement = function(cate_id, cate_name) {
     const element = $('<button class="btn btn-default btn-sm"></button>');
-    element.data('id', cate_id).text(cate_name);
+    element.attr('data-id', cate_id).text(cate_name);
     $('#js-select-cate').append(element);
 };
 
