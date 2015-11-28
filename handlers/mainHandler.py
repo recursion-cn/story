@@ -55,6 +55,6 @@ class IndexHandler(baseHandler.RequestHandler):
 class InviteHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
-        query_invite_record = 'select id, invitee_id, code, created from tb_invite where inviter_id = %s'
+        query_invite_record = 'select id, invitee_id, code, invitee_email, created from tb_invite where inviter_id = %s'
         records = db.query(query_invite_record, self.current_user.id)
         self.render('invite.html', records=records)

@@ -2,3 +2,9 @@ table th,
 table td {
   text-align: center;
 }
+.invite-help {
+  padding-left: 10px;
+}
+.invite-code {
+  margin-top: 10px;
+}

@@ -9,7 +9,11 @@
             <form class="form-inline">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="请输入对方的email地址">
-                    <button class="btn btn-main">发送邀请码</button>
+                    <button class="btn btn-main send-invite">生成/发送邀请码</button>
+                    <a href="javascript:;" class="glyphicon glyphicon-question-sign invite-help" data-toggle="popover" data-trigger="hover" data-content="每个邀请码只能用于一次注册，注册成功后邀请码即失效。"></a>
+                </div>
+                <div class="invite-code">
+                    <strong>您也可以不输入email，直接点击上面的“生成/发送邀请码”按钮生成一个邀请码自行发送给您的朋友</strong>
                 </div>
             </form>
             <h3>我的邀请记录</h3>
@@ -34,7 +38,7 @@
                     {% set index = index + 1 %}
                     <tr>
                         <td>{{ index }}</td>
-                        <td>{{ record.invitee_id }}</td>
+                        <td>{{ record.invitee_email or '未使用邮箱' }}</td>
                         <td>{{ record.code }}</td>
                         <td>{{ record.created }}</td>
                         <td><span class="text-muted">尚未注册</span></td>
@@ -46,4 +50,7 @@
         </div>
     </div>
 </div>
+{% end %}
+{% block js-area %}
+<script type="text/javascript" src="/assets/dist/js/invite.js"></script>
 {% end %}

@@ -1,5 +1,5 @@
 /**
- * login module
+ * signup module
  *
  * @author victor li
  * @date 2015/11/28
