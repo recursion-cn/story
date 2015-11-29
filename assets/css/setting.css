@@ -1,0 +1,10 @@
+.password-setting,
+.cate-setting {
+  max-width: 50%;
+  margin: 5px 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #e0e0e0;
+}
+.cate-setting .btn {
+  margin-bottom: 10px;
+}

@@ -6,8 +6,6 @@
 
 'use strict'
 
-require('expose?$!expose?jQuery!jquery');
-require('bootstrap');
 const Utils = require('./utils.js');
 const referer = $('input[name="referer"]').val();
 

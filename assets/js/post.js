@@ -6,9 +6,6 @@
 
 'use strict'
 
-require('expose?$!expose?jQuery!jquery');
-require('bootstrap');
-
 const converter = new Markdown.Converter();
 const safeConverter = Markdown.getSanitizingConverter();
 const Utils = require('./utils.js');

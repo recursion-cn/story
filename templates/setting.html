@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block css-area %}
+<link rel="stylesheet" href="/assets/css/setting.css">
+{% end %}
+{% block main %}
+<div class="main container-fluid clearfix">
+    <div class="main-body">
+        <div class="user-setting">
+            <div class="password-setting clearfix">
+                <h3 class="text-muted">密码修改</h3>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">旧密码</div>
+                        <input type="password" class="form-control" placeholder="请输入旧密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">新密码</div>
+                        <input type="password" class="form-control" placeholder="请输入新密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">新密码确认</div>
+                        <input type="password" class="form-control" placeholder="请在此输入密码">
+                    </div>
+                </div>
+                <mark class="text-muted">您的密码将被加密存储，密码长度应在6-18位字符之间，首尾不能包含空格</mark>
+                <button class="btn btn-main pull-right">确认修改</button>
+            </div>
+            <div class="cate-setting">
+                <h3 class="text-muted">目录管理</h3>
+                {% if categories and len(categories) %}
+                {% for cate in categories %}
+                <button class="btn btn-info btn-sm" data-id={{ cate.id }}>
+                    <span>{{ cate.name }}</span>
+                    <span class="badge">{{ cate.post_count }}</span>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {% end %}
+                {% end %}
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}

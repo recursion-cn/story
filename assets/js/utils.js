@@ -7,8 +7,6 @@
 
 'use strict'
 
-require('expose?$!expose?jQuery!jquery');
-
 let Utils = {};
 
 let cookie = {};

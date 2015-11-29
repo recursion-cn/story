@@ -97,3 +97,27 @@ class ProfileHandler(baseHandler.RequestHandler):
             self.render('profile.html', user=user)
 
         raise tornado.web.HTTPError(404)
+
+class SettingHandler(baseHandler.RequestHandler):
+    @tornado.web.authenticated
+    def get(self):
+        query_category = 'select id, name from tb_category where user_id = %s'
+        categories_id = []
+        categories = db.query(query_category, str(self.current_user.id))
+        if categories:
+            for cate in categories:
+                categories_id.append(str(cate.id))
+        cate_post_count_mapper = []
+        if categories_id:
+            query_posts = 'select category_id, count(1) count from tb_post where category_id in {0} group by category_id'.format(tuple(categories_id))
+            cate_post_count_mapper = db.query(query_posts)
+
+        for cate in categories:
+            for mapper in cate_post_count_mapper:
+                cate['post_count'] = 0
+                if mapper.category_id == cate.id:
+                    cate['post_count'] = mapper.count
+
+        self.render('setting.html', categories=categories)
+
+

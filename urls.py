@@ -13,6 +13,7 @@ urls = [
     (r'/users/draft', post.DraftListHandler),
     (r'/users/edit', post.EditHandler),
     (r'/users/edit/(\d+)', post.EditHandler),
+    (r'/users/setting', user.SettingHandler),
     (r'/posts', post.ListHandler),
     (r'/api/posts', post.ListApiHandler),
     (r'/posts/(\d+)', post.PostHandler),
