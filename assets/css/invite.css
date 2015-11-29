@@ -1,9 +1,15 @@
+.invite-user input.form-control {
+  width: 360px;
+}
+.invite-records {
+  margin-top: 30px;
+}
 table th,
 table td {
   text-align: center;
 }
 .invite-help {
-  padding-left: 10px;
+  padding-left: 5px;
 }
 .invite-code {
   margin-top: 10px;

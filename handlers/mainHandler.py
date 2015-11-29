@@ -10,6 +10,7 @@ from modules.db import db
 import markdown
 import bleach
 from bs4 import BeautifulSoup
+import datetime
 
 """
 direct into the site index page or the corresponding user's posts list page
@@ -58,3 +59,9 @@ class InviteHandler(baseHandler.RequestHandler):
         query_invite_record = 'select id, invitee_id, code, invitee_email, created from tb_invite where inviter_id = %s'
         records = db.query(query_invite_record, self.current_user.id)
         self.render('invite.html', records=records)
+
+class InviteGenerateHandler(baseHandler.RequestHandler):
+    def get(self):
+        pass
+
+
