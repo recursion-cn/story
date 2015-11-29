@@ -47,6 +47,5 @@ class AddHandler(baseHandler.RequestHandler):
 class BatchDeleteHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
-        print self.get_body_argument('categories')
-        categories = self.get_body_arguments('categories')
+        categories = self.get_body_argument('categories')
         print categories
