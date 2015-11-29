@@ -225,13 +225,12 @@ class InsertOrUpdateHandler(baseHandler.RequestHandler):
 
         if title and content and category_id:
             now = datetime.datetime.now()
-            if post_id != -1:
+            if int(post_id) != -1:
                 sql = 'update tb_post set title = %s, content = %s, public = %s, visible = %s, category_id = %s, updated = %s where id = %s and deleted = 0'
                 num = db.update(sql, title, content, int(post_public), int(visible), int(category_id), now, int(post_id))
             else:
                 sql = 'insert into tb_post (title, content, user_id, category_id, public, visible, created) values (%s, %s, %s, %s, %s, %s, %s)'
                 num = db.insert(sql, title, content, long(user_id), int(category_id), int(post_public), int(visible), now)
-
             if num:
                 self.write({'success': True})
                 self.finish()
