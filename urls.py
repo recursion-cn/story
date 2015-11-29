@@ -14,6 +14,7 @@ urls = [
     (r'/users/edit', post.EditHandler),
     (r'/users/edit/(\d+)', post.EditHandler),
     (r'/users/setting', user.SettingHandler),
+    (r'/api/users/change_password', user.PasswordModifyHandler),
     (r'/posts', post.ListHandler),
     (r'/api/posts', post.ListApiHandler),
     (r'/posts/(\d+)', post.PostHandler),

@@ -98,6 +98,46 @@ class ProfileHandler(baseHandler.RequestHandler):
 
         raise tornado.web.HTTPError(404)
 
+class PasswordModifyHandler(baseHandler.RequestHandler):
+    @tornado.web.authenticated
+    def post(self):
+        old_password = self.get_body_argument('old_password')
+        new_password = self.get_body_argument('new_password')
+        new_password_confirm = self.get_body_argument('new_password_confirm')
+        if old_password and new_password and new_password_confirm:
+            if len(new_password) >= 6 and len(new_password) <= 18:
+                if new_password == new_password_confirm:
+                    md5 = hashlib.md5()
+                    md5.update(old_password)
+                    password_md5 = md5.hexdigest().upper()
+                    query_user = 'select password from tb_user where nick = %s'
+                    user = db.get(query_user, self.current_user.nick)
+                    if user.password.upper() == password_md5:
+                        md5 = hashlib.md5()
+                        md5.update(new_password)
+                        new_password_md5 = md5.hexdigest().upper()
+                        update_user = 'update tb_user set password = %s where nick = %s'
+                        row = db.update(update_user, new_password_md5, self.current_user.nick)
+                        if row:
+                            self.write({'success': True})
+                            self.finish()
+                            return
+                        self.write({'success': False, 'error_code': constants.error_code['internal_error']})
+                        self.finish()
+                        return
+                    self.write({'success': False, 'error_code': constants.error_code['wrong_password']})
+                    self.finish()
+                    return
+                self.write({'success': False, 'error_code': constants.error_code['password_confirm_failed']})
+                self.finish()
+                return
+            self.write({'success': False, 'error_code': constants.error_code['illegal_password']})
+            self.finish()
+            return
+        self.write({'success': False, 'error_code': constants.error_code['missing_parameters']})
+        self.finish()
+
+
 class SettingHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):

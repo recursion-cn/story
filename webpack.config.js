@@ -8,7 +8,8 @@ module.exports = {
         signup: './assets/js/signup.js',
         login: './assets/js/login.js',
         post: './assets/js/post.js',
-        invite: './assets/js/invite.js'
+        invite: './assets/js/invite.js',
+        setting: './assets/js/setting.js'
     },
     output: {
         path: './assets/dist/js',

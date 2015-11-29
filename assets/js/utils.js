@@ -70,7 +70,9 @@ Utils.showMsg = function(type, msg, timeout) {
     let msgArea = msgBar.find('strong');
     msgArea.html(msg);
     msgBar.fadeIn();
-    let id = setTimeout(function() {
+    let id;
+    clearTimeout(id);
+    id = setTimeout(function() {
         msgBar.fadeOut();
         clearTimeout(id);
     }, timeout);
