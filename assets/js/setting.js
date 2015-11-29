@@ -69,6 +69,15 @@ const changePassword = function(data) {
     });
 };
 
+const deleteCategories = function(data) {
+    const url = '/category/delete';
+    $.post(url, data, function(res) {
+        console.log(res);
+    });
+};
+
+let _categories = [];
+
 $('body').on('click', '#js-submit-password', function(e) {
     e.preventDefault();
     const validatedPasswordModifyData = validatePasswordModifyData(getPasswordModifyData());
@@ -78,5 +87,23 @@ $('body').on('click', '#js-submit-password', function(e) {
     } else {
         Utils.showMsg('error', validatedPasswordModifyData.msg);
     }
+}).on('click', '.cate-btn', function() {
+    const id = $(this).data('id');
+    if ($(this).data('selected')) {
+        const _index = _categories.indexOf(id);
+        delete _categories[_index];
+        $(this).addClass('btn-default').removeClass('btn-danger').data('selected', false);
+    } else {
+        if (_categories.indexOf(id) < 0) {
+            _categories.push(id);
+        }
+        $(this).addClass('btn-danger').removeClass('btn-default').data('selected', true);
+    }
+}).on('click', '#js-delete-cate', function(e) {
+    e.preventDefault();
+    const data = {'categories': _categories};
+    console.log(_categories);
+    console.log(data);
+    deleteCategories(data);
 });
 

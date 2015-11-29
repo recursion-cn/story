@@ -14,9 +14,8 @@ class LoginHandler(baseHandler.RequestHandler):
         self.render('login.html')
 
     def post(self):
-        nick = self.get_body_argument('nick')
-        password = self.get_body_argument('password')
-        nick = nick.strip()
+        nick = self.get_body_argument('nick', None)
+        password = self.get_body_argument('password', None)
         if not nick or not password:
             self.write({'success': False, 'error_code': constants.error_code['miss_nick_or_password']})
             self.finish()
@@ -44,11 +43,10 @@ class SignupHandler(baseHandler.RequestHandler):
         self.render('signup.html');
 
     def post(self):
-        nick = self.get_body_argument('nick')
-        password = self.get_body_argument('password')
-        password_confirm = self.get_body_argument('password_confirm')
-        invite_code = self.get_body_argument('invite_code')
-        nick = nick.strip()
+        nick = self.get_body_argument('nick', None)
+        password = self.get_body_argument('password', None)
+        password_confirm = self.get_body_argument('password_confirm', None)
+        invite_code = self.get_body_argument('invite_code', None)
         if nick and password and password_confirm and invite_code:
             length = len(password)
             if length >= 6 and length <= 18 and password == password_confirm:
@@ -101,9 +99,9 @@ class ProfileHandler(baseHandler.RequestHandler):
 class PasswordModifyHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
-        old_password = self.get_body_argument('old_password')
-        new_password = self.get_body_argument('new_password')
-        new_password_confirm = self.get_body_argument('new_password_confirm')
+        old_password = self.get_body_argument('old_password', None)
+        new_password = self.get_body_argument('new_password', None)
+        new_password_confirm = self.get_body_argument('new_password_confirm', None)
         if old_password and new_password and new_password_confirm:
             if len(new_password) >= 6 and len(new_password) <= 18:
                 if new_password == new_password_confirm:

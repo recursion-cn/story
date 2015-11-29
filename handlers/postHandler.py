@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup
 import tornado.web
 from settings import settings
 import json
+import constants
 
 """
 get the public posts list
@@ -55,11 +56,9 @@ get the current user's posts list, need login.
 class ListHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
-        size = 10
+        defaultSize = 10
         needPagination = False
-        args = self.request.arguments
-        if args.get('size'):
-            size = int(args.get('size')[0])
+        size = self.get_query_argument('size', defaultSize)
         count_posts = 'select count(1) count from tb_post where visible = 1 and deleted = 0 and user_id = %s'
         _count = db.get(count_posts, self.current_user.id)
         count = _count.count
@@ -88,10 +87,8 @@ get curent user's drafts, need login.
 class DraftListHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
-        size = 10
-        args = self.request.arguments
-        if args.get('size'):
-            size = int(args.get('size')[0])
+        defaultSize = 10
+        size = self.get_query_argument('size', defaultSize)
         query = """select id, title, content, user_id, created, updated from tb_post
                  where user_id = %s and deleted = 0 and visible = 0 order by if(updated is NULL, created, updated) desc
                 """
@@ -113,9 +110,8 @@ class ListApiHandler(baseHandler.RequestHandler):
     def get(self, offset=0, size=10):
         res = {'data': None}
         needPagination = False
-        args = self.request.arguments
-        offset = args.get('offset') and args.get('offset')[0] or offset
-        size = args.get('size') and args.get('size')[0] or size
+        offset = self.get_query_argument('offset', 0)
+        size = self.get_query_argument('size', 10)
 
         count_posts = 'select count(1) as count from tb_post where visible = 1 and deleted = 0 and user_id = %s'
         _count = db.get(count_posts, self.current_user.id)
@@ -195,20 +191,21 @@ make the post be public
 class ShareHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
-        post_id = self.get_body_argument('post_id')
-        query = 'select id, user_id from tb_post where id = %s and deleted = 0'
-        _post = db.query(query)
-        if _post and _post.id == post_id:
-            update_public = 'update tb_post set public = 1 where id = %s'
-            row_count = db.update(update_public, post_id)
-            if row_count:
-                self.write({'success': True})
+        post_id = self.get_body_argument('post_id', None)
+        if post_id:
+            query = 'select id, user_id from tb_post where id = %s and deleted = 0'
+            _post = db.query(query)
+            if _post and _post.id == post_id:
+                update_public = 'update tb_post set public = 1 where id = %s'
+                row_count = db.update(update_public, post_id)
+                if row_count:
+                    self.write({'success': True})
+                    self.finish()
+                    return
+                self.write({'success': False, 'error_code': constants.error_code['internal_error']})
                 self.finish()
                 return
-            self.write({'success': False})
-            self.finish()
-            return
-        self.write({'success': False})
+        self.write({'success': False, 'error_code': constants.error_code['missing_parameters']})
         self.finish()
 
 """
@@ -217,19 +214,20 @@ create new post or update an exist post
 class InsertOrUpdateHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
-        title = self.get_body_argument('title')
-        content = self.get_body_argument('content')
-        category_id = self.get_body_argument('category')
+        title = self.get_body_argument('title', None)
+        content = self.get_body_argument('content', None)
+        category_id = self.get_body_argument('category', None)
         user_id = self.current_user.id
-        post_public = self.get_body_argument('privacy')
-        post_id = int(self.get_body_argument('id'))
-        visible = 1 - int(self.get_body_argument('draft'))
+        post_public = self.get_body_argument('privacy', None)
+        post_id = self.get_body_argument('id', -1)
+        draft = self.get_body_argument('draft', 0)
+        visible = 1 - int(draft)
 
         if title and content and category_id:
             now = datetime.datetime.now()
             if post_id != -1:
                 sql = 'update tb_post set title = %s, content = %s, public = %s, visible = %s, category_id = %s, updated = %s where id = %s and deleted = 0'
-                num = db.update(sql, title, content, int(post_public), int(visible), int(category_id), now, post_id)
+                num = db.update(sql, title, content, int(post_public), int(visible), int(category_id), now, int(post_id))
             else:
                 sql = 'insert into tb_post (title, content, user_id, category_id, public, visible, created) values (%s, %s, %s, %s, %s, %s, %s)'
                 num = db.insert(sql, title, content, long(user_id), int(category_id), int(post_public), int(visible), now)
@@ -238,10 +236,10 @@ class InsertOrUpdateHandler(baseHandler.RequestHandler):
                 self.write({'success': True})
                 self.finish()
                 return
-            self.write({'success': False})
+            self.write({'success': False, 'error_code': constants.error_code['internal_error']})
             self.finish()
             return
-        self.write({'success': False})
+        self.write({'success': False, 'error_code': constants.error_code['missing_parameters']})
         self.finish()
 
 """
@@ -255,6 +253,6 @@ class DeleteHandler(baseHandler.RequestHandler):
             self.write({'success': True})
             self.finish()
             return
-        self.write({'success': False})
+        self.write({'success': False, 'error_code': constants.error_code['internal_error']})
         self.finish()
 

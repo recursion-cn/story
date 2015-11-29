@@ -27,7 +27,7 @@ class IsCategoryExistHandler(baseHandler.RequestHandler):
         self.write({'success': False, 'error_code': constants.error_code['parameter_missing']})
         self.finish()
 
-class AddCategoryHandler(baseHandler.RequestHandler):
+class AddHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
         category = self.get_body_argument('cate_name')
@@ -43,3 +43,10 @@ class AddCategoryHandler(baseHandler.RequestHandler):
             if id:
                 self.write({'success': True, 'category_id': id})
                 self.finish()
+
+class BatchDeleteHandler(baseHandler.RequestHandler):
+    @tornado.web.authenticated
+    def post(self):
+        print self.get_body_argument('categories')
+        categories = self.get_body_arguments('categories')
+        print categories

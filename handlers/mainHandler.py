@@ -28,11 +28,9 @@ class IndexHandler(baseHandler.RequestHandler):
         select_user = 'select id, nick from tb_user where nick = %s'
         user = db.get(select_user, nick)
         if user:
-            size = 10
+            defaultSize = 10
             needPagination = False
-            args = self.request.arguments
-            if args.get('size'):
-                size = int(args.get('size')[0])
+            size = self.get_query_argument('size', defaultSize)
             count_posts = 'select count(1) count from tb_post where visible = 1 and deleted = 0 and public = 1 and user_id = %s'
             _count = db.get(count_posts, user.id)
             count = _count.count

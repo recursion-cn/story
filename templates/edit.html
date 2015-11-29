@@ -69,7 +69,6 @@
                 </div>
                 <input type="hidden" name="privacy" value="-1">
                 {% end %}
-
                 <!--
                 {% if post and ord(post.public) %}
                 <label class="radio-inline">
@@ -156,8 +155,8 @@
     <input type="hidden" name="id" value={{ post.id }}>
     {% else %}
     <input type="hidden" name="id" value="-1">
-    <input type="hidden" name="category" value="-1">
     {% end %}
+    <input type="hidden" name="category" value="-1">
 </div>
 <!--div class="btns-dialog container-fluid"></div-->
 <input type="hidden" name="referer" value={{ referer }}>
