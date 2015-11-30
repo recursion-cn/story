@@ -66,7 +66,7 @@ class ListHandler(baseHandler.RequestHandler):
                  where visible = 1 and deleted = 0 and user_id = %s order by if(updated is NULL, created, updated) desc
                  limit 0, %s
                 """
-        posts = db.query(query, self.current_user.id, size)
+        posts = db.query(query, self.current_user.id, int(size))
         if posts:
             needPagination = True if count > len(posts) else False
             for post in posts:
