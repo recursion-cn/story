@@ -11,3 +11,9 @@
 .cate-setting .btn {
   margin: 0 5px 10px 0;
 }
+@media screen and (max-width: 1200px) {
+  .password-setting,
+  .cate-setting {
+    max-width: 100%;
+  }
+}
