@@ -12,7 +12,7 @@ import constants
 class IsCategoryExistHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
-        category = self.get_query_argument('cate_name')
+        category = self.get_query_argument('cate_name', None)
         if category:
             query_exist = 'select count(*) count from tb_category where name = %s and user_id = %s'
             num = db.get(query_exist, category, self.current_user.id)
@@ -24,7 +24,7 @@ class IsCategoryExistHandler(baseHandler.RequestHandler):
                 self.write({'success': True, 'exist': False})
                 self.finish()
                 return
-        self.write({'success': False, 'error_code': constants.error_code['parameter_missing']})
+        self.write({'success': False, 'error_code': constants.error_code['missing_parameters']})
         self.finish()
 
 class AddHandler(baseHandler.RequestHandler):

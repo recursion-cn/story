@@ -65,6 +65,8 @@ const changePassword = function(data) {
             setTimeout(function() {
                 logout();
             }, 1000);
+        } else if (!res.success) {
+            Utils.showMsg('error', ErrorCode[res.error_code])
         }
     });
 };
