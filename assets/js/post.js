@@ -10,6 +10,14 @@ const converter = new Markdown.Converter();
 const safeConverter = Markdown.getSanitizingConverter();
 const Utils = require('./utils.js');
 
+const init = () => {
+    initTooltip()
+};
+
+const initTooltip = () => {
+    $('em[data-toggle="tooltip"]').tooltip();
+};
+
 const parseMarkdown = function(md) {
     return safeConverter.makeHtml(md);
 };
@@ -67,9 +75,9 @@ const initDeleteConfirmTooltip = function() {
     $('#js-delete-post').popover({html: true, title: title, content: content});
 };
 
-$(function() {
-    //initDeleteConfirmTooltip();
-});
+$( () =>
+    init()
+);
 
 $('body').on('click', '#js-delete-confirm .cancel-btn', function() {
     //const id = $('#js-delete-post').data('id');
