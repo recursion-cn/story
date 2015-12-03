@@ -52,6 +52,8 @@ textarea.form-control {
 }
 .header .navbar-default .navbar-toggle {
   border: 0;
+  background-color: #0C7179;
+  color: #fff;
 }
 .header .navbar-default .sm-menu-bar {
   margin-top: 0;
