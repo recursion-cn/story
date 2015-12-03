@@ -50,6 +50,9 @@ textarea.form-control {
   top: -2px;
   border-top: 0;
 }
+.header .navbar-default .navbar-toggle {
+  border: 0;
+}
 .header .navbar-default .sm-menu-bar {
   margin-top: 0;
   text-align: center;

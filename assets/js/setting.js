@@ -72,7 +72,7 @@ const changePassword = function(data) {
 };
 
 const deleteCategories = function(data) {
-    const url = '/category/delete';
+    const url = '/api/category/delete';
     $.post(url, data, function(res) {
         console.log(res);
     });
@@ -103,8 +103,8 @@ $('body').on('click', '#js-submit-password', function(e) {
     }
 }).on('click', '#js-delete-cate', function(e) {
     e.preventDefault();
-    const data = {'categories': _categories};
-    console.log(_categories);
+    const categoriesStr = _categories.join(',');
+    const data = {'categories': categoriesStr};
     console.log(data);
     deleteCategories(data);
 });

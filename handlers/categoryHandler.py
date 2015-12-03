@@ -8,7 +8,11 @@ import baseHandler
 import tornado.web
 from modules.db import db
 import constants
+import json
 
+"""
+determine whether the specified category is exist
+"""
 class IsCategoryExistHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
@@ -27,6 +31,9 @@ class IsCategoryExistHandler(baseHandler.RequestHandler):
         self.write({'success': False, 'error_code': constants.error_code['missing_parameters']})
         self.finish()
 
+"""
+add new category
+"""
 class AddHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
@@ -44,8 +51,17 @@ class AddHandler(baseHandler.RequestHandler):
                 self.write({'success': True, 'category_id': id})
                 self.finish()
 
+"""
+batch delete categories
+"""
 class BatchDeleteHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
-        categories = self.get_body_argument('categories')
-        print categories
+        categories = self.get_body_argument('categories', None)
+        if categories:
+            catesArray = categories.split(',')
+            batch_delete = 'delete from tb_category where id in {0}'.format(tuple(catesArray))
+            #rows = db.delete(batch_delete)
+            #print rows
+            print json.dumps(db)
+
