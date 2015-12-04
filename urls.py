@@ -3,6 +3,7 @@ import handlers.mainHandler as main
 import handlers.postHandler as post
 import handlers.userHandler as user
 import handlers.categoryHandler as cate
+import handlers.api.postApiHandler as postApi
 
 urls = [
     (r'/', main.IndexHandler),
@@ -17,6 +18,7 @@ urls = [
     (r'/api/users/change_password', user.PasswordModifyHandler),
     (r'/posts', post.ListHandler),
     (r'/api/posts', post.ListApiHandler),
+    (r'/api/posts/like', postApi.LikeHandler),
     (r'/posts/(\d+)', post.PostHandler),
     (r'/posts/create', post.InsertOrUpdateHandler),
     (r'/posts/delete/(\d+)', post.DeleteHandler),

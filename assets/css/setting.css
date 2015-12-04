@@ -1,5 +1,7 @@
+.nick-setting,
 .password-setting,
-.cate-setting {
+.cate-setting,
+.trash-setting {
   max-width: 50%;
   margin: 5px 0 20px;
   padding-bottom: 10px;
