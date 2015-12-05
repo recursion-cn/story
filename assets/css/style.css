@@ -79,7 +79,6 @@ textarea.form-control {
 }
 .header .nav.navbar-nav a {
   color: #fff;
-  opacity: .7;
   transition: opacity .2s;
 }
 .header .nav-user-panel.navbar-nav li {
