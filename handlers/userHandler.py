@@ -146,9 +146,11 @@ class SettingHandler(baseHandler.RequestHandler):
             for cate in categories:
                 categories_id.append(str(cate.id))
         cate_post_count_mapper = []
-        if categories_id:
+        if len(categories_id) > 1:
             query_posts = 'select category_id, count(1) count from tb_post where category_id in {0} group by category_id'.format(tuple(categories_id))
-            cate_post_count_mapper = db.query(query_posts)
+        elif len(categories_id) == 1:
+            query_posts = 'select category_id, count(1) count from tb_post where category_id = {0}'.format(int(categories_id[0]))
+        cate_post_count_mapper = db.query(query_posts)
 
         for cate in categories:
             for mapper in cate_post_count_mapper:

@@ -73,8 +73,12 @@ const changePassword = function(data) {
 
 const deleteCategories = function(data) {
     const url = '/api/category/delete';
+    const deletedCates = $('.cate-btn[data-selected=1]');
     $.post(url, data, function(res) {
-        console.log(res);
+        if (res && res.success) {
+            Utils.showMsg('success', '目录已经删除');
+            deletedCates.remove();
+        }
     });
 };
 
@@ -91,21 +95,30 @@ $('body').on('click', '#js-submit-password', function(e) {
     }
 }).on('click', '.cate-btn', function() {
     const id = $(this).data('id');
-    if ($(this).data('selected')) {
+    if ($(this).data('cate-selected')) {
         const _index = _categories.indexOf(id);
         delete _categories[_index];
-        $(this).addClass('btn-default').removeClass('btn-danger').data('selected', false);
+        $(this).addClass('btn-default').removeClass('btn-danger').attr('data-selected', 0).data('cate-selected', false);
     } else {
         if (_categories.indexOf(id) < 0) {
             _categories.push(id);
         }
-        $(this).addClass('btn-danger').removeClass('btn-default').data('selected', true);
+        $(this).addClass('btn-danger').removeClass('btn-default').attr('data-selected', 1).data('cate-selected', true);
     }
 }).on('click', '#js-delete-cate', function(e) {
     e.preventDefault();
-    const categoriesStr = _categories.join(',');
+    let dirtyCategories = [];
+    _categories.forEach(function(item) {
+        if (item || item === 0) {
+            dirtyCategories.push(item);
+        }
+    });
+    if (dirtyCategories.length === 0) {
+        Utils.showMsg('error', '请选择要删除的目录');
+        return;
+    }
+    const categoriesStr = dirtyCategories.join(',');
     const data = {'categories': categoriesStr};
-    console.log(data);
     deleteCategories(data);
 });
 

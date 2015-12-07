@@ -59,9 +59,15 @@ class BatchDeleteHandler(baseHandler.RequestHandler):
     def post(self):
         categories = self.get_body_argument('categories', None)
         if categories:
-            catesArray = categories.split(',')
-            batch_delete = 'delete from tb_category where id in {0}'.format(tuple(catesArray))
-            #rows = db.delete(batch_delete)
-            #print rows
-            print json.dumps(db)
+            if categories.find(',') > -1:
+                catesArray = categories.split(',')
+                for i in range(0, len(catesArray)):
+                    catesArray[i] = int(catesArray[i])
+                batch_delete = 'delete from tb_category where id in {0}'.format(tuple(catesArray))
+            else:
+                batch_delete = 'delete from tb_category where id = {0}'.format(int(categories))
+
+            db.execute(batch_delete)
+            self.write({'success': True})
+            self.finish()
 
