@@ -75,6 +75,46 @@ const initDeleteConfirmTooltip = function() {
     $('#js-delete-post').popover({html: true, title: title, content: content});
 };
 
+/**
+ * 匿名用户“喜欢”操作
+ * @param postId
+ */
+const hasAnonymousLiked = function(postId) {
+    let likedPosts = localStorage.getItem('liked_posts');
+    if (likedPosts) {
+        likedPosts = JSON.parse(likedPosts);
+        if (likedPosts.indexOf(postId+'') > -1) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
+const markAnonymousLiked = function(postId) {
+    let likedPosts = localStorage.getItem('liked_posts');
+    if (likedPosts) {
+        likedPosts = JSON.parse(likedPosts);
+        if (likedPosts instanceof Array) {
+            likedPosts.push(postId);
+        } else {
+            likedPosts = [postId];
+        }
+    } else {
+        likedPosts = [postId];
+    }
+    localStorage.setItem('liked_posts', JSON.stringify(likedPosts));
+};
+
+const likePost = function(postId) {
+    const url = '/api/posts/like';
+    $.post(url, {post_id: postId}, function(data) {
+        if (data && data.success) {
+            markAnonymousLiked(postId);
+        }
+    });
+};
+
 $( () =>
     init()
 );
@@ -88,4 +128,9 @@ $('body').on('click', '#js-delete-confirm .cancel-btn', function() {
     const id = $('#js-delete-post').data('id');
     deletePost(id);
     $('#js-delete-confirm-modal').modal('hide');
+}).on('click', '#js-like-post', function(e) {
+    const postId = $('#post-id').val();
+    if (!hasAnonymousLiked(postId)) {
+        likePost(postId);
+    }
 });

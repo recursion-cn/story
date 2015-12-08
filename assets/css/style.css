@@ -123,11 +123,16 @@ textarea.form-control {
   min-height: 100px;
   background-color: #ffffff;
 }
+.post-type {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
 .post {
   padding-bottom: 26px;
+  border-bottom: 1px solid #e0e0e0;
 }
-.post .post-header .title {
-  color: #000;
+.post .post-header .title-link {
+  color: #333;
   display: inline-block;
 }
 .post .post-header .info {
@@ -138,11 +143,13 @@ textarea.form-control {
 }
 .post .post-body {
   line-height: 1.7;
-  text-indent: 1.7em;
   color: #666;
 }
 .post .post-body img {
   max-width: 650px;
+}
+.post:last-child {
+  border-bottom: none;
 }
 .post-pagination {
   width: 136px;
