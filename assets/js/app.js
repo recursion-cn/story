@@ -34,7 +34,7 @@ const dataBind = function(data) {
     for (let i = 0, len = data.length; i < len; i++) {
         let template = $($('#js-post-template').html());
         const item = data[i];
-        template.find('.title').attr('href', '/posts/' + item.id).find('h3').text(item.title);
+        template.find('.title-link').attr('href', '/posts/' + item.id).find('p').text(item.title);
         template.find('.author').attr('href', '/users/' + item.author.id).text(item.author.nick);
         template.find('.text-info').text(item.last_modified);
         template.find('.post-body').text(item.summary);

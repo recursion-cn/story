@@ -124,16 +124,19 @@ textarea.form-control {
   background-color: #ffffff;
 }
 .post-type {
+  margin-bottom: 15px;
   padding: 8px;
   border-bottom: 1px solid #ccc;
 }
 .post {
   padding-bottom: 26px;
-  border-bottom: 1px solid #e0e0e0;
 }
 .post .post-header .title-link {
-  color: #333;
   display: inline-block;
+}
+.post .post-header .title-link .title {
+  font-size: 1.4em;
+  font-weight: 500;
 }
 .post .post-header .info {
   padding: 0 0 5px 5px;

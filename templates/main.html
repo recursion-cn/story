@@ -13,11 +13,17 @@
 <div class="main container-fluid clearfix">
     <div class="row">
         <div class="main-body col-md-6">
+            <div class="post-type">
+                <span class="glyphicon glyphicon-list-alt"></span>
+                <span>我公开发表的文章</span>
+            </div>
             {% for post in posts %}
             <div class="post container-fluid">
                 <div class="post-header row">
                     <div class="col-md-12">
-                        <a class="title" href={{ "/posts/" + str(post.id) }}><h3>{{ post.title }}</h3></a>
+                        <a class="title-link" href={{ "/posts/" + str(post.id) }}>
+                            <p class="title">{{ post.title }}</p>
+                        </a>
                     </div>
                     <div class="col-md-12">
                         <div class="info">
@@ -51,7 +57,7 @@
     <div class="post container-fluid">
         <div class="post-header row">
             <div class="col-md-12">
-                <a class="title" href=""><h3></h3></a>
+                <a class="title-link" href=""><p class="title"></p></a>
             </div>
             <div class="col-md-12">
                 <div class="info">

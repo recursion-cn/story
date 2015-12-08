@@ -38,7 +38,7 @@ class IndexHandler(baseHandler.RequestHandler):
                         if(updated is NULL, created, updated) last_modified from tb_post where
                         user_id = %s and public = 1 and visible = 1 order by last_modified desc limit 0, %s
                     """
-            posts = db.query(select_posts, user.id, size)
+            posts = db.query(select_posts, user.id, int(size))
             if posts:
                 needPagination = True if count > len(posts) else False
                 for post in posts:

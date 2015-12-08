@@ -2,10 +2,16 @@
 {% block main %}
 <div class="main container-fluid clearfix">
     <div class="main-body col-md-6">
+        <div class="post-type">
+            <span class="glyphicon glyphicon-list-alt"></span>
+            <span>最新草稿</span>
+        </div>
         {% for draft in drafts %}
         <div class="post draft">
             <div class="post-header">
-                <a class="title" href={{ "/posts/" + str(draft.id) }}><h3>{{ draft.title }}</h3></a>
+                <a class="title-link" href={{ "/posts/" + str(draft.id) }}>
+                    <p class="title">{{ draft.title }}</p>
+                </a>
                 <div class="info">
                     <a class="author" href={{ "/users/" + str(draft.author.id) }}>{{ draft.author.nick }}</a>
                     <span>最后发布于</span>
