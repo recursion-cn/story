@@ -2,12 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import tornado.web
-import baseHandler
 import hashlib
-from modules.db import db
+import json
 import datetime
 import string
+import baseHandler
+from models.Member import Member
+from modules.db import db
+from modules import utils
 import constants
+
 
 class LoginHandler(baseHandler.RequestHandler):
     def get(self):
@@ -20,7 +24,8 @@ class LoginHandler(baseHandler.RequestHandler):
             self.write({'success': False, 'error_code': constants.error_code['miss_nick_or_password']})
             self.finish()
             return
-        user = db.get('select id, nick, password from tb_user where nick = %s', nick)
+        #user = db.get('select id, nick, password from tb_user where nick = %s', nick)
+        user = Member.getByNick(nick)
 
         if user:
             md5 = hashlib.md5()
@@ -28,6 +33,7 @@ class LoginHandler(baseHandler.RequestHandler):
             password_md5 = md5.hexdigest().upper()
             if user.password.upper() == password_md5:
                 self.set_secure_cookie('current_user', nick, 10)
+                user = json.dumps(user, cls=utils.JSONEncoder)
                 self.write({'success': True, 'data': user})
                 self.finish()
             else:
@@ -90,9 +96,9 @@ class LogoutHandler(baseHandler.RequestHandler):
 class ProfileHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self, id):
-        user = db.get('select id, nick, created, updated from tb_user where id = %s', id)
-        if user:
-            self.render('profile.html', user=user)
+        member = Member.getById(id)
+        if member:
+            self.render('profile.html', user=member)
 
         raise tornado.web.HTTPError(404)
 

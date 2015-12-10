@@ -145,6 +145,7 @@ textarea.form-control {
   font-weight: bold;
 }
 .post .post-body {
+  font-size: 1.1em;
   line-height: 1.7;
   color: #666;
 }

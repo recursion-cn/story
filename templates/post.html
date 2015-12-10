@@ -11,7 +11,7 @@
         <div class="single-post">
             <div class="title">
                 {% if not ord(post.visible) %}
-                    <h3 class="bg-warning">{{ post.title }}</h3>
+                    <h3 class="bg-warning">{{ post.title }}</h3><sup><mark>[草稿]</mark></sup>
                 {% else %}
                     <h3>{{ post.title }}</h3>
                 {% end %}
