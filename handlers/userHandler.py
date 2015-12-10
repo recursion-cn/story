@@ -24,7 +24,6 @@ class LoginHandler(baseHandler.RequestHandler):
             self.write({'success': False, 'error_code': constants.error_code['miss_nick_or_password']})
             self.finish()
             return
-        #user = db.get('select id, nick, password from tb_user where nick = %s', nick)
         user = Member.getByNick(nick)
 
         if user:
@@ -56,9 +55,7 @@ class SignupHandler(baseHandler.RequestHandler):
         if nick and password and password_confirm and invite_code:
             length = len(password)
             if length >= 6 and length <= 18 and password == password_confirm:
-                query_exist = 'select count(1) count from tb_user where nick = %s'
-                user_num = db.get(query_exist, nick)
-                if user_num and user_num.count:
+                if Member.isExist(nick):
                     self.write({'success': False, 'error_code': constants.error_code['user_has_exist']})
                     self.finish()
                     return

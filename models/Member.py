@@ -33,6 +33,12 @@ class Member:
         member = db.get(query, id)
         return member
 
+    @classmethod
+    def isExist(cls, nick):
+        query_count = 'select count(nick) count from tb_user where nick = %s'
+        count_obj = db.get(query_count, nick)
+        return count_obj.count > 0
+
     def updateNick(self, new_nick):
         if self.id:
             update = 'update tb_user set nick = %s where id = %s'
