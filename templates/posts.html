@@ -7,6 +7,12 @@
                 <span class="glyphicon glyphicon-list-alt"></span>
                 <span>最新文章</span>
             </div>
+            {% if len(posts) == 0 %}
+            <div class="empty-post-notice">
+                <span class="text-muted">您尚未发表过文章，先写一篇吧。</span>
+                <a href="/users/edit">写一篇文章</a>
+            </div>
+            {% end %}
             {% for post in posts %}
             <div class="post container-fluid">
                 <div class="post-header row">
@@ -17,7 +23,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="info">
-                            <a class="author" href={{ "/users/profile/" + str(post.author.id) }}>{{ post.author.nick }}</a>
+                            <!--a class="author" href={{ "/users/profile/" + str(post.author.id) }}>{{ post.author.nick }}</a-->
                             <span>本文最后发布于</span>
                             <span class="text-info" data-toggle="tooltip" data-placement="bottom" title={{ post.last_modified }}>{{ post.last_modified }}</span>
                         </div>

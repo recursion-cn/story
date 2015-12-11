@@ -128,6 +128,12 @@ textarea.form-control {
   padding: 8px;
   border-bottom: 1px solid #ccc;
 }
+.empty-post-notice {
+  padding: 5px 10px;
+}
+.empty-post-notice a {
+  text-decoration: underline;
+}
 .post {
   padding-bottom: 26px;
 }

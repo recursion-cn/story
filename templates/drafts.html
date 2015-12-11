@@ -6,6 +6,12 @@
             <span class="glyphicon glyphicon-list-alt"></span>
             <span>最新草稿</span>
         </div>
+        {% if len(drafts) == 0 %}
+        <div class="empty-post-notice">
+            <span class="text-muted">您尚未保存过草稿，先写一篇吧。</span>
+            <a href="/users/edit">写一篇文章</a>
+        </div>
+        {% end %}
         {% for draft in drafts %}
         <div class="post draft">
             <div class="post-header">
