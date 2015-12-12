@@ -8,26 +8,39 @@
 
 const Utils = require('./utils.js');
 const referer = $('input[name="referer"]').val();
+let editor;
 
 const init = function() {
     initMarkdownEditor();
 };
 
 const initMarkdownEditor = function() {
-    const converter = new Markdown.Converter();
-    const safeConverter = Markdown.getSanitizingConverter();
-    const editor = new Markdown.Editor(safeConverter);
-    editor.run();
+    const md = $('#js-post-content').html() || '';
+    editor = editormd('js-editormd', {
+        path: '/assets/lib/editor.md/lib/',
+        markdown: md,
+        autoLoadModules: false,
+        saveHTMLToTextarea: true,
+        //tex: true,
+        tocm: true,
+        emoji: true,
+        taskList: true,
+        codeFold: true,
+        searchReplace: true,
+        htmlDecode: "style, script, iframe",
+        flowChart: true,
+        sequenceDiagram: true
+    })
 };
 
 const getPost = function() {
     let post = {};
     post.category = $('input[name="category"]').val();
     post.title = $('input[name="title"]').val();
-    post.content = $('textarea[name="content"]').val();
+    post.content = editor.getMarkdown();
     post.privacy = $('input[name="privacy"]').val();
     post.id = $('input[name="id"]').val();
-
+console.log(post)
     return post;
 };
 

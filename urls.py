@@ -21,6 +21,7 @@ urls = [
     (r'/api/posts', post.ListApiHandler),
     (r'/api/posts/like', postApi.LikeHandler),
     (r'/posts/(\d+)', post.PostHandler),
+    (r'/api/posts/(\d+)', postApi.PostHandler),
     (r'/posts/create', post.InsertOrUpdateHandler),
     (r'/posts/delete/(\d+)', post.DeleteHandler),
     (r'/category/exist', cate.IsCategoryExistHandler),

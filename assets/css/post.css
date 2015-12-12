@@ -6,10 +6,10 @@
   display: inline-block;
 }
 .single-post .content {
+  padding: 10px;
   font-size: 1.16em;
   line-height: 1.9;
   word-break: break-all;
-  color: #666;
 }
 .single-post .content img {
   max-width: 100%;

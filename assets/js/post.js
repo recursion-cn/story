@@ -6,9 +6,8 @@
 
 'use strict'
 
-const converter = new Markdown.Converter();
-const safeConverter = Markdown.getSanitizingConverter();
 const Utils = require('./utils.js');
+let editor;
 
 const init = () => {
     initTooltip()
@@ -19,7 +18,7 @@ const initTooltip = () => {
 };
 
 const parseMarkdown = function(md) {
-    return safeConverter.makeHtml(md);
+    //return safeConverter.makeHtml(md);
 };
 
 const renderMarkdown = function(mdHtml) {
@@ -32,7 +31,29 @@ const render = function() {
     $('#js-content-template').remove();
 };
 
-//render();
+const getPost = function(postId) {
+    $.get('/api/posts/' + postId, function(res) {
+        if (!res || !res.success) return;
+        const postStr = res.post;
+        const post = JSON.parse(postStr);
+        const md = post.content;
+        editormd.markdownToHTML('js-content', {
+            markdown: md ,
+            htmlDecode: 'style, script, iframe',
+            //toc: false,
+            tocm: true,
+            //tocContainer: "#custom-toc-container",
+            //gfm: false,
+            //tocDropdown: true,
+            markdownSourceCode: false,
+            emoji: true,
+            taskList: true,
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+};
 
 /**
  * find all <img/> tags from post
@@ -115,9 +136,11 @@ const likePost = function(postId) {
     });
 };
 
-$( () =>
-    init()
-);
+$( () => {
+    init();
+    const id = $('#js-delete-post').data('id');
+    getPost(id);
+});
 
 $('body').on('click', '#js-delete-confirm .cancel-btn', function() {
     //const id = $('#js-delete-post').data('id');

@@ -14,6 +14,34 @@ import json
 import constants
 
 """
+get single post by id
+"""
+class PostHandler(baseApiHandler.RequestHandler):
+
+    def get(self, id):
+        query = """select id, title, content, user_id, public, visible, if(updated is NULL, created, updated) as last_modified
+                 from tb_post where id = %s and deleted = 0
+                """
+        post = db.get(query, id)
+        if post:
+            if not ord(post.public):
+                if not self.current_user:
+                     self.write_error(403, '您没有该文章的阅读权限')
+                     return
+                elif self.current_user.id != post.user_id:
+                    self.write_error(403, '您没有该文章的阅读权限')
+                    return
+            query_author = 'select id, nick from tb_user where id = %s'
+            author = db.get(query_author, post.user_id)
+            post['author'] = author
+            post = json.dumps(post, cls=modules.utils.JSONEncoder)
+            self.write({'success': True, 'post': post})
+            self.finish()
+            return
+
+        self.write_error(404)
+
+"""
 add like interaction on a post
 """
 class LikeHandler(baseApiHandler.RequestHandler):
