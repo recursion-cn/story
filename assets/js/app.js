@@ -68,9 +68,9 @@ $(function() {
 $('body').on('mouseover', '.nav-user-panel', (e) => {
     $('.nav-user-panel').find('.user-panel').fadeIn()
 }
-).on('mouseleave', '.nav-user-panel', (e) =>
+).on('mouseleave', '.nav-user-panel', (e) => {
     $('.nav-user-panel').find('.user-panel').fadeOut()
-).on('click', '#js-load-more', (e) => {
+}).on('click', '#js-load-more', (e) => {
     const params = getPaginationParams()
     const page = params.page + 1;
     pagination(page, params.pageSize)

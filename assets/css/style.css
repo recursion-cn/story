@@ -6,6 +6,7 @@ body {
   margin-bottom: 100px;
   padding: 80px 0 0;
   font: 13px "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, Helvetica, Arial, sans-serif;
+  background-color: #f0f0f0;
 }
 input.form-control,
 textarea.form-control {
@@ -29,8 +30,9 @@ textarea.form-control {
   top: 0;
   width: 100%;
   height: 50px;
-  background-color: #038d98;
-  border-bottom: 1px solid #06565D;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 6px #ccc;
 }
 .header .navbar {
   min-height: 49px;
@@ -39,14 +41,14 @@ textarea.form-control {
   width: 62%;
   max-height: 49px;
   margin: 0 auto;
-  background-color: #038d98;
+  background-color: #ffffff;
 }
 .header .navbar-default .navbar-header a:hover {
-  color: #fff;
+  color: #000;
   opacity: 1;
 }
 .header .navbar-default .navbar-nav li a:hover {
-  color: #fff;
+  color: #000;
   opacity: 1;
 }
 .header .navbar-default .navbar-collapse.collapse {
@@ -56,29 +58,30 @@ textarea.form-control {
 .header .navbar-default .navbar-toggle {
   padding: 5px 10px;
   border: 0;
-  background-color: #0C7179;
-  color: #fff;
+  color: #000;
 }
 .header .navbar-default .sm-menu-bar {
   margin-top: 0;
   text-align: center;
-  background-color: #038d98;
-  border-top: 1px solid #087C86;
+  background-color: #ffffff;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 6px #e0e0e0;
 }
 .header .navbar-default .sm-menu-bar .nav.navbar-nav a {
   padding-top: 5px;
   padding-bottom: 5px;
   font-weight: bold;
-  color: #fff;
+  color: #000;
 }
 .header .navbar-fixed-top {
   border: 0;
 }
 .header .navbar-header a {
-  color: #fff;
+  color: #000;
 }
 .header .nav.navbar-nav a {
-  color: #fff;
+  color: #000;
   transition: opacity .2s;
 }
 .header .nav-user-panel.navbar-nav li {
@@ -91,28 +94,39 @@ textarea.form-control {
   width: 100%;
   min-width: 100px;
   min-height: 100px;
-  background-color: #13838c;
+  background-color: #ffffff;
+  border-top: 0;
   top: 0;
   text-align: center;
   border-radius: 0 0 3px 3px;
-  box-shadow: 0 1px 3px #0b808a;
   display: none;
 }
 .header .user-panel .user-panel-header {
   height: 50px;
   line-height: 50px;
-  border-bottom: 1px solid #067A86;
+}
+.header .user-panel .user-panel-header a {
+  color: #333;
+}
+.header .user-panel .user-panel-body {
+  border: 1px solid #e0e0e0;
+  border-top: 0;
 }
 .header .user-panel .user-panel-body .user-link-item {
   height: 36px;
   line-height: 36px;
-  border-bottom: 1px solid #067A86;
+}
+.header .user-panel .user-panel-body .user-link-item a {
+  color: #333;
 }
 .header .user-panel .user-panel-body .user-link-item:last-child {
   border-bottom: none;
 }
 .header .user-panel .user-panel-body .user-link-item:hover {
-  background-color: #289EAB;
+  background-color: #666;
+}
+.header .user-panel .user-panel-body .user-link-item:hover a {
+  color: #ffffff;
 }
 .main {
   width: 60%;
@@ -121,7 +135,11 @@ textarea.form-control {
 .main-body,
 .main-side {
   min-height: 100px;
+  border-radius: 3px;
+}
+.main-body {
   background-color: #ffffff;
+  border: 1px solid #e0e0e0;
 }
 .post-type {
   margin-bottom: 15px;
@@ -143,6 +161,7 @@ textarea.form-control {
 .post .post-header .title-link .title {
   font-size: 1.4em;
   font-weight: 500;
+  color: #333;
 }
 .post .post-header .info {
   padding: 0 0 5px 5px;

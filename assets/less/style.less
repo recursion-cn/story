@@ -8,6 +8,7 @@ body {
     margin-bottom: 100px;
     padding: 80px 0 0;
     font: 13px @font-mac, @font-win, @font-linux, @font-common;
+    background-color: #f0f0f0;
 }
 
 input.form-control,
@@ -40,9 +41,10 @@ textarea.form-control {
     top: 0;
     width: 100%;
     height: 50px;
-    background-color: @blue;
-    border-bottom: 1px solid #06565D;
+    background-color: @white;
+    border-bottom: 1px solid #ccc;
     //box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+    box-shadow: 0 0 6px #ccc;
     .navbar {
         min-height: 49px;
     }
@@ -50,13 +52,13 @@ textarea.form-control {
         width: 62%;
         max-height: 49px;
         margin: 0 auto;
-        background-color: @blue;
+        background-color: @white;
         .navbar-header a:hover {
-            color: #fff;
+            color: #000;
             opacity: 1;
         }
         .navbar-nav li a:hover {
-            color: #fff;
+            color: #000;
             opacity: 1;
         }
         .navbar-collapse.collapse {
@@ -67,21 +69,22 @@ textarea.form-control {
         .navbar-toggle {
             padding: 5px 10px;
             border: 0;
-            background-color: #0C7179;
-            color: #fff;
+            color: #000;
         }
         .sm-menu-bar {
             margin-top: 0;
             text-align: center;
             //background-color: rgba(3, 141, 152, 1);
-            background-color: @blue;
-            border-top: 1px solid #087C86;
+            background-color: @white;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            box-shadow: 0 0 6px #e0e0e0;
             .nav.navbar-nav {
                 a {
                     padding-top: 5px;
                     padding-bottom: 5px;
                     font-weight: bold;
-                    color: #fff;
+                    color: #000;
                 }
             }
         }
@@ -91,12 +94,12 @@ textarea.form-control {
     }
     .navbar-header {
         a {
-            color: #fff;
+            color: #000;
         }
     }
     .nav.navbar-nav {
         a {
-            color: #fff;
+            color: #000;
             //opacity: .7;
             transition: opacity .2s;
           }
@@ -113,28 +116,40 @@ textarea.form-control {
         width: 100%;
         min-width: 100px;
         min-height: 100px;
-        background-color: #13838c;
+        background-color: @white;
+        border-top: 0;
         top: 0;
         text-align: center;
         border-radius: 0 0 3px 3px;
-        box-shadow: 0 1px 3px #0b808a;
+        //box-shadow: 0 1px 3px #000;
         display: none;
         .user-panel-header {
             height: 50px;
             line-height: 50px;
-            border-bottom: 1px solid #067A86;
+            a {
+                color: #333;
+            }
+            //border-bottom: 1px solid #067A86;
         }
         .user-panel-body {
+            border: 1px solid #e0e0e0;
+            border-top: 0;
             .user-link-item {
                 height: 36px;
                 line-height: 36px;
-                border-bottom: 1px solid #067A86;
+                //border-bottom: 1px solid #067A86;
+                a {
+                    color: #333;
+                }
             }
             .user-link-item:last-child {
                 border-bottom: none;
             }
             .user-link-item:hover {
-                background-color: #289EAB;
+                background-color: #666;
+                a {
+                    color: @white;
+                }
             }
         }
     }
@@ -148,7 +163,12 @@ textarea.form-control {
 .main-body,
 .main-side {
     min-height: 100px;
+    border-radius: 3px;
+}
+
+.main-body {
     background-color: @white;
+    border: 1px solid #e0e0e0;
 }
 
 .post-type {
@@ -172,6 +192,7 @@ textarea.form-control {
             .title {
                 font-size: 1.4em;
                 font-weight: 500;
+                color: #333;
             }
         }
         .info {
