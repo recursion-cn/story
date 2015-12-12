@@ -29,8 +29,11 @@ const initMarkdownEditor = function() {
         searchReplace: true,
         htmlDecode: "style, script, iframe",
         flowChart: true,
-        sequenceDiagram: true
-    })
+        sequenceDiagram: true,
+        onfullscreen : function() {
+            this.editor.css("border-radius", 0).css("z-index", 1000);
+        },
+    });
 };
 
 const getPost = function() {
