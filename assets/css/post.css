@@ -10,6 +10,8 @@
   font-size: 1.16em;
   line-height: 1.9;
   word-break: break-all;
+  font-family: "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, Helvetica, Arial, sans-serif;
+  font-size: 14px;
 }
 .single-post .content img {
   max-width: 100%;

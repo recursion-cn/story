@@ -58,6 +58,9 @@
 .edit-panel .editor-area textarea.form-control:focus {
   box-shadow: none;
 }
+.edit-panel .editor-area .editormd-preview-container {
+  font-family: "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, Helvetica, Arial, sans-serif;
+}
 .edit-panel .editor-preview {
   position: relative;
 }
