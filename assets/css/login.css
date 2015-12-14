@@ -1,6 +1,10 @@
 .login-panel {
   margin-top: 30px;
 }
+.login-panel form {
+  width: 45%;
+  margin: 0 auto;
+}
 @media screen and (max-width: 1200px) {
   .login-panel {
     width: 96%;

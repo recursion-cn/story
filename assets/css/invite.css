@@ -1,8 +1,10 @@
+.invite-user {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
 .invite-user input.form-control {
   min-width: 360px;
-}
-.invite-records {
-  margin-top: 30px;
 }
 table th,
 table td {

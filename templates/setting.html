@@ -4,66 +4,90 @@
 {% end %}
 {% block main %}
 <div class="main container-fluid clearfix">
-    <div class="main-body">
-        <div class="user-setting">
-            <div class="nick-setting" id="js-nick-setting">
-                <h3 class="text-muted">更换昵称</h3>
-                <div class="form-group">
-                    <input type="text" name="nick" class="form-control" placeholder="请输入旧密码" value={{ current_user.nick }}>
-                </div>
-                <div class="clearfix">
-                    <!--button class="btn btn-main btn-sm pull-right" id="js-submit-nick">确认修改</button-->
-                    <a href="javascript:;" class="pull-right" id="js-submit-nick">确认修改</a>
+    <div class="col-md-6">
+        <div class="base-panel">
+            <div class="panel-nav">
+                <span>更换昵称</span>
+            </div>
+            <div class="panel-main">
+                <div class="nick-setting" id="js-nick-setting">
+                    <div class="form-group">
+                        <input type="text" name="nick" class="base-input" placeholder="请输入旧密码" value={{ current_user.nick }}>
+                    </div>
+                    <div class="clearfix">
+                        <a href="javascript:;" class="pull-right" id="js-submit-nick">确认修改</a>
+                    </div>
                 </div>
             </div>
-            <div class="password-setting" id="js-password-setting">
-                <h3 class="text-muted">更换密码</h3>
-                <div class="setting-info">
-                    <span class="text-muted"><span class="glyphicon glyphicon-info-sign"></span> 您的密码将被加密存储，密码长度应在6~18位字符之间，首尾不能包含空格</span>
-                </div>
-                <div class="form-group">
-                    <input type="password" name="old_password" class="form-control" placeholder="请输入旧密码">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="new_password" class="form-control" placeholder="请输入新密码">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="new_password_confirm" class="form-control" placeholder="请再次输入密码">
-                </div>
-                <div class="clearfix">
-                    <!--button class="btn btn-main btn-sm pull-right" id="js-submit-password">确认修改</button-->
-                    <a href="javascript:;" class="pull-right" id="js-submit-password">确认修改</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="base-panel">
+            <div class="panel-nav">
+                <span>更换密码</span>
+            </div>
+            <div class="panel-main">
+                <div class="password-setting" id="js-password-setting">
+                    <div class="form-group">
+                        <input type="password" name="old_password" class="base-input" placeholder="请输入旧密码">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="new_password" class="base-input" placeholder="请输入新密码">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="new_password_confirm" class="base-input" placeholder="请再次输入密码">
+                    </div>
+                    <div class="clearfix">
+                        <!--button class="btn btn-main btn-sm pull-right" id="js-submit-password">确认修改</button-->
+                        <a href="javascript:;" class="pull-right" id="js-submit-password">确认修改</a>
+                    </div>
                 </div>
             </div>
-            <div class="cate-setting">
-                <h3 class="text-muted">目录管理</h3>
-                <div class="setting-info">
-                    <span class="text-muted"><span class="glyphicon glyphicon-info-sign"></span> 只能删除不包含文章的目录</span>
-                </div>
-                {% if categories and len(categories) %}
-                {% for cate in categories %}
-                {% if cate.post_count > 0 %}
-                <button class="btn btn-disabled btn-sm disabled" disabled="disabled">
-                    <span>{{ cate.name }}</span>
-                    <strong class="text-primary">[{{ cate.post_count }}]</strong>
-                </button>
-                {% else %}
-                <button class="btn btn-default btn-sm cate-btn" data-id={{ cate.id }}>
-                    <span>{{ cate.name }}</span>
-                    <strong class="text-primary">[{{ cate.post_count }}]</strong>
-                </button>
-                {% end %}
-                {% end %}
-                {% end %}
-                <div class="clearfix">
-                    <!--button class="btn btn-main btn-sm pull-right" id="js-delete-cate">批量删除</button-->
-                    <a href="javascript:;" class="pull-right" id="js-delete-cate">批量删除</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="base-panel">
+            <div class="panel-nav">
+                <span>目录管理</span>
+            </div>
+            <div class="panel-main">
+                <div class="cate-setting">
+                    <div class="setting-info">
+                        <span class="text-muted"><span class="glyphicon glyphicon-info-sign"></span> 只能删除不包含文章的目录</span>
+                    </div>
+                    {% if categories and len(categories) %}
+                    {% for cate in categories %}
+                    {% if cate.post_count > 0 %}
+                    <button class="btn btn-disabled btn-sm disabled" disabled="disabled">
+                        <span>{{ cate.name }}</span>
+                        <strong class="text-primary">[{{ cate.post_count }}]</strong>
+                    </button>
+                    {% else %}
+                    <button class="btn btn-default btn-sm cate-btn" data-id={{ cate.id }}>
+                        <span>{{ cate.name }}</span>
+                        <strong class="text-primary">[{{ cate.post_count }}]</strong>
+                    </button>
+                    {% end %}
+                    {% end %}
+                    {% end %}
+                    <div class="clearfix">
+                        <!--button class="btn btn-main btn-sm pull-right" id="js-delete-cate">批量删除</button-->
+                        <a href="javascript:;" class="pull-right" id="js-delete-cate">批量删除</a>
+                    </div>
                 </div>
             </div>
-            <div class="trash-setting">
-                <h3 class="text-muted">回收站</h3>
-                <div class="setting-info">
-                    <span class="text-muted"><span class="glyphicon glyphicon-info-sign"></span> 从回收站删除的文章将无法找回，请谨慎操作</span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="base-panel">
+            <div class="panel-nav">
+                <span>回收站</span>
+            </div>
+            <div class="panel-main">
+                <div class="trash-setting">
+                    <div class="setting-info">
+                        <span class="text-muted"><span class="glyphicon glyphicon-info-sign"></span> 从回收站删除的文章将无法找回，请谨慎操作</span>
+                    </div>
                 </div>
             </div>
         </div>

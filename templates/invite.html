@@ -4,55 +4,57 @@
 {% end %}
 {% block main %}
 <div class="main container-fluid clearfix">
-    <div class="main-body">
-        <div class="invite-user">
-            <div class="row">
-                <div class="col-md-12">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <!--input type="text" class="form-control" placeholder="请输入对方的email地址"-->
-                            <button class="btn btn-main send-invite">生成/发送邀请码</button>
-                            <a href="javascript:;" class="glyphicon glyphicon-question-sign invite-help" data-toggle="popover" data-trigger="hover" data-content="每个邀请码只能用于一次注册，注册成功后邀请码即失效。"></a>
-                        </div>
-                        <div class="invite-code">
-                            <strong>您也可以不输入email，直接点击上面的<mark>“生成/发送邀请码”</mark>按钮生成一个邀请码自行发送给您的朋友</strong>
-                        </div>
-                    </form>
+    <div class="invite-panel base-panel col-md-7">
+        <div class="panel-nav">
+            <span>邀请使用</span>
+        </div>
+        <div class="panel-main">
+            <div class="invite-user">
+                <div class="invite-records">
+                    <strong class="text-muted">我的邀请记录</strong>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>被邀请人</th>
+                                <th>邀请码</th>
+                                <th>邀请时间</th>
+                                <th>状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if not records or len(records) == 0 %}
+                            <tr>
+                                <td colspan="5" class="text-muted">我还没有邀请过人</td>
+                            </tr>
+                            {% else %}
+                            {% set index = 0 %}
+                            {% for record in records %}
+                            {% set index = index + 1 %}
+                            <tr>
+                                <td>{{ index }}</td>
+                                <td>{{ record.invitee_email or '未使用邮箱' }}</td>
+                                <td>{{ record.code }}</td>
+                                <td>{{ record.created }}</td>
+                                <td><span class="text-muted">尚未注册</span></td>
+                            </tr>
+                            {% end %}
+                            {% end %}
+                        </tbody>
+                    </table>
                 </div>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <!--input type="text" class="form-control" placeholder="请输入对方的email地址"-->
+                        <button class="base-btn send-invite">生成邀请码</button>
+                        <!--a href="javascript:;" class="glyphicon glyphicon-question-sign invite-help" data-toggle="popover" data-trigger="hover" data-content="每个邀请码只能用于一次注册，注册成功后邀请码即失效。"></a-->
+                    </div>
+                </form>
             </div>
-            <div class="invite-records">
-                <strong class="text-muted">我的邀请记录</strong>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>被邀请人</th>
-                            <th>邀请码</th>
-                            <th>邀请时间</th>
-                            <th>状态</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if not records or len(records) == 0 %}
-                        <tr>
-                            <td colspan="5" class="text-muted">我还没有邀请过人</td>
-                        </tr>
-                        {% else %}
-                        {% set index = 0 %}
-                        {% for record in records %}
-                        {% set index = index + 1 %}
-                        <tr>
-                            <td>{{ index }}</td>
-                            <td>{{ record.invitee_email or '未使用邮箱' }}</td>
-                            <td>{{ record.code }}</td>
-                            <td>{{ record.created }}</td>
-                            <td><span class="text-muted">尚未注册</span></td>
-                        </tr>
-                        {% end %}
-                        {% end %}
-                    </tbody>
-                </table>
-            </div>
+        </div>
+        <div class="panel-foot panel-notice">
+            <p>1. 生成的邀请码将展示在"生成邀请码"按钮的右边</p>
+            <p>2. 一个邀请码只能邀请一人</p>
         </div>
     </div>
 </div>
