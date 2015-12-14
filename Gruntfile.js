@@ -6,6 +6,7 @@ module.exports = function(grunt) {
                     paths: ['assets/less']
                 },
                 files: {
+                    'assets/css/fragmenthub.css': 'assets/less/fragmenthub.less',
                     'assets/css/style.css': 'assets/less/style.less',
                     'assets/css/index.css': 'assets/less/index.less',
                     'assets/css/edit.css': 'assets/less/edit.less',

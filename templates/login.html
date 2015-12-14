@@ -3,34 +3,32 @@
     <link href={{ static_url("css/login.css") }} rel="stylesheet">
 {% end %}
 {% block main %}
-    <div class="login-panel">
-        <label>
-            <h3>用户登录</h3>
-        </label>
-        <form action="/users/login", method="POST">
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-user"></span>
-                </span>
-                <input type="text" class="form-control" name="nick" placeholder="用户名/注册邮箱">
+    <div class="main container-fluid clearfix">
+        <div class="login-panel base-panel col-md-7">
+            <div class="panel-nav">
+                <span>用户登录</span>
             </div>
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-lock"></span>
-                </span>
-                <input type="password" class="form-control" name="password" placeholder="密码, 6-18位">
+            <div class="panel-main">
+                <form action="/users/login", method="POST">
+                    <div class="form-group">
+                        <input type="text" class="base-input" name="nick" placeholder="用户名/注册邮箱">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="base-input" name="password" placeholder="密码, 6-18位">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="base-btn submit">登录</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            还没有账户？<a href="/users/signup">注册一个</a>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <button class="btn btn-block btn-main submit">登录</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    还没有账户？<a href="/users/signup">注册一个</a>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 {% end %}
 {% block js-area %}

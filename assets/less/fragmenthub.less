@@ -1,0 +1,60 @@
+@import "variable.less";
+
+/* form elements */
+.base-input {
+    height: 30px;
+    padding: 0 5px;
+    width: 98%;
+    border-radius: 3px;
+    border: 1px solid #999;
+}
+
+.base-input:hover,
+.base-input:focus {
+    outline: none;
+}
+
+.base-btn {
+    width: 160px;
+    height: 30px;
+    border: 1px solid @dark-green;
+    background-color: @green;
+    border-radius: 3px;
+    color: @white;
+}
+
+.base-btn:hover {
+    background-color: @white-green;
+}
+
+.base-btn:focus {
+    outline: none;
+}
+
+/* panel elements */
+.base-panel {
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    .panel-nav {
+        width: 100%;
+        padding: 7px 10px;
+        border-bottom: 1px solid #e0e0e0;
+        font-weight: bold;
+    }
+    .panel-main {
+        width: 45%;
+        margin: 15px auto 0;
+        padding: 10px 0;
+    }
+    .panel-foot {
+        width: 100%;
+        min-height: 20px;
+        margin-top: 5px;
+        padding: 10px;
+        border-top: 1px solid #e0e0e0;
+    }
+    .panel-foot.panel-notice {
+        background-color: #FAFFBD;
+    }
+}

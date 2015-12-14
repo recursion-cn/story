@@ -6,16 +6,20 @@
 <div class="main container-fluid clearfix">
     <div class="main-body">
         <div class="invite-user">
-            <form class="form-inline">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="请输入对方的email地址">
-                    <button class="btn btn-main send-invite">生成/发送邀请码</button>
-                    <a href="javascript:;" class="glyphicon glyphicon-question-sign invite-help" data-toggle="popover" data-trigger="hover" data-content="每个邀请码只能用于一次注册，注册成功后邀请码即失效。"></a>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!--input type="text" class="form-control" placeholder="请输入对方的email地址"-->
+                            <button class="btn btn-main send-invite">生成/发送邀请码</button>
+                            <a href="javascript:;" class="glyphicon glyphicon-question-sign invite-help" data-toggle="popover" data-trigger="hover" data-content="每个邀请码只能用于一次注册，注册成功后邀请码即失效。"></a>
+                        </div>
+                        <div class="invite-code">
+                            <strong>您也可以不输入email，直接点击上面的<mark>“生成/发送邀请码”</mark>按钮生成一个邀请码自行发送给您的朋友</strong>
+                        </div>
+                    </form>
                 </div>
-                <div class="invite-code">
-                    <strong>您也可以不输入email，直接点击上面的<mark>“生成/发送邀请码”</mark>按钮生成一个邀请码自行发送给您的朋友</strong>
-                </div>
-            </form>
+            </div>
             <div class="invite-records">
                 <strong class="text-muted">我的邀请记录</strong>
                 <table class="table table-striped">

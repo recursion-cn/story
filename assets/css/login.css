@@ -1,15 +1,5 @@
 .login-panel {
-  margin: 0 auto;
-  margin-top: 50px;
-  padding: 30px;
-}
-.login-panel .input-group {
-  margin-bottom: 10px;
-}
-@media screen and (min-width: 1200px) {
-  .login-panel {
-    width: 23%;
-  }
+  margin-top: 30px;
 }
 @media screen and (max-width: 1200px) {
   .login-panel {

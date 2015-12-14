@@ -204,13 +204,13 @@ textarea.form-control {
   bottom: 0;
   border-top: 1px solid #e1e1e1;
   text-align: center;
-  background-color: #f8f8f8;
+  background-color: #fff;
 }
 .footer .info {
   padding-top: 10px;
 }
 .footer .copy {
-  padding-top: 5px;
+  padding-top: 10px;
 }
 @media screen and (max-width: 1200px) {
   .header .navbar-default {
