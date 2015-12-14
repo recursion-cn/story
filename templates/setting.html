@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block css-area %}
-<link rel="stylesheet" href="/assets/css/setting.css">
+<link rel="stylesheet" href={{ static_url("css/setting.css") }}>
 {% end %}
 {% block main %}
 <div class="main container-fluid clearfix">
@@ -71,5 +71,5 @@
 </div>
 {% end %}
 {% block js-area %}
-<script src="/assets/dist/js/setting.js" type="text/javascript"></script>
+<script src={{ static_url("dist/js/setting.js") }} type="text/javascript"></script>
 {% end %}

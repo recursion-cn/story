@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block css-area %}
-    <link href="/assets/css/login.css" rel="stylesheet">
+    <link href={{ static_url("css/login.css") }} rel="stylesheet">
 {% end %}
 {% block main %}
     <div class="login-panel">
@@ -34,5 +34,5 @@
     </div>
 {% end %}
 {% block js-area %}
-    <script type="text/javascript" src="/assets/dist/js/login.js"></script>
+    <script type="text/javascript" src={{ static_url("dist/js/login.js") }}></script>
 {% end %}

@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block css-area %}
-<link rel="stylesheet" href="/assets/css/invite.css">
+<link rel="stylesheet" href={{ static_url("css/invite.css") }}>
 {% end %}
 {% block main %}
 <div class="main container-fluid clearfix">
@@ -54,5 +54,5 @@
 </div>
 {% end %}
 {% block js-area %}
-<script type="text/javascript" src="/assets/dist/js/invite.js"></script>
+<script type="text/javascript" src={{ static_url("dist/js/invite.js") }}></script>
 {% end %}

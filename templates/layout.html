@@ -5,8 +5,8 @@
     <meta name="renderer" content="webkit">
     <meta charset="UTF-8">
     <title>FragmentHub</title>
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href={{ static_url("css/bootstrap.min.css") }}>
+    <link rel="stylesheet" href={{ static_url("css/style.css") }}>
     {% block css-area %}{% end %}
 </head>
 <body>
@@ -86,7 +86,7 @@
         用户内容采用<a rel="license" href="http://creativecommons.org/licenses/by/3.0/cn/">知识共享署名 3.0 中国大陆许可协议</a>进行许可。
     </div>
 </body>
-<script type="text/javascript" src="/assets/dist/js/dep.js"></script>
-<script type="text/javascript" src="/assets/dist/js/app.js"></script>
+<script type="text/javascript" src={{ static_url("dist/js/dep.js") }}></script>
+<script type="text/javascript" src={{ static_url("dist/js/app.js") }}></script>
 {% block js-area  %}{% end %}
 </html>
