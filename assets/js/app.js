@@ -24,7 +24,7 @@ const pagination = function(page, pageSize) {
         if (res && res.res && res.res.data) {
             const data = JSON.parse(res.res.data);
             dataBind(data);
-            showOrHidePagination(res.res.needPagination);
+            showOrHidePagination(res.res.need_pagination);
         }
     });
 };

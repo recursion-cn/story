@@ -7,6 +7,7 @@
 import baseHandler
 from modules.db import db
 import modules.utils
+from models.Post import Post
 import datetime
 import markdown
 import bleach
@@ -17,58 +18,19 @@ import json
 import constants
 
 """
-get the public posts list
-"""
-
-class PublicListHandler(baseHandler.RequestHandler):
-
-    def get(self):
-        query = """select id, title, content, user_id, category_id, created, updated, from tb_post
-                 where public = 1 and visible = 1 and deleted = 0 order by if(updated is NULL, created, updated) desc
-                 limit 0, 20
-                """
-        posts = db.query(query)
-        users_id = []
-        if posts:
-            for post in posts:
-                _html = markdown.markdown(post.content)
-                soup = BeautifulSoup(_html, 'html.parser')
-                _text = soup.get_text()
-                if not post['user_id'] in users_id:
-                    users_id.append(str(post['user_id']))
-                if _text and len(_text) > 200:
-                    _text = _text[0:200] + '...'
-                post['summary'] = _text
-                post['last_modified'] = post['updated'] if post['updated'] else post['created']
-            select_uses = 'select id, nick from tb_user where id in (' + ','.join(users_id) + ')'
-            users = db.query(select_uses)
-            for post in posts:
-                for user in users:
-                    if post['user_id'] == user['id']:
-                        post['author'] = user
-
-        self.render('index.html', posts=posts)
-
-"""
 get the current user's posts list, need login.
 @return posts list
 """
 class ListHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
-        defaultSize = 10
-        needPagination = False
-        size = self.get_query_argument('size', defaultSize)
-        count_posts = 'select count(1) count from tb_post where visible = 1 and deleted = 0 and user_id = %s'
-        _count = db.get(count_posts, self.current_user.id)
-        count = _count.count
-        query = """select id, title, content, category_id, created, updated from tb_post
-                 where visible = 1 and deleted = 0 and user_id = %s order by if(updated is NULL, created, updated) desc
-                 limit 0, %s
-                """
-        posts = db.query(query, self.current_user.id, int(size))
+        default_size = 10
+        need_pagination = False
+        size = self.get_query_argument('size', default_size)
+        count = Post.count_posts(self.current_user.id)
+        posts = Post.list(self.current_user.id, 0, int(size))
         if posts:
-            needPagination = True if count > len(posts) else False
+            need_pagination = True if count > len(posts) else False
             for post in posts:
                 _html = markdown.markdown(post.content)
                 soup = BeautifulSoup(_html, 'html.parser')
@@ -76,10 +38,9 @@ class ListHandler(baseHandler.RequestHandler):
                 if _text and len(_text) > 200:
                     _text = _text[0:200] + '...'
                 post['summary'] = _text
-                post['last_modified'] = post['updated'] if post['updated'] else post['created']
                 post['author'] = self.current_user
 
-        self.render('posts.html', posts=posts, pageSize=size, needPagination=int(needPagination))
+        self.render('posts.html', posts=posts, page_size=size, need_pagination=int(need_pagination))
 
 """
 get curent user's drafts, need login.
@@ -87,55 +48,43 @@ get curent user's drafts, need login.
 class DraftListHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
-        defaultSize = 10
-        size = self.get_query_argument('size', defaultSize)
-        query = """select id, title, content, user_id, created, updated from tb_post
-                 where user_id = %s and deleted = 0 and visible = 0 order by if(updated is NULL, created, updated) desc
-                """
-        drafts = db.query(query, self.current_user.id)
+        default_size = 10
+        summary_length = 200
+        size = self.get_query_argument('size', default_size)
+        drafts = Post.drafts(self.current_user.id, 0, int(size))
         for draft in drafts:
             draft['author'] = self.current_user
-            draft['last_modified'] = draft['updated'] if draft['updated'] else draft['created']
             _html = markdown.markdown(draft.content)
             soup = BeautifulSoup(_html, 'html.parser')
             _text = soup.get_text()
-            if _text and len(_text) > 200:
-                _text = _text[0:200] + '...'
+            if _text and len(_text) > summary_length:
+                _text = _text[0:summary_length] + '...'
             draft['summary'] = _text
 
         self.render('drafts.html', drafts=drafts)
 
 class ListApiHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
-    def get(self, offset=0, size=10):
+    def get(self):
         res = {'data': None}
-        needPagination = False
+        need_pagination = False
+        summary_length = 200
         offset = self.get_query_argument('offset', 0)
         size = self.get_query_argument('size', 10)
-
-        count_posts = 'select count(1) as count from tb_post where visible = 1 and deleted = 0 and user_id = %s'
-        _count = db.get(count_posts, self.current_user.id)
-        count = _count.count
-
-        query = """
-                select id, title, content, user_id, created, updated from tb_post
-                where user_id = %s and deleted = 0 and visible = 1 order by if(updated is NULL, created, updated) desc
-                limit %s, %s
-                """
-        posts = db.query(query, self.current_user.id, int(offset), int(size))
+        count = Post.count_posts(self.current_user.id)
+        posts = Post.list(self.current_user.id, int(offset), int(size))
         if posts:
-            needPagination = True if count > (int(offset) + int(size)) else False
+            need_pagination = True if count > (int(offset) + int(size)) else False
             for post in posts:
                 _html = markdown.markdown(post.content)
                 soup = BeautifulSoup(_html, 'html.parser')
                 _text = soup.get_text()
-                if _text and len(_text) > 200:
-                    _text = _text[0:200] + '...'
+                if _text and len(_text) > summary_length:
+                    _text = _text[0:summary_length] + '...'
                 post['summary'] = _text
-                post['last_modified'] = post['updated'] if post['updated'] else post['created']
                 post['author'] = self.current_user
             posts = json.dumps(posts, cls=modules.utils.JSONEncoder)
-            res = {'res': {'data': posts, 'needPagination': needPagination}}
+            res = {'res': {'data': posts, 'need_pagination': need_pagination}}
 
         self.write(res)
         self.finish()
@@ -146,10 +95,7 @@ get single post by id
 class PostHandler(baseHandler.RequestHandler):
 
     def get(self, id):
-        query = """select id, title, user_id, public, visible, if(updated is NULL, created, updated) as last_modified
-                 from tb_post where id = %s and deleted = 0
-                """
-        post = db.get(query, id)
+        post = Post.get_post(id)
         if post:
             if not ord(post.public):
                 if not self.current_user:
@@ -174,8 +120,7 @@ class EditHandler(baseHandler.RequestHandler):
     def get(self, post_id=None):
         post = None
         if post_id:
-            get_post = 'select id, title, content, user_id, category_id, public from tb_post where id = %s'
-            _post = db.get(get_post, post_id)
+            _post = Post.get_post(post_id)
             if _post and _post.user_id == self.current_user.id:
                 post = _post
         get_categories = 'select id, name from tb_category where visible = 1 and user_id = %s'
@@ -245,9 +190,7 @@ mark post as deleted
 """
 class DeleteHandler(baseHandler.RequestHandler):
     def delete(self, post_id):
-        delete_post = 'update tb_post set deleted = 1 where id = %s'
-        num = db.update(delete_post, post_id)
-        if num:
+        if Post.pretend_delete(post_id):
             self.write({'success': True})
             self.finish()
             return
