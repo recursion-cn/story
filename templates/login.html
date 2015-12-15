@@ -3,6 +3,7 @@
     <link href={{ static_url("css/login.css") }} rel="stylesheet">
 {% end %}
 {% block main %}
+<div class="wrapper">
     <div class="main container-fluid clearfix">
         <div class="login-panel base-panel col-md-7">
             <div class="panel-nav">
@@ -29,8 +30,11 @@
                 </form>
             </div>
         </div>
-        <div class="main-side col-md-3 visible-lg-block visible-md-block"></div>
+        <div class="main-side visible-lg-block visible-md-block">
+            
+        </div>
     </div>
+</div>
 {% end %}
 {% block js-area %}
     <script type="text/javascript" src={{ static_url("dist/js/login.js") }}></script>

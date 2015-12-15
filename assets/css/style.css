@@ -3,10 +3,8 @@ html {
   min-height: 100%;
 }
 body {
-  margin-bottom: 100px;
-  padding: 80px 0 0;
   font: 13px "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, Helvetica, Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
 }
 input.form-control,
 textarea.form-control {
@@ -128,6 +126,11 @@ textarea.form-control {
 .header .user-panel .user-panel-body .user-link-item:hover a {
   color: #ffffff;
 }
+.wrapper {
+  width: 100%;
+  padding: 80px 0 30px;
+  background-color: #f4f7f8;
+}
 .main {
   width: 960px;
   margin: 0 auto;
@@ -139,7 +142,7 @@ textarea.form-control {
 }
 .main-body {
   background-color: #ffffff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #E0E1E2;
 }
 .main-side {
   width: 236px;
@@ -203,7 +206,7 @@ textarea.form-control {
   width: 100%;
   margin: 0 auto;
   padding-bottom: 10px;
-  position: absolute;
+  position: relative;
   bottom: 0;
   border-top: 1px solid #e1e1e1;
   text-align: center;

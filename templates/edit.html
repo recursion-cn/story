@@ -8,96 +8,98 @@
 
 {% end %}
 {% block main %}
-<div class="editor-main container-fluid clearfix edit-panel">
-    <label><h3>编辑文章</h3></label>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                {% if post %}
-                <input class="base-input" type="text" name="title" value={{ post.title }} placeholder="输入文章标题" autofocus>
-                {% else %}
-                <input class="base-input" type="text" name="title" placeholder="输入文章标题" autofocus>
-                {% end %}
-                <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label class="text-muted">选择文章目录：</label>
-            <div class="select-cate" id="js-select-cate">
-                {% for category in categories %}
-                    {% if post and post.category_id == category.id %}
-                    <button class="btn btn-info btn-sm" data-id={{ category.id }}>{{ category.name }}</button>
-                    <input type="hidden" name="category" value={{ category.id }}>
+<div class="wrapper">
+    <div class="editor-main container-fluid clearfix edit-panel">
+        <label><h3>编辑文章</h3></label>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    {% if post %}
+                    <input class="base-input" type="text" name="title" value={{ post.title }} placeholder="输入文章标题" autofocus>
                     {% else %}
-                    <button class="btn btn-default btn-sm" data-id={{ category.id }}>{{ category.name }}</button>
+                    <input class="base-input" type="text" name="title" placeholder="输入文章标题" autofocus>
                     {% end %}
-                {% end %}
-            </div>
-            <div class="create-cate">
-                <button id="js-add-cate" class="btn btn-default btn-sm" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="click">
-                    <span class="text-primary">添加新目录</span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="select-privacy" id="js-select-privacy">
-                <label class="text-muted">是否对外公开：</label>
-                {% if post and ord(post.public) %}
-                <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-danger btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
-                    <button type="button" class="btn btn-default btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
-                </div>
-                <input type="hidden" name="privacy" value="1">
-                {% elif post and not ord(post.public) %}
-                <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
-                    <button type="button" class="btn btn-danger btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
-                </div>
-                <input type="hidden" name="privacy" value="0">
-                {% elif not post %}
-                <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
-                    <button type="button" class="btn btn-default btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
-                </div>
-                <input type="hidden" name="privacy" value="-1">
-                {% end %}
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-5 editor-notice text-danger">
-           <!--暂时只支持<a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a>语法-->
-        </div>
-    </div>
-    <div class="row">
-        <div class="editor-area col-md-12">
-            <!--div class="editor-header" id="wmd-button-bar"></div-->
-            <div class="editor-body">
-                <div class="editormd" id="js-editormd">
-                    <script type="text/markdown"></script>
-                </div>
-            </div>
-            <div class="editor-footer clearfix">
-                <div class="pull-right">
-                    <button class="btn btn-orange draft-btn">存为草稿</button>
-                    <button class="btn btn-main submit-btn">立即发布</button>
+                    <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true"></span>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="text-muted">选择文章目录：</label>
+                <div class="select-cate" id="js-select-cate">
+                    {% for category in categories %}
+                        {% if post and post.category_id == category.id %}
+                        <button class="btn btn-info btn-sm" data-id={{ category.id }}>{{ category.name }}</button>
+                        <input type="hidden" name="category" value={{ category.id }}>
+                        {% else %}
+                        <button class="btn btn-default btn-sm" data-id={{ category.id }}>{{ category.name }}</button>
+                        {% end %}
+                    {% end %}
+                </div>
+                <div class="create-cate">
+                    <button id="js-add-cate" class="btn btn-default btn-sm" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="click">
+                        <span class="text-primary">添加新目录</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="select-privacy" id="js-select-privacy">
+                    <label class="text-muted">是否对外公开：</label>
+                    {% if post and ord(post.public) %}
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-danger btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
+                        <button type="button" class="btn btn-default btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
+                    </div>
+                    <input type="hidden" name="privacy" value="1">
+                    {% elif post and not ord(post.public) %}
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
+                        <button type="button" class="btn btn-danger btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
+                    </div>
+                    <input type="hidden" name="privacy" value="0">
+                    {% elif not post %}
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
+                        <button type="button" class="btn btn-default btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
+                    </div>
+                    <input type="hidden" name="privacy" value="-1">
+                    {% end %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 editor-notice text-danger">
+               <!--暂时只支持<a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a>语法-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="editor-area col-md-12">
+                <!--div class="editor-header" id="wmd-button-bar"></div-->
+                <div class="editor-body">
+                    <div class="editormd" id="js-editormd">
+                        <script type="text/markdown"></script>
+                    </div>
+                </div>
+                <div class="editor-footer clearfix">
+                    <div class="pull-right">
+                        <button class="btn btn-orange draft-btn">存为草稿</button>
+                        <button class="btn btn-main submit-btn">立即发布</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if post %}
+        <input type="hidden" name="id" value={{ post.id }}>
+        <script type="text/template" id="js-post-content">
+            {% raw post.content %}
+        </script>
+        {% else %}
+        <input type="hidden" name="id" value="-1">
+        {% end %}
+        <input type="hidden" name="category" value="-1">
     </div>
-    {% if post %}
-    <input type="hidden" name="id" value={{ post.id }}>
-    <script type="text/template" id="js-post-content">
-        {% raw post.content %}
-    </script>
-    {% else %}
-    <input type="hidden" name="id" value="-1">
-    {% end %}
-    <input type="hidden" name="category" value="-1">
 </div>
 <input type="hidden" name="referer" value={{ referer }}>
 {% end %}

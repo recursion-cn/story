@@ -1,37 +1,39 @@
 {% extends "layout.html" %}
 {% block main %}
-<div class="main container-fluid clearfix">
-    <div class="main-body col-md-7">
-        <div class="post-type">
-            <span class="glyphicon glyphicon-list-alt"></span>
-            <span>我的草稿</span>
-        </div>
-        {% if len(drafts) == 0 %}
-        <div class="empty-post-notice">
-            <span class="text-muted">您尚未保存过草稿，先写一篇吧。</span>
-            <a href="/users/edit">写一篇文章</a>
-        </div>
-        {% end %}
-        {% for draft in drafts %}
-        <div class="post draft">
-            <div class="post-header">
-                <a class="title-link" href={{ "/posts/" + str(draft.id) }}>
-                    <p class="title">{{ draft.title }}</p>
-                </a>
-                <div class="info">
-                    <a class="author" href={{ "/users/" + str(draft.author.id) }}>{{ draft.author.nick }}</a>
-                    <span>最后发布于</span>
-                    <span class="text-info" data-toggle="tooltip" data-placement="bottom" title={{ draft.last_modified }}>{{ draft.last_modified }}</span>
+<div class="wrapper">
+    <div class="main container-fluid clearfix">
+        <div class="main-body col-md-8">
+            <div class="post-type">
+                <span class="glyphicon glyphicon-list-alt"></span>
+                <span>我的草稿</span>
+            </div>
+            {% if len(drafts) == 0 %}
+            <div class="empty-post-notice">
+                <span class="text-muted">您尚未保存过草稿，先写一篇吧。</span>
+                <a href="/users/edit">写一篇文章</a>
+            </div>
+            {% end %}
+            {% for draft in drafts %}
+            <div class="post draft">
+                <div class="post-header">
+                    <a class="title-link" href={{ "/posts/" + str(draft.id) }}>
+                        <p class="title">{{ draft.title }}</p>
+                    </a>
+                    <div class="info">
+                        <a class="author" href={{ "/users/" + str(draft.author.id) }}>{{ draft.author.nick }}</a>
+                        <span>最后发布于</span>
+                        <span class="text-info">{{ draft.last_modified }}</span>
+                    </div>
+                </div>
+                <div class="post-body">
+                    {{ draft.summary }}
                 </div>
             </div>
-            <div class="post-body">
-                {{ draft.summary }}
-            </div>
+            {% end %}
         </div>
-        {% end %}
-    </div>
-    <div class="main-side col-md-3 visible-lg-block visible-md-block pull-right">
-        {% include sidebar.html %}
+        <div class="main-side visible-lg-block visible-md-block">
+            {% include sidebar.html %}
+        </div>
     </div>
 </div>
 {% end %}

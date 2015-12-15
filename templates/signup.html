@@ -3,6 +3,7 @@
     <link href={{ static_url("css/signup.css") }} rel="stylesheet">
 {% end %}
 {% block main %}
+<div class="wrapper">
     <div class="main container-fluid clearfix">
         <div class="signup-panel base-panel col-md-7">
             <div class="panel-nav">
@@ -27,11 +28,11 @@
                             <button class="base-btn submit">注册</button>
                         </div>
                     </div>
-                    <div class="row">
+                    <!--div class="row">
                         <div class="col-md-12">
                             已经注册过了？<a href="/users/login">登录</a>
                         </div>
-                    </div>
+                    </div-->
                 </form>
             </div>
             <div class="panel-foot panel-notice">
@@ -40,6 +41,7 @@
             </div>
         </div>
     </div>
+</div>
 {% end %}
 {% block js-area %}
     <script type="text/javascript" src={{ static_url("dist/js/signup.js") }}></script>
