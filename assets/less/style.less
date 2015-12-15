@@ -43,13 +43,12 @@ textarea.form-control {
     height: 50px;
     background-color: @white;
     border-bottom: 1px solid #ccc;
-    //box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
     box-shadow: 0 0 6px #ccc;
     .navbar {
         min-height: 49px;
     }
     .navbar-default {
-        width: 62%;
+        width: @header-width;
         max-height: 49px;
         margin: 0 auto;
         background-color: @white;
@@ -156,7 +155,7 @@ textarea.form-control {
 }
 
 .main {
-    width: 60%;
+    width: @main-width;
     margin: 0 auto;
 }
 
@@ -169,6 +168,11 @@ textarea.form-control {
 .main-body {
     background-color: @white;
     border: 1px solid #e0e0e0;
+}
+
+.main-side {
+    width: 236px;
+    float: right;
 }
 
 .post-type {
@@ -231,11 +235,10 @@ textarea.form-control {
 }
 
 .side-links {
-    width: 86%;
-    margin-top: 20px;
+    width: 100%;
     padding: 10px;
     text-align: center;
-    background-color: #f9f9f9;
+    background-color: @white;
     border: 1px solid #e0e0e0;
     border-radius: 3px;
 }

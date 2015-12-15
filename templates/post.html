@@ -5,47 +5,49 @@
 {% end %}
 {% block main %}
 <div class="main container-fluid clearfix">
-    <div class="main-body col-md-7">
-        <div class="single-post">
-            <div class="title">
-                {% if not ord(post.visible) %}
-                    <h3 class="bg-warning">{{ post.title }}</h3><sup><mark>[草稿]</mark></sup>
-                {% else %}
-                    <h3>{{ post.title }}</h3>
-                {% end %}
-            </div>
-            <div class="content markdown-body editormd-html-preview" id="js-content"></div>
-            <div class="assign">
-                <p><em>{{ post.author.nick }}</em></p>
-                <p><em data-toggle="tooltip" data-placement="top" title="最后修改时间">{{ post.last_modified }}</em></p>
-            </div>
-            <div class="fun">
-                <ul class="list-inline">
-                    {% if current_user and current_user.id == post.author.id %}
-                    <li>
-                        <span class="glyphicon glyphicon-edit"></span>
-                        <a href={{ '/users/edit/' + str(post.id) }}>编辑</a>
-                    </li>
-                    <li>
-                        <span class="glyphicon glyphicon-trash"></span>
-                        <!--a href="javascript:;" id="js-delete-post" data-id={{ post.id }} data-toggle="popover" data-placement="top">删除</a-->
-                        <a href="javascript:;" id="js-delete-post" data-id={{ post.id }}>删除</a>
-                    </li>
+    <div class="row">
+        <div class="main-body col-md-8">
+            <div class="single-post">
+                <div class="title">
+                    {% if not ord(post.visible) %}
+                        <h3 class="bg-warning">{{ post.title }}</h3><sup><mark>[草稿]</mark></sup>
+                    {% else %}
+                        <h3>{{ post.title }}</h3>
                     {% end %}
-                    <li>
-                        <span class="glyphicon glyphicon-heart-empty"></span>
-                        <a href="javascript:;" id="js-like-post">喜欢</a>
-                    </li>
-                    <li>
-                        <span class="glyphicon glyphicon-share"></span>
-                        <a href="javascript:;">分享</a>
-                    </li>
-                </ul>
+                </div>
+                <div class="content markdown-body editormd-html-preview" id="js-content"></div>
+                <div class="assign">
+                    <p><em>{{ post.author.nick }}</em></p>
+                    <p><em>{{ post.last_modified }}</em></p>
+                </div>
+                <div class="fun">
+                    <ul class="list-inline">
+                        {% if current_user and current_user.id == post.author.id %}
+                        <li>
+                            <span class="glyphicon glyphicon-edit"></span>
+                            <a href={{ '/users/edit/' + str(post.id) }}>编辑</a>
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-trash"></span>
+                            <!--a href="javascript:;" id="js-delete-post" data-id={{ post.id }} data-toggle="popover" data-placement="top">删除</a-->
+                            <a href="javascript:;" id="js-delete-post" data-id={{ post.id }}>删除</a>
+                        </li>
+                        {% end %}
+                        <li>
+                            <span class="glyphicon glyphicon-heart-empty"></span>
+                            <a href="javascript:;" id="js-like-post">喜欢</a>
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-share"></span>
+                            <a href="javascript:;">分享</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="main-side col-md-3 visible-lg-block visible-md-block pull-right">
-        {% include sidebar.html %}
+        <div class="main-side visible-lg-block visible-md-block">
+            {% include sidebar.html %}
+        </div>
     </div>
 </div>
 <div class="modal fade" id="js-delete-confirm-modal">

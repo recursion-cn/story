@@ -52,9 +52,6 @@
             </div>
             <div class="panel-main">
                 <div class="cate-setting">
-                    <div class="setting-info">
-                        <span class="text-muted"><span class="glyphicon glyphicon-info-sign"></span> 只能删除不包含文章的目录</span>
-                    </div>
                     {% if categories and len(categories) %}
                     {% for cate in categories %}
                     {% if cate.post_count > 0 %}
@@ -76,6 +73,9 @@
                     </div>
                 </div>
             </div>
+            <div class="panel-foot panel-notice">
+                <p>只能删除不包含文章的目录</p>
+            </div>
         </div>
     </div>
     <div class="col-md-6">
@@ -85,10 +85,10 @@
             </div>
             <div class="panel-main">
                 <div class="trash-setting">
-                    <div class="setting-info">
-                        <span class="text-muted"><span class="glyphicon glyphicon-info-sign"></span> 从回收站删除的文章将无法找回，请谨慎操作</span>
-                    </div>
                 </div>
+            </div>
+            <div class="panel-foot panel-notice">
+                <p>从回收站删除的文章将无法找回，请谨慎操作</p>
             </div>
         </div>
     </div>
