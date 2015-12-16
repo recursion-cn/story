@@ -30,12 +30,13 @@ class ListHandler(baseHandler.RequestHandler):
         cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
         categories = Category.list(self.current_user.id)
+        user_id = self.current_user.id
         if cate_id:
-            posts = Post.list_by_category(self.current_user.id, int(cate_id), 0, int(size))
-            count = Post.count_posts_by_category(self.current_user.id, cate_id)
+            posts = Post.list_by_category(user_id, int(cate_id), 0, int(size))
+            count = Post.count_posts_by_category(user_id, cate_id)
         else:
-            count = Post.count_posts(self.current_user.id)
-            posts = Post.list(self.current_user.id, 0, int(size))
+            count = Post.count_posts(user_id)
+            posts = Post.list(user_id, 0, int(size))
         if posts:
             need_pagination = True if count > len(posts) else False
             for post in posts:
@@ -60,12 +61,13 @@ class DraftListHandler(baseHandler.RequestHandler):
         cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
         categories = Category.list(self.current_user.id)
+        user_id = self.current_user.id
         if cate_id:
-            drafts = Post.drafts_by_category(self.current_user.id, int(cate_id), 0, int(size))
-            count = Post.count_drafts_by_category(self.current_user.id, cate_id)
+            drafts = Post.drafts_by_category(user_id, int(cate_id), 0, int(size))
+            count = Post.count_drafts_by_category(user_id, cate_id)
         else:
-            drafts = Post.drafts(self.current_user.id, 0, int(size))
-            count = Post.count_drafts(self.current_user.id)
+            drafts = Post.drafts(user_id, 0, int(size))
+            count = Post.count_drafts(user_id)
         for draft in drafts:
             draft['author'] = self.current_user
             _html = markdown.markdown(draft.content)
@@ -85,8 +87,9 @@ class ListApiHandler(baseHandler.RequestHandler):
         summary_length = 200
         offset = self.get_query_argument('offset', 0)
         size = self.get_query_argument('size', 10)
-        count = Post.count_posts(self.current_user.id)
-        posts = Post.list(self.current_user.id, int(offset), int(size))
+        user_id = self.current_user.id
+        count = Post.count_posts(user_id)
+        posts = Post.list(user_id, int(offset), int(size))
         if posts:
             need_pagination = True if count > (int(offset) + int(size)) else False
             for post in posts:
@@ -132,13 +135,14 @@ direct to the edit page
 class EditHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self, post_id=None):
+        user_id = self.current_user.id
         post = None
         if post_id:
             _post = Post.get_post(post_id)
-            if _post and _post.user_id == self.current_user.id:
+            if _post and _post.user_id == user_id:
                 post = _post
         get_categories = 'select id, name from tb_category where visible = 1 and user_id = %s'
-        categories = db.query(get_categories, self.current_user.id)
+        categories = db.query(get_categories, user_id)
         referer = self.request.headers.get('Referer') or '/'
 
         self.render('edit.html', categories=categories, post=post, referer=referer)

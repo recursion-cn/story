@@ -9,14 +9,13 @@
                     {% if cate_id and int(cate_id) == int(cate.id) %}
                     <a class="cate-item active" href="javascript:;">{{ cate.name }}</a>
                     {% else %}
-                    <a class="cate-item" href={{ '/posts?cate=' + str(cate.id) }}>{{ cate.name }}</a>
+                    <a class="cate-item" href={{ '/users/draft?cate=' + str(cate.id) }}>{{ cate.name }}</a>
                     {% end %}
                     {% end %}
                 </div>
                 {% if len(drafts) == 0 %}
                 <div class="empty-post-notice">
-                    <p>Oops, 没有找到文章</p>
-                    <!--a href="/users/edit">写一篇文章</a-->
+                    <p>Oops, 没有找到草稿</p>
                 </div>
                 {% else %}
                 {% for draft in drafts %}
