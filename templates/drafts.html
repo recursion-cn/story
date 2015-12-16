@@ -2,43 +2,45 @@
 {% block main %}
 <div class="wrapper">
     <div class="main container-fluid clearfix">
-        <div class="main-body col-md-8">
-            <div class="cates-area">
-                {% for cate in categories %}
-                {% if cate_id and int(cate_id) == int(cate.id) %}
-                <a class="cate-item active" href="javascript:;">{{ cate.name }}</a>
+        <div class="row">
+            <div class="main-body col-md-8">
+                <div class="cates-area">
+                    {% for cate in categories %}
+                    {% if cate_id and int(cate_id) == int(cate.id) %}
+                    <a class="cate-item active" href="javascript:;">{{ cate.name }}</a>
+                    {% else %}
+                    <a class="cate-item" href={{ '/posts?cate=' + str(cate.id) }}>{{ cate.name }}</a>
+                    {% end %}
+                    {% end %}
+                </div>
+                {% if len(drafts) == 0 %}
+                <div class="empty-post-notice">
+                    <p>Oops, 没有找到文章</p>
+                    <!--a href="/users/edit">写一篇文章</a-->
+                </div>
                 {% else %}
-                <a class="cate-item" href={{ '/posts?cate=' + str(cate.id) }}>{{ cate.name }}</a>
-                {% end %}
-                {% end %}
-            </div>
-            {% if len(drafts) == 0 %}
-            <div class="empty-post-notice">
-                <p>Oops, 没有找到文章</p>
-                <!--a href="/users/edit">写一篇文章</a-->
-            </div>
-            {% else %}
-            {% for draft in drafts %}
-            <div class="post draft">
-                <div class="post-header">
-                    <a class="title-link" href={{ "/posts/" + str(draft.id) }}>
-                        <p class="title">{{ draft.title }}</p>
-                    </a>
-                    <div class="info">
-                        <a class="author" href={{ "/users/" + str(draft.author.id) }}>{{ draft.author.nick }}</a>
-                        <span>最后发布于</span>
-                        <span class="text-info">{{ draft.last_modified }}</span>
+                {% for draft in drafts %}
+                <div class="post draft">
+                    <div class="post-header">
+                        <a class="title-link" href={{ "/posts/" + str(draft.id) }}>
+                            <p class="title">{{ draft.title }}</p>
+                        </a>
+                        <div class="info">
+                            <a class="author" href={{ "/users/" + str(draft.author.id) }}>{{ draft.author.nick }}</a>
+                            <span>最后发布于</span>
+                            <span class="text-info">{{ draft.last_modified }}</span>
+                        </div>
+                    </div>
+                    <div class="post-body">
+                        {{ draft.summary }}
                     </div>
                 </div>
-                <div class="post-body">
-                    {{ draft.summary }}
-                </div>
+                {% end %}
+                {% end %}
             </div>
-            {% end %}
-            {% end %}
-        </div>
-        <div class="main-side visible-lg-block visible-md-block">
-            {% include sidebar.html %}
+            <div class="main-side visible-lg-block visible-md-block">
+                {% include sidebar.html %}
+            </div>
         </div>
     </div>
 </div>
