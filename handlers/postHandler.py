@@ -57,8 +57,15 @@ class DraftListHandler(baseHandler.RequestHandler):
     def get(self):
         default_size = 10
         summary_length = 200
+        cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
-        drafts = Post.drafts(self.current_user.id, 0, int(size))
+        categories = Category.list(self.current_user.id)
+        if cate_id:
+            drafts = Post.drafts_by_category(self.current_user.id, int(cate_id), 0, int(size))
+            count = Post.count_drafts_by_category(self.current_user.id, cate_id)
+        else:
+            drafts = Post.drafts(self.current_user.id, 0, int(size))
+            count = Post.count_drafts(self.current_user.id)
         for draft in drafts:
             draft['author'] = self.current_user
             _html = markdown.markdown(draft.content)
@@ -68,7 +75,7 @@ class DraftListHandler(baseHandler.RequestHandler):
                 _text = _text[0:summary_length] + '...'
             draft['summary'] = _text
 
-        self.render('drafts.html', drafts=drafts)
+        self.render('drafts.html', cate_id=cate_id, categories=categories, drafts=drafts)
 
 class ListApiHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated

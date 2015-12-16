@@ -11,6 +11,30 @@
   outline: none;
 }
 .base-btn {
+  padding: 3px 7px;
+  border: 1px solid #e3e9e9;
+  border-radius: 3px;
+  background-color: #ffffff;
+  outline: none;
+}
+.base-btn:hover {
+  background-color: #4594af;
+  color: #ffffff;
+}
+.base-btn.choosen {
+  background-color: #4594af;
+  color: #ffffff;
+}
+.base-btn.disabled {
+  background-color: #f4f7f8;
+  cursor: not-allowed;
+}
+.base-btn.disabled:hover {
+  background-color: #f4f7f8;
+  color: #000000;
+}
+.login-btn,
+.signup-btn {
   width: 160px;
   height: 30px;
   border: 1px solid #1a7d6b;
@@ -18,10 +42,12 @@
   border-radius: 3px;
   color: #ffffff;
 }
-.base-btn:hover {
+.login-btn:hover,
+.signup-btn:hover {
   background-color: #2ec1a6;
 }
-.base-btn:focus {
+.login-btn:focus,
+.signup-btn:focus {
   outline: none;
 }
 /* panel elements */

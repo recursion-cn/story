@@ -98,12 +98,12 @@ $('body').on('click', '#js-submit-password', function(e) {
     if ($(this).data('cate-selected')) {
         const _index = _categories.indexOf(id);
         delete _categories[_index];
-        $(this).addClass('btn-default').removeClass('btn-danger').attr('data-selected', 0).data('cate-selected', false);
+        $(this).removeClass('choosen').attr('data-selected', 0).data('cate-selected', false);
     } else {
         if (_categories.indexOf(id) < 0) {
             _categories.push(id);
         }
-        $(this).addClass('btn-danger').removeClass('btn-default').attr('data-selected', 1).data('cate-selected', true);
+        $(this).addClass('choosen').attr('data-selected', 1).data('cate-selected', true);
     }
 }).on('click', '#js-delete-cate', function(e) {
     e.preventDefault();

@@ -3,16 +3,21 @@
 <div class="wrapper">
     <div class="main container-fluid clearfix">
         <div class="main-body col-md-8">
-            <div class="post-type">
-                <span class="glyphicon glyphicon-list-alt"></span>
-                <span>我的草稿</span>
+            <div class="cates-area">
+                {% for cate in categories %}
+                {% if cate_id and int(cate_id) == int(cate.id) %}
+                <a class="cate-item active" href="javascript:;">{{ cate.name }}</a>
+                {% else %}
+                <a class="cate-item" href={{ '/posts?cate=' + str(cate.id) }}>{{ cate.name }}</a>
+                {% end %}
+                {% end %}
             </div>
             {% if len(drafts) == 0 %}
             <div class="empty-post-notice">
-                <span class="text-muted">您尚未保存过草稿，先写一篇吧。</span>
-                <a href="/users/edit">写一篇文章</a>
+                <p>Oops, 没有找到文章</p>
+                <!--a href="/users/edit">写一篇文章</a-->
             </div>
-            {% end %}
+            {% else %}
             {% for draft in drafts %}
             <div class="post draft">
                 <div class="post-header">
@@ -29,6 +34,7 @@
                     {{ draft.summary }}
                 </div>
             </div>
+            {% end %}
             {% end %}
         </div>
         <div class="main-side visible-lg-block visible-md-block">

@@ -15,6 +15,35 @@
 }
 
 .base-btn {
+    padding: 3px 7px;
+    border: 1px solid @dark-gray;
+    border-radius: 3px;
+    background-color: @white;
+    outline: none;
+}
+
+.base-btn:hover {
+    background-color: @blue;
+    color: @white;
+}
+
+.base-btn.choosen {
+    background-color: @blue;
+    color: @white;
+}
+
+.base-btn.disabled {
+    background-color: @gray;
+    cursor: not-allowed;
+}
+
+.base-btn.disabled:hover {
+    background-color: @gray;
+    color: @dark;
+}
+
+.login-btn,
+.signup-btn {
     width: 160px;
     height: 30px;
     border: 1px solid @dark-green;
@@ -23,11 +52,13 @@
     color: @white;
 }
 
-.base-btn:hover {
+.login-btn:hover,
+.signup-btn:hover {
     background-color: @white-green;
 }
 
-.base-btn:focus {
+.login-btn:focus,
+.signup-btn:focus {
     outline: none;
 }
 

@@ -161,7 +161,7 @@ textarea.form-control {
   margin: 0 0 5px;
   padding: 0 6px;
   border-radius: 2px;
-  color: #000000;
+  color: #5A6265;
   cursor: pointer;
 }
 .cates-area .cate-item:hover {
@@ -218,7 +218,7 @@ textarea.form-control {
   width: 136px;
   margin: 20px auto 30px;
 }
-.draft .post-header .title {
+.draft .post-header .title-link .title {
   color: #D0560A;
 }
 .side-links {
@@ -232,7 +232,7 @@ textarea.form-control {
 .footer {
   width: 100%;
   margin: 0 auto;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
   position: relative;
   bottom: 0;
   border-top: 1px solid #e1e1e1;
