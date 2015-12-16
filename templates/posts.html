@@ -4,16 +4,21 @@
     <div class="main container-fluid clearfix">
         <div class="row">
             <div class="main-body col-md-8">
-                <div class="post-type">
-                    <span class="glyphicon glyphicon-list-alt"></span>
-                    <span>最新文章</span>
+                <div class="cates-area">
+                    {% for cate in categories %}
+                    {% if cate_id and int(cate_id) == int(cate.id) %}
+                    <a class="cate-item active" href="javascript:;">{{ cate.name }}</a>
+                    {% else %}
+                    <a class="cate-item" href={{ '/posts?cate=' + str(cate.id) }}>{{ cate.name }}</a>
+                    {% end %}
+                    {% end %}
                 </div>
                 {% if len(posts) == 0 %}
                 <div class="empty-post-notice">
-                    <span class="text-muted">您尚未发表过文章，先写一篇吧。</span>
-                    <a href="/users/edit">写一篇文章</a>
+                    <p>Oops, 没有找到文章</p>
+                    <!--a href="/users/edit">写一篇文章</a-->
                 </div>
-                {% end %}
+                {% else %}
                 {% for post in posts %}
                 <div class="post container-fluid">
                     <div class="post-header row">
@@ -43,6 +48,7 @@
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 点击查看更多
                     </button>
                 </div>
+                {% end %}
                 {% end %}
             </div>
             <div class="main-side visible-lg-block visible-md-block">

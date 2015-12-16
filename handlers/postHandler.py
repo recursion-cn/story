@@ -8,6 +8,7 @@ import baseHandler
 from modules.db import db
 import modules.utils
 from models.Post import Post
+from models.Category import Category
 import datetime
 import markdown
 import bleach
@@ -26,9 +27,15 @@ class ListHandler(baseHandler.RequestHandler):
     def get(self):
         default_size = 10
         need_pagination = False
+        cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
-        count = Post.count_posts(self.current_user.id)
-        posts = Post.list(self.current_user.id, 0, int(size))
+        categories = Category.list(self.current_user.id)
+        if cate_id:
+            posts = Post.list_by_category(self.current_user.id, int(cate_id), 0, int(size))
+            count = Post.count_posts_by_category(self.current_user.id, cate_id)
+        else:
+            count = Post.count_posts(self.current_user.id)
+            posts = Post.list(self.current_user.id, 0, int(size))
         if posts:
             need_pagination = True if count > len(posts) else False
             for post in posts:
@@ -40,7 +47,7 @@ class ListHandler(baseHandler.RequestHandler):
                 post['summary'] = _text
                 post['author'] = self.current_user
 
-        self.render('posts.html', posts=posts, page_size=size, need_pagination=int(need_pagination))
+        self.render('posts.html', cate_id=cate_id, categories=categories, posts=posts, page_size=size, need_pagination=int(need_pagination))
 
 """
 get curent user's drafts, need login.

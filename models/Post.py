@@ -19,6 +19,13 @@ class Post:
             return count_row.count
 
     @classmethod
+    def count_posts_by_category(cls, user_id, category_id):
+        get_count = 'select count(1) count from tb_post where visible = 1 and deleted = 0 and user_id = %s and category_id = %s'
+        count_row = db.get(get_count, user_id, category_id)
+        if count_row:
+            return count_row.count
+
+    @classmethod
     def list(cls, user_id, offset=0, size=10):
         query_list = """select id, title, content, category_id, created, updated, if(updated is NULL, created, updated) last_modified 
                         from tb_post where visible = 1 and deleted = 0 and user_id = %s order by last_modified desc limit %s, %s"""
@@ -31,6 +38,13 @@ class Post:
                           from tb_post where visible = 0 and deleted = 0 and user_id = %s order by last_modified desc limit %s, %s"""
         drafts = db.query(query_drafts, user_id, offset, size)
         return drafts
+
+    @classmethod
+    def list_by_category(cls, user_id, category_id, offset=0, size=10):
+        query_list = """select id, title, content, category_id, created, updated, if(updated is NULL, created, updated) last_modified 
+                        from tb_post where visible = 1 and deleted = 0 and user_id = %s and category_id = %s order by last_modified desc limit %s, %s"""
+        posts = db.query(query_list, user_id, category_id, offset, size)
+        return posts
 
     @classmethod
     def get_post(cls, id):

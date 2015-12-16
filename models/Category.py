@@ -11,13 +11,13 @@ class Category:
         pass
 
     @classmethod
-    def list(owner_nick):
-        query_list = 'select id, name from tb_category where nick = %s'
-        categories = db.query(query_list, nick)
+    def list(cls, user_id):
+        query_list = 'select id, name from tb_category where user_id = %s'
+        categories = db.query(query_list, user_id)
         return categories
 
     @classmethod
-    def get(category_id):
+    def get(cls, category_id):
         get_one = 'select id, name from tb_category where nick = %s'
         category = db.get(get_one)
         return category

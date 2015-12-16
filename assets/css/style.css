@@ -110,20 +110,22 @@ textarea.form-control {
   line-height: 36px;
 }
 .header .user-panel .user-panel-body .user-link-item a {
+  text-decoration: none;
   color: #333;
 }
 .header .user-panel .user-panel-body .user-link-item:last-child {
   border-bottom: none;
 }
 .header .user-panel .user-panel-body .user-link-item:hover {
-  background-color: #666;
+  background-color: #e3e9e9;
 }
 .header .user-panel .user-panel-body .user-link-item:hover a {
-  color: #ffffff;
+  color: #000000;
 }
 .wrapper {
   width: 100%;
-  padding: 80px 0 30px;
+  min-height: 500px;
+  padding: 70px 0 30px;
   background-color: #f4f7f8;
 }
 .main {
@@ -143,6 +145,38 @@ textarea.form-control {
   width: 236px;
   float: right;
 }
+.cates-area {
+  min-height: 36px;
+  margin: 0 -15px 15px;
+  padding: 10px 15px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #e3e9e9;
+}
+.cates-area .cate-item {
+  min-width: 30px;
+  height: 23px;
+  line-height: 23px;
+  text-align: center;
+  display: inline-block;
+  margin: 0 0 5px;
+  padding: 0 6px;
+  border-radius: 2px;
+  color: #000000;
+  cursor: pointer;
+}
+.cates-area .cate-item:hover {
+  text-decoration: none;
+  background-color: #4594af;
+  color: #ffffff;
+}
+.cates-area .cate-item.active {
+  background-color: #4594af;
+  color: #ffffff;
+}
+.cates-area .cate-item.active:hover {
+  background-color: #1d7f9e;
+  color: #ffffff;
+}
 .post-type {
   margin-bottom: 15px;
   padding: 8px;
@@ -150,9 +184,7 @@ textarea.form-control {
 }
 .empty-post-notice {
   padding: 5px 10px;
-}
-.empty-post-notice a {
-  text-decoration: underline;
+  font-weight: bold;
 }
 .post {
   padding-bottom: 26px;
@@ -223,7 +255,7 @@ textarea.form-control {
 }
 .msg-area {
   position: fixed;
-  z-index: 1000;
+  z-index: 999;
   width: 100%;
   text-align: center;
   display: none;
@@ -235,7 +267,7 @@ textarea.form-control {
 }
 .btn-main {
   color: #fff;
-  background-color: #038d98;
+  background-color: #4594af;
   border-color: #0D7179;
 }
 .btn-main:hover,
@@ -273,6 +305,6 @@ textarea.form-control {
   border: 1px solid #0C6F77;
 }
 ::selection {
-  background-color: #038d98;
+  background-color: #4594af;
   color: #fff;
 }
