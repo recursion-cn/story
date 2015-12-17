@@ -28,3 +28,9 @@ class RequestHandler(tornado.web.RequestHandler):
         )
         self.write(default_res)
         self.finish()
+
+    def send_success(self, data):
+        self.send_result(True, data, error_code=None)
+
+    def send_error(self, error_code, msg=None):
+        self.send_result(error_code=error_code, msg=msg)

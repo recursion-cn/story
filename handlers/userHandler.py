@@ -15,6 +15,12 @@ import constants
 
 class LoginHandler(baseHandler.RequestHandler):
     def get(self):
+        if self.current_user:
+            referer = self.request.headers.get('Referer') or '/'
+            if referer.find('signup') > -1:
+                referer = '/'
+            self.redirect(referer)
+            return
         self.render('login.html')
 
     def post(self):

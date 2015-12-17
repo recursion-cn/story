@@ -37,14 +37,14 @@
 .signup-btn {
   width: 160px;
   height: 30px;
-  border: 1px solid #1a7d6b;
-  background-color: #30b9a0;
+  border: 1px solid #1d7f9e;
+  background-color: #4594af;
   border-radius: 3px;
   color: #ffffff;
 }
 .login-btn:hover,
 .signup-btn:hover {
-  background-color: #2ec1a6;
+  background-color: #289ec3;
 }
 .login-btn:focus,
 .signup-btn:focus {

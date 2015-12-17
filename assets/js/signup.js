@@ -76,4 +76,6 @@ $('body').on('click', '.submit', function(e) {
     } else {
         Utils.showMsg('error', validatedRegisterInfo.msg);
     }
+}).on('click', '#js-direct-to-login', function(e) {
+    window.location.href = '/users/login';
 });

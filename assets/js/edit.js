@@ -43,7 +43,7 @@ const getPost = function() {
     post.content = editor.getMarkdown();
     post.privacy = $('input[name="privacy"]').val();
     post.id = $('input[name="id"]').val();
-console.log(post)
+
     return post;
 };
 

@@ -36,7 +36,7 @@ class IndexHandler(baseHandler.RequestHandler):
             count = Post.count_posts(user.id)
             posts = Post.list(user.id, 0, default_size)
             if posts:
-                need_pagination = True if count > len(posts) else False
+                need_pagination = count > len(posts)
                 for post in posts:
                     _html = markdown.markdown(post.content)
                     soup = BeautifulSoup(_html, 'html.parser')

@@ -115,5 +115,7 @@ $('body').on('click', 'button.submit', function(e) {
     e.preventDefault();
     hideError();
     login(validate(getParams(), Utils.showMsg));
+}).on('click', '#js-direct-signup', function(e) {
+    window.location.href = '/users/signup';
 });
 
