@@ -17,3 +17,12 @@ class RequestHandler(tornado.web.RequestHandler):
             current_user = db.get(query, current_nick)
 
         return current_user
+
+    def send_result(self, success=False, data=None, msg=None):
+        default_res = dict(
+            success=success,
+            data=data,
+            msg=msg
+        )
+        self.write(default_res)
+        self.finish()

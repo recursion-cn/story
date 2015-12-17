@@ -6,6 +6,7 @@
 
 import baseApiHandler
 from modules.db import db
+from models.Post import Post
 import modules.utils
 import datetime
 import tornado.web
@@ -19,10 +20,7 @@ get single post by id
 class PostHandler(baseApiHandler.RequestHandler):
 
     def get(self, id):
-        query = """select id, title, content, user_id, public, visible, if(updated is NULL, created, updated) as last_modified
-                 from tb_post where id = %s and deleted = 0
-                """
-        post = db.get(query, id)
+        post = Post.get_post(id)
         if post:
             if not ord(post.public):
                 if not self.current_user:
