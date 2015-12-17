@@ -48,7 +48,8 @@ class ListHandler(baseHandler.RequestHandler):
                 post['summary'] = _text
                 post['author'] = self.current_user
 
-        self.render('posts.html', cate_id=cate_id, categories=categories, posts=posts, page_size=size, need_pagination=int(need_pagination))
+        self.render('posts.html', cate_id=cate_id, categories=categories,
+            posts=posts, page_size=size, need_pagination=int(need_pagination))
 
 """
 get curent user's drafts, need login.
