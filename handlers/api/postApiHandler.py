@@ -33,8 +33,7 @@ class PostHandler(baseApiHandler.RequestHandler):
             author = db.get(query_author, post.user_id)
             post['author'] = author
             post = json.dumps(post, cls=modules.utils.JSONEncoder)
-            self.write({'success': True, 'post': post})
-            self.finish()
+            self.send_result(True, post, None)
             return
 
         self.write_error(404)
@@ -57,13 +56,11 @@ class LikeHandler(baseApiHandler.RequestHandler):
                         like_id = db.insert(add_like, self.current_user.id, post_id, 1, 0, now)
                         if like_id:
                             #self.set_cookie('like_post_{0}'.format(post_id), '1', expires_days=999)
-                            self.write({'success': True})
-                            self.finish()
+                            self.send_result(True, error_code=None)
                             return
                 else:
                     add_like = 'insert into tb_interaction (post_id, `like`, unlike, created) values (%s, %s, %s, %s)'
                     like_id = db.insert(add_like, post_id, 1, 0, now)
                     if like_id:
                         #self.set_cookie('like_post_{0}'.format(post_id), '1', expires_days=999)
-                        self.write({'success': True})
-                        self.finish()
+                        self.send_result(True, error_code=None)

@@ -3,6 +3,7 @@
 
 import tornado.web
 from modules.db import db
+import constants
 
 class RequestHandler(tornado.web.RequestHandler):
 
@@ -27,3 +28,13 @@ class RequestHandler(tornado.web.RequestHandler):
             self.render('500.html')
         else:
             super(RequestHandler, self).write_error(status_code, **kwargs)
+
+    def send_result(self, success=False, data=None, error_code=constants.error_code['internal_error'], msg=None):
+        default_res = dict(
+            success = success,
+            data = data,
+            error_code = error_code,
+            msg = msg
+        )
+        self.write(default_res)
+        self.finish()

@@ -21,8 +21,7 @@ class LoginHandler(baseHandler.RequestHandler):
         nick = self.get_body_argument('nick', None)
         password = self.get_body_argument('password', None)
         if not nick or not password:
-            self.write({'success': False, 'error_code': constants.error_code['miss_nick_or_password']})
-            self.finish()
+            self.send_result(error_code=constants.error_code['miss_nick_or_password'])
             return
         user = Member.getByNick(nick)
 
@@ -33,15 +32,12 @@ class LoginHandler(baseHandler.RequestHandler):
             if user.password.upper() == password_md5:
                 self.set_secure_cookie('current_user', nick, 10)
                 user = json.dumps(user, cls=utils.JSONEncoder)
-                self.write({'success': True, 'data': user})
-                self.finish()
+                self.send_result(True, user, error_code=None)
             else:
-                self.write({'success': False, 'error_code': constants.error_code['wrong_password']})
-                self.finish()
+                self.send_result(error_code=constants.error_code['wrong_password'])
             return
 
-        self.write({'success': False, 'error_code': constants.error_code['member_not_exist']})
-        self.finish()
+        self.send_result(error_code=constants.error_code['member_not_exist'])
 
 class SignupHandler(baseHandler.RequestHandler):
     def get(self):
@@ -56,8 +52,7 @@ class SignupHandler(baseHandler.RequestHandler):
             length = len(password)
             if length >= 6 and length <= 18 and password == password_confirm:
                 if Member.isExist(nick):
-                    self.write({'success': False, 'error_code': constants.error_code['user_has_exist']})
-                    self.finish()
+                    self.send_result(error_code=constants.error_code['user_has_exist'])
                     return
                 query_invite_code = 'select count(1) count from tb_invite where code = %s'
                 code_num = db.get(query_invite_code, invite_code)
@@ -69,19 +64,16 @@ class SignupHandler(baseHandler.RequestHandler):
                     insert_sql = 'insert into tb_user (nick, password, created) values (%s, %s, %s)'
                     try:
                         member_id = db.insert(insert_sql, nick, password_md5, now)
-                        self.write({'success': True})
-                        self.finish()
+                        self.send_result(True, error_code=None)
                         return
                     except:
                         pass
                         # TODO add log
                 elif not code_num.count:
-                    self.write({'success': False, 'error_code': constants.error_code['invite_code_not_exist']})
-                    self.finish()
+                    self.send_result(error_code=constants.error_code['invite_code_not_exist'])
                     return
 
-        self.write({'success': False})
-        self.finish()
+        self.send_result()
 
 class LogoutHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
@@ -120,23 +112,17 @@ class PasswordModifyHandler(baseHandler.RequestHandler):
                         update_user = 'update tb_user set password = %s where nick = %s'
                         row = db.update(update_user, new_password_md5, self.current_user.nick)
                         if row:
-                            self.write({'success': True})
-                            self.finish()
+                            self.send_result(True, error_code=None)
                             return
-                        self.write({'success': False, 'error_code': constants.error_code['internal_error']})
-                        self.finish()
+                        self.send_result()
                         return
-                    self.write({'success': False, 'error_code': constants.error_code['wrong_password']})
-                    self.finish()
+                    self.send_result(error_code=constants.error_code['wrong_password'])
                     return
-                self.write({'success': False, 'error_code': constants.error_code['password_confirm_failed']})
-                self.finish()
+                self.send_result(error_code=constants.error_code['password_confirm_failed'])
                 return
-            self.write({'success': False, 'error_code': constants.error_code['illegal_password']})
-            self.finish()
+            self.send_result(error_code=constants.error_code['illegal_password'])
             return
-        self.write({'success': False, 'error_code': constants.error_code['missing_parameters']})
-        self.finish()
+        self.send_result(error_code=constants.error_code['missing_parameters'])
 
 
 class SettingHandler(baseHandler.RequestHandler):

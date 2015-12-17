@@ -34,7 +34,7 @@ const render = function() {
 const getPost = function(postId) {
     $.get('/api/posts/' + postId, function(res) {
         if (!res || !res.success) return;
-        const postStr = res.post;
+        const postStr = res.data;
         const post = JSON.parse(postStr);
         const md = post.content;
         editormd.markdownToHTML('js-content', {

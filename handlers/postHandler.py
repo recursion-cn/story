@@ -26,6 +26,7 @@ class ListHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
         default_size = 10
+        summary_length = 200
         need_pagination = False
         cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
@@ -38,13 +39,13 @@ class ListHandler(baseHandler.RequestHandler):
             count = Post.count_posts(user_id)
             posts = Post.list(user_id, 0, int(size))
         if posts:
-            need_pagination = True if count > len(posts) else False
+            need_pagination = count > len(posts)
             for post in posts:
                 _html = markdown.markdown(post.content)
                 soup = BeautifulSoup(_html, 'html.parser')
                 _text = soup.get_text()
-                if _text and len(_text) > 200:
-                    _text = _text[0:200] + '...'
+                if _text and len(_text) > summary_length:
+                    _text = _text[0:summary_length] + '...'
                 post['summary'] = _text
                 post['author'] = self.current_user
 
@@ -92,7 +93,7 @@ class ListApiHandler(baseHandler.RequestHandler):
         count = Post.count_posts(user_id)
         posts = Post.list(user_id, int(offset), int(size))
         if posts:
-            need_pagination = True if count > (int(offset) + int(size)) else False
+            need_pagination = count > (int(offset) + int(size))
             for post in posts:
                 _html = markdown.markdown(post.content)
                 soup = BeautifulSoup(_html, 'html.parser')
@@ -162,14 +163,11 @@ class ShareHandler(baseHandler.RequestHandler):
                 update_public = 'update tb_post set public = 1 where id = %s'
                 row_count = db.update(update_public, post_id)
                 if row_count:
-                    self.write({'success': True})
-                    self.finish()
+                    self.send_result(True, error_code=None)
                     return
-                self.write({'success': False, 'error_code': constants.error_code['internal_error']})
-                self.finish()
+                self.send_result()
                 return
-        self.write({'success': False, 'error_code': constants.error_code['missing_parameters']})
-        self.finish()
+        self.send_result(error_code=constants.error_code['missing_parameters'])
 
 """
 create new post or update an exist post
@@ -195,14 +193,11 @@ class InsertOrUpdateHandler(baseHandler.RequestHandler):
                 sql = 'insert into tb_post (title, content, user_id, category_id, public, visible, created) values (%s, %s, %s, %s, %s, %s, %s)'
                 num = db.insert(sql, title, content, long(user_id), int(category_id), int(post_public), int(visible), now)
             if num:
-                self.write({'success': True})
-                self.finish()
+                self.send_result(True, error_code=None)
                 return
-            self.write({'success': False, 'error_code': constants.error_code['internal_error']})
-            self.finish()
+            self.send_result()
             return
-        self.write({'success': False, 'error_code': constants.error_code['missing_parameters']})
-        self.finish()
+        self.send_result(error_code=constants.error_code['missing_parameters'])
 
 """
 mark post as deleted
@@ -210,9 +205,7 @@ mark post as deleted
 class DeleteHandler(baseHandler.RequestHandler):
     def delete(self, post_id):
         if Post.pretend_delete(post_id):
-            self.write({'success': True})
-            self.finish()
+            self.send_result(True, error_code=None)
             return
-        self.write({'success': False, 'error_code': constants.error_code['internal_error']})
-        self.finish()
+        self.send_result()
 

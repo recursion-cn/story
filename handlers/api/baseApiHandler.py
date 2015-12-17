@@ -6,6 +6,7 @@
 
 import tornado.web
 from modules.db import db
+import constants
 
 class RequestHandler(tornado.web.RequestHandler):
 
@@ -18,11 +19,12 @@ class RequestHandler(tornado.web.RequestHandler):
 
         return current_user
 
-    def send_result(self, success=False, data=None, msg=None):
+    def send_result(self, success=False, data=None, error_code=constants.error_code['internal_error'], msg=None):
         default_res = dict(
-            success=success,
-            data=data,
-            msg=msg
+            success = success,
+            data = data,
+            error_code = error_code,
+            msg = msg
         )
         self.write(default_res)
         self.finish()
