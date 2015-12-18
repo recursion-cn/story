@@ -17,7 +17,6 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>被邀请人</th>
                                     <th>邀请码</th>
                                     <th>邀请时间</th>
                                     <th>状态</th>
@@ -26,7 +25,7 @@
                             <tbody>
                                 {% if not records or len(records) == 0 %}
                                 <tr>
-                                    <td colspan="5" class="text-muted">我还没有邀请过人</td>
+                                    <td colspan="5" class="text-muted">我还没有邀请记录</td>
                                 </tr>
                                 {% else %}
                                 {% set index = 0 %}
@@ -34,10 +33,9 @@
                                 {% set index = index + 1 %}
                                 <tr>
                                     <td>{{ index }}</td>
-                                    <td>{{ record.invitee_email or '未使用邮箱' }}</td>
                                     <td>{{ record.code }}</td>
                                     <td>{{ record.created }}</td>
-                                    <td><span class="text-muted">尚未注册</span></td>
+                                    <td>{% if ord(record.used) %} 已使用 {% else %} 未使用 {% end %}</td>
                                 </tr>
                                 {% end %}
                                 {% end %}
@@ -47,7 +45,8 @@
                     <form class="form-inline">
                         <div class="form-group">
                             <!--input type="text" class="form-control" placeholder="请输入对方的email地址"-->
-                            <button class="base-btn send-invite">生成邀请码</button>
+                            <button class="base-btn" id="js-get-invite-code">生成邀请码</button>
+                            <span class="invite-code"></span>
                             <!--a href="javascript:;" class="glyphicon glyphicon-question-sign invite-help" data-toggle="popover" data-trigger="hover" data-content="每个邀请码只能用于一次注册，注册成功后邀请码即失效。"></a-->
                         </div>
                     </form>

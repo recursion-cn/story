@@ -13,6 +13,7 @@ import bleach
 from bs4 import BeautifulSoup
 import datetime
 import random
+import constants
 
 """
 direct into the site index page or the corresponding user's posts list page
@@ -23,7 +24,6 @@ class IndexHandler(baseHandler.RequestHandler):
     def get(self, nick=None):
         posts = None
         if not nick:
-            #self.render('index.html')
             self.redirect('/posts')
             return
 
@@ -53,16 +53,26 @@ class IndexHandler(baseHandler.RequestHandler):
 class InviteHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
-        query_invite_record = 'select id, invitee_id, code, invitee_email, created from tb_invite where inviter_id = %s'
+        query_invite_record = 'select id, invitee_id, code, created, used from tb_invite where inviter_id = %s'
         records = db.query(query_invite_record, self.current_user.id)
         self.render('invite.html', records=records)
 
 class InviteGenerateHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
+        count_code = 'select count(1) count from tb_invite where inviter_id = %s and used = 0'
+        count_obj = db.get(count_code, self.current_user.id)
+        if count_obj.count >= 3:
+            self.send_result(error_code=constants.error_code['invitation_reached_limit'])
+            return
         code = ''
         for i in range(8):
             code += str(random.randint(0, 9))
-        print code
+        insert_code = 'insert into tb_invite (inviter_id, code, created, used) values (%s, %s, %s, %s)'
+        id = db.insert(insert_code, self.current_user.id, code, datetime.datetime.now(), 0)
+        if id:
+            self.send_result(True, code, None)
+            return
+        self.send_result()
 
 

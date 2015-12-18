@@ -10,6 +10,7 @@ error_code = {
     'password_confirm_failed': 105,
     'illegal_password': 106,
     'category_already_exist': 200,
+    'invitation_reached_limit': 300,
     'internal_error': 500,
     'missing_parameters': 501
 }

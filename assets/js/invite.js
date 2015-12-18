@@ -18,6 +18,15 @@ const initInviteHelpPopover = function() {
     $('.invite-help').popover();
 };
 
+const getInviteCode = function() {
+    const url = '/api/invite/code';
+    $.get(url, res => {
+        if (res && res.success && res.data) {
+            $('.invite-code').text(res.data);
+        }
+    });
+};
+
 $(function() {
     init();
 });
@@ -25,4 +34,7 @@ $(function() {
 $('body').on('click', '.send-invite', function(e) {
     e.preventDefault();
     $('.invite-code').fadeIn();
+}).on('click', '#js-get-invite-code', function(e) {
+    e.preventDefault();
+    getInviteCode();
 });
