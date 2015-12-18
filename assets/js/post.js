@@ -138,7 +138,7 @@ const likePost = function(postId) {
 
 $( () => {
     init();
-    const id = $('#js-delete-post').data('id');
+    const id = $('#post-id').val();
     getPost(id);
 });
 

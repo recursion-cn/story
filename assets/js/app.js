@@ -10,6 +10,13 @@
 require('expose?$!expose?jQuery!jquery');
 require('bootstrap');
 
+const navigatorJudge = function() {
+    if (document.documentMode) {
+        return 'IE' + document.documentMode;
+    }
+    return 'Modern';
+};
+
 const getPaginationParams = function() {
     const page = $('#js-load-more').data('page');
     const pageSize = $('#js-load-more').data('size');

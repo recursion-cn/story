@@ -260,13 +260,30 @@ textarea.form-control {
     }
 }
 
-.side-links {
-    width: 100%;
-    padding: 10px;
+.side-links-panel {
     text-align: center;
-    background-color: @white;
-    border: 1px solid #e0e0e0;
-    border-radius: 3px;
+    .side-links {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.recommend-posts-panel {
+    .panel-nav {
+        background-color: @dark-gray;
+        font-size: 12px;
+        font-weight: normal;
+    }
+    .panel-main {
+        margin-top: 5px;
+    }
+    .recommend-posts {
+        padding: 0 10px;
+        .block-item {
+            display: block;
+            color: #555;
+        }
+    }
 }
 
 .footer {

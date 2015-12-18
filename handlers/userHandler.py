@@ -17,6 +17,7 @@ class LoginHandler(baseHandler.RequestHandler):
     def get(self):
         if self.current_user:
             referer = self.request.headers.get('Referer') or '/'
+            print referer
             if referer.find('signup') > -1:
                 referer = '/'
             self.redirect(referer)

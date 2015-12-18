@@ -221,13 +221,27 @@ textarea.form-control {
 .draft .post-header .title-link .title {
   color: #D0560A;
 }
-.side-links {
-  width: 100%;
-  padding: 10px;
+.side-links-panel {
   text-align: center;
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 3px;
+}
+.side-links-panel .side-links {
+  width: 100%;
+  text-align: center;
+}
+.recommend-posts-panel .panel-nav {
+  background-color: #e3e9e9;
+  font-size: 12px;
+  font-weight: normal;
+}
+.recommend-posts-panel .panel-main {
+  margin-top: 5px;
+}
+.recommend-posts-panel .recommend-posts {
+  padding: 0 10px;
+}
+.recommend-posts-panel .recommend-posts .block-item {
+  display: block;
+  color: #555;
 }
 .footer {
   width: 100%;
