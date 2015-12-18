@@ -5,12 +5,20 @@
         <div class="row">
             <div class="main-body col-md-8">
                 <div class="cates-area">
-                    {% for cate in categories %}
-                    {% if cate_id and int(cate_id) == int(cate.id) %}
-                    <a class="cate-item active" href="javascript:;">{{ cate.name }}</a>
+                    {% if not cate_id %}
+                        <a class="cate-item active" href="javascript:;">全部</a>
+                        {% for cate in categories %}
+                            <a class="cate-item" href={{ '/posts?cate=' + str(cate.id) }}>{{ cate.name }}</a>
+                        {% end %}
                     {% else %}
-                    <a class="cate-item" href={{ '/posts?cate=' + str(cate.id) }}>{{ cate.name }}</a>
-                    {% end %}
+                        <a class="cate-item" href="/posts">全部</a>
+                        {% for cate in categories %}
+                            {% if cate_id and int(cate_id) == int(cate.id) %}
+                                <a class="cate-item active" href="javascript:;">{{ cate.name }}</a>
+                            {% else %}
+                                <a class="cate-item" href={{ '/posts?cate=' + str(cate.id) }}>{{ cate.name }}</a>
+                            {% end %}
+                        {% end %}
                     {% end %}
                 </div>
                 {% if len(posts) == 0 %}

@@ -12,6 +12,7 @@ import markdown
 import bleach
 from bs4 import BeautifulSoup
 import datetime
+import random
 
 """
 direct into the site index page or the corresponding user's posts list page
@@ -57,7 +58,11 @@ class InviteHandler(baseHandler.RequestHandler):
         self.render('invite.html', records=records)
 
 class InviteGenerateHandler(baseHandler.RequestHandler):
+    @tornado.web.authenticated
     def get(self):
-        pass
+        code = ''
+        for i in range(8):
+            code += str(random.randint(0, 9))
+        print code
 
 

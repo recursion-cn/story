@@ -28,5 +28,6 @@ urls = [
     (r'/category/add', cate.AddHandler),
     (r'/api/category/delete', cate.BatchDeleteHandler),
     (r'/invite', main.InviteHandler),
+    (r'/api/invite/code', main.InviteGenerateHandler),
     (r'.*', base.RequestHandler),
 ]
