@@ -23,7 +23,7 @@ textarea.form-control {
   top: 0;
   width: 100%;
   height: 50px;
-  background-color: #ffffff;
+  background-color: #33394a;
   border-bottom: 1px solid #ccc;
   box-shadow: 0 0 6px #ccc;
 }
@@ -34,14 +34,14 @@ textarea.form-control {
   width: 1024px;
   max-height: 49px;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: #33394a;
 }
 .header .navbar-default .navbar-header a:hover {
-  color: #000;
+  color: #ffffff;
   opacity: 1;
 }
 .header .navbar-default .navbar-nav li a:hover {
-  color: #000;
+  color: #ffffff;
   opacity: 1;
 }
 .header .navbar-default .navbar-collapse.collapse {
@@ -51,12 +51,12 @@ textarea.form-control {
 .header .navbar-default .navbar-toggle {
   padding: 10px 10px;
   border: 0;
-  color: #000;
+  color: #ffffff;
 }
 .header .navbar-default .sm-menu-bar {
   margin-top: 0;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #33394a;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   box-shadow: 0 0 6px #e0e0e0;
@@ -65,17 +65,20 @@ textarea.form-control {
   padding-top: 5px;
   padding-bottom: 5px;
   font-weight: bold;
-  color: #000;
+  color: #ffffff;
 }
 .header .navbar-fixed-top {
   border: 0;
 }
 .header .navbar-header a {
-  color: #000;
+  color: #ffffff;
 }
 .header .nav.navbar-nav a {
-  color: #000;
+  color: #ffffff;
   transition: opacity .2s;
+}
+.header .nav.navbar-nav a:focus {
+  color: #ffffff;
 }
 .header .nav-user-panel.navbar-nav li {
   min-width: 100px;
@@ -87,11 +90,11 @@ textarea.form-control {
   width: 100%;
   min-width: 100px;
   min-height: 100px;
-  background-color: #ffffff;
+  background-color: #33394a;
   border-top: 0;
-  top: 49px;
+  top: 51px;
   text-align: center;
-  border-radius: 0 0 3px 3px;
+  border-radius: 5px;
   display: none;
 }
 .header .user-panel .user-panel-header {
@@ -99,28 +102,29 @@ textarea.form-control {
   line-height: 50px;
 }
 .header .user-panel .user-panel-header a {
-  color: #333;
+  color: #ffffff;
 }
 .header .user-panel .user-panel-body {
-  border: 1px solid #e0e0e0;
   border-top: 0;
 }
 .header .user-panel .user-panel-body .user-link-item {
+  display: block;
   height: 36px;
   line-height: 36px;
 }
 .header .user-panel .user-panel-body .user-link-item a {
   text-decoration: none;
-  color: #333;
+  color: #ffffff;
 }
 .header .user-panel .user-panel-body .user-link-item:last-child {
   border-bottom: none;
 }
 .header .user-panel .user-panel-body .user-link-item:hover {
-  background-color: #e3e9e9;
+  background-color: #000000;
+  border-radius: 5px;
 }
 .header .user-panel .user-panel-body .user-link-item:hover a {
-  color: #000000;
+  color: #ffffff;
 }
 .wrapper {
   width: 100%;
@@ -138,8 +142,8 @@ textarea.form-control {
   border-radius: 3px;
 }
 .main-body {
-  background-color: #ffffff;
-  border: 1px solid #E0E1E2;
+  width: 60%;
+  float: left;
 }
 .main-side {
   width: 236px;
@@ -150,7 +154,6 @@ textarea.form-control {
   margin: 0 -15px 15px;
   padding: 10px 15px;
   border-bottom: 1px solid #e0e0e0;
-  background-color: #e3e9e9;
 }
 .cates-area .cate-item {
   min-width: 30px;
@@ -187,7 +190,9 @@ textarea.form-control {
   font-weight: bold;
 }
 .post {
-  padding-bottom: 26px;
+  margin: 0 -15px 3px;
+  padding: 15px 15px 26px;
+  border-bottom: 1px solid #e0e0e0;
 }
 .post .post-header .title-link {
   display: inline-block;
@@ -195,7 +200,6 @@ textarea.form-control {
 .post .post-header .title-link .title {
   font-size: 1.4em;
   font-weight: 500;
-  color: #333;
 }
 .post .post-header .info {
   padding: 0 0 5px 5px;
@@ -206,7 +210,6 @@ textarea.form-control {
 .post .post-body {
   font-size: 1.1em;
   line-height: 1.7;
-  color: #666;
 }
 .post .post-body img {
   max-width: 650px;
@@ -265,6 +268,15 @@ textarea.form-control {
   }
   .main {
     width: 100%;
+  }
+  .main-body {
+    width: 100%;
+  }
+  .main-body .cates-area {
+    margin: 0 15px 15px;
+  }
+  .main-body .post {
+    margin: 0 15px 10px;
   }
 }
 .msg-area {

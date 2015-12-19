@@ -72,10 +72,10 @@ $(function() {
     init();
 });
 
-$('body').on('mouseover', '.nav-user-panel', (e) => {
+$('body').on('click', '.nav-user-panel', (e) => {
+    e.stopPropagation();
     $('.nav-user-panel').find('.user-panel').fadeIn()
-}
-).on('mouseleave', '.nav-user-panel', (e) => {
+}).on('click', 'div:not(.user-panel-body)', (e) => {
     $('.nav-user-panel').find('.user-panel').fadeOut()
 }).on('click', '#js-load-more', (e) => {
     const params = getPaginationParams()

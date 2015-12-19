@@ -1,5 +1,8 @@
 @import "variable.less";
 .single-post {
+    margin: 0 -15px;
+    background-color: @white;
+    border-radius: 3px;
     .title {
         margin-bottom: 18px;
         border-bottom: 1px dashed #e0e0e0;
@@ -32,5 +35,12 @@
     .post-pager {
         width: 86%;
         margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .single-post {
+        width: 100%;
+        margin: 0;
     }
 }

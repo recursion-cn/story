@@ -10,7 +10,7 @@
 {% block main %}
 <div class="wrapper">
     <div class="editor-main container-fluid clearfix edit-panel">
-        <label><h3>编辑文章</h3></label>
+        <!--label><h3>编辑文章</h3></label-->
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -29,16 +29,17 @@
                 <div class="select-cate" id="js-select-cate">
                     {% for category in categories %}
                         {% if post and post.category_id == category.id %}
-                        <button class="btn btn-info btn-sm" data-id={{ category.id }}>{{ category.name }}</button>
+                        <button class="base-btn choosen" data-id={{ category.id }}>{{ category.name }}</button>
                         <input type="hidden" name="category" value={{ category.id }}>
                         {% else %}
-                        <button class="btn btn-default btn-sm" data-id={{ category.id }}>{{ category.name }}</button>
+                        <button class="base-btn" data-id={{ category.id }}>{{ category.name }}</button>
                         {% end %}
                     {% end %}
                 </div>
                 <div class="create-cate">
-                    <button id="js-add-cate" class="btn btn-default btn-sm" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="click">
-                        <span class="text-primary">添加新目录</span>
+                    <button id="js-add-cate" class="base-btn" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="click">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span>添加新目录</span>
                     </button>
                 </div>
             </div>
@@ -49,20 +50,20 @@
                     <label class="text-muted">是否对外公开：</label>
                     {% if post and ord(post.public) %}
                     <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-danger btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
-                        <button type="button" class="btn btn-default btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
+                        <button type="button" class="base-btn choosen left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
+                        <button type="button" class="base-btn right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
                     </div>
                     <input type="hidden" name="privacy" value="1">
                     {% elif post and not ord(post.public) %}
                     <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
-                        <button type="button" class="btn btn-danger btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
+                        <button type="button" class="base-btn left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
+                        <button type="button" class="base-btn choosen right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
                     </div>
                     <input type="hidden" name="privacy" value="0">
                     {% elif not post %}
                     <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default btn-sm left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
-                        <button type="button" class="btn btn-default btn-sm right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
+                        <button type="button" class="base-btn left-switch" data-value="1"><span class="glyphicon glyphicon-eye-open"></span> 公开</button>
+                        <button type="button" class="base-btn right-switch" data-value="0"><span class="glyphicon glyphicon-eye-close"></span> 禁止</button>
                     </div>
                     <input type="hidden" name="privacy" value="-1">
                     {% end %}

@@ -21,8 +21,13 @@ const initInviteHelpPopover = function() {
 const getInviteCode = function() {
     const url = '/api/invite/code';
     $.get(url, res => {
-        if (res && res.success && res.data) {
-            $('.invite-code').text(res.data);
+        if (res) {
+            if (res.success && res.data) {
+                $('.invite-code').text(res.data);
+            } else {
+                $('.invite-code').text(ErrorCode[res.error_code])
+                .addClass('text-danger');
+            }
         }
     });
 };

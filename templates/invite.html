@@ -33,9 +33,9 @@
                                 {% set index = index + 1 %}
                                 <tr>
                                     <td>{{ index }}</td>
-                                    <td>{{ record.code }}</td>
+                                    <td><mark>{{ record.code }}</mark></td>
                                     <td>{{ record.created }}</td>
-                                    <td>{% if ord(record.used) %} 已使用 {% else %} 未使用 {% end %}</td>
+                                    <td>{% if ord(record.used) %} <span class="text-success">已使用</span> {% else %} <span class="text-danger">未使用</span> {% end %}</td>
                                 </tr>
                                 {% end %}
                                 {% end %}

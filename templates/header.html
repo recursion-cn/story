@@ -1,0 +1,58 @@
+<div class="header">
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <span class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                </span>
+                <a href="/posts" class="navbar-brand">FragmentHub</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav hidden-sm hidden-xs">
+                    <li>
+                        <button href="/users/edit" class="base-btn edit-btn">
+                            <span class="glyphicon glyphicon-edit"></span>
+                            <span>写文章</span>
+                        </button>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav hidden-md hidden-lg sm-menu-bar">
+                    {% if not current_user %}
+                        <li><a href="/users/login">登录</a></li>
+                    {% else %}
+                        <li><a href="/users/edit">撰写文章</a></li>
+                        <li><a href={{ "/site/" + current_user.nick }}>我的主页</a></li>
+                        <li><a href="/users/draft">我的草稿</a></li>
+                        <li><a href="/users/setting">设置</a></li>
+                        <li><a href="/invite">邀请使用</a></li>
+                        <li><a href="/users/exit">退出</a></li>
+                    {% end %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right nav-user-panel">
+                    <li>
+                        {% if not current_user %}
+                            <a href="/users/login">登录</a>
+                        {% else %}
+                            <a class="hidden-sm hidden-xs" href="javascript:;">
+                                <span>{{ current_user.nick }}</span>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="user-panel">
+                                <!--div class="user-panel-header">
+                                    <a href="javascript:;">{{ current_user.nick }}</a>
+                                </div-->
+                                <div class="user-panel-body">
+                                    <div class="user-link-item"><a href="/users/edit">撰写文章</a></div>
+                                    <div class="user-link-item"><a href={{ "/site/" + current_user.nick }}>我的主页</a></div>
+                                    <div class="user-link-item"><a href="/users/draft">我的草稿</a></div>
+                                    <div class="user-link-item"><a href="/users/setting">设置</a></div>
+                                    <div class="user-link-item"><a href="/users/exit">退出</a></div>
+                                </div>
+                            </div>
+                        {% end %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

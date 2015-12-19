@@ -7,14 +7,16 @@
 <div class="wrapper">
     <div class="main container-fluid clearfix">
         <div class="row">
-            <div class="main-body col-md-8">
-                <div class="single-post">
+            <div class="main-body">
+                <div class="single-post container-fluid">
                     <div class="title">
+                        <a href={{ '/users/edit/' + str(post.id) }}>
                         {% if not ord(post.visible) %}
                             <h3 class="bg-warning">{{ post.title }}</h3>
                         {% else %}
                             <h3>{{ post.title }}</h3>
                         {% end %}
+                        </a>
                     </div>
                     <div class="content markdown-body editormd-html-preview" id="js-content"></div>
                     <div class="assign">

@@ -33,6 +33,15 @@
   background-color: #f4f7f8;
   color: #000000;
 }
+.edit-btn {
+  margin: 13px;
+  background-color: #33394a;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+.edit-btn:hover {
+  background-color: #4D4F50;
+}
 .login-btn,
 .signup-btn {
   width: 160px;

@@ -125,7 +125,7 @@ const addCategory = function(data) {
 };
 
 const addCategoryElement = function(cate_id, cate_name) {
-    const element = $('<button class="btn btn-default btn-sm"></button>');
+    const element = $('<button class="base-btn"></button>');
     element.attr('data-id', cate_id).text(cate_name);
     $('#js-select-cate').append(element);
 };
@@ -194,16 +194,17 @@ $('body').on('click', '.switch-editor-mode', function(e) {
     }
 }).on('click', '#js-select-cate>button', function() {
     // 选择文章目录
-    $('#js-select-cate>button').removeClass('btn-info').addClass('btn-default');
-    $(this).addClass('btn-info');
+    $('#js-select-cate>button').removeClass('choosen');
+    $(this).addClass('choosen');
     const categoryId = $(this).data('id');
     $('input[name="category"]').val(categoryId);
 }).on('click', '#js-select-privacy button', function() {
     // 选择是否公开发布
-    $('#js-select-privacy button').removeClass('btn-danger').addClass('btn-default');
+    $('#js-select-privacy button').removeClass('choosen');
     const value = $(this).data('value');
-    $(this).addClass('btn-danger');
+    $(this).addClass('choosen');
     $('input[name="privacy"]').val(value);
+    console.log(value)
 }).on('click', '#js-add-cate', function() {
     // todo
 }).on('click', '#js-new-cate-btn-hide', function() {

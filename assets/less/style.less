@@ -29,7 +29,7 @@ textarea.form-control {
     top: 0;
     width: 100%;
     height: 50px;
-    background-color: @white;
+    background-color: @header-background;
     border-bottom: 1px solid #ccc;
     box-shadow: 0 0 6px #ccc;
     .navbar {
@@ -39,13 +39,13 @@ textarea.form-control {
         width: @header-width;
         max-height: 49px;
         margin: 0 auto;
-        background-color: @white;
+        background-color: @header-background;
         .navbar-header a:hover {
-            color: #000;
+            color: @white;
             opacity: 1;
         }
         .navbar-nav li a:hover {
-            color: #000;
+            color: @white;
             opacity: 1;
         }
         .navbar-collapse.collapse {
@@ -55,13 +55,13 @@ textarea.form-control {
         .navbar-toggle {
             padding: 10px 10px;
             border: 0;
-            color: #000;
+            color: @white;
         }
         .sm-menu-bar {
             margin-top: 0;
             text-align: center;
             //background-color: rgba(3, 141, 152, 1);
-            background-color: @white;
+            background-color: @header-background;
             border-top: 1px solid #ccc;
             border-bottom: 1px solid #ccc;
             box-shadow: 0 0 6px #e0e0e0;
@@ -70,7 +70,7 @@ textarea.form-control {
                     padding-top: 5px;
                     padding-bottom: 5px;
                     font-weight: bold;
-                    color: #000;
+                    color: @white;
                 }
             }
         }
@@ -80,15 +80,18 @@ textarea.form-control {
     }
     .navbar-header {
         a {
-            color: #000;
+            color: @white;
         }
     }
     .nav.navbar-nav {
         a {
-            color: #000;
+            color: @white;
             //opacity: .7;
             transition: opacity .2s;
-          }
+        }
+        a:focus {
+            color: @white;
+        }
     }
     .nav-user-panel.navbar-nav {
         li {
@@ -102,37 +105,39 @@ textarea.form-control {
         width: 100%;
         min-width: 100px;
         min-height: 100px;
-        background-color: @white;
+        background-color: @header-background;
         border-top: 0;
-        top: 49px;
+        top: 51px;
         text-align: center;
-        border-radius: 0 0 3px 3px;
+        border-radius: 5px;
         display: none;
         .user-panel-header {
             height: 50px;
             line-height: 50px;
             a {
-                color: #333;
+                color: @white;
             }
         }
         .user-panel-body {
-            border: 1px solid #e0e0e0;
+            //border: 1px solid #e0e0e0;
             border-top: 0;
             .user-link-item {
+                display: block;
                 height: 36px;
                 line-height: 36px;
                 a {
                     text-decoration: none;
-                    color: #333;
+                    color: @white;
                 }
             }
             .user-link-item:last-child {
                 border-bottom: none;
             }
             .user-link-item:hover {
-                background-color: @dark-gray;
+                background-color: @dark;
+                border-radius: 5px;
                 a {
-                    color: @dark;
+                    color: @white;
                 }
             }
         }
@@ -158,8 +163,10 @@ textarea.form-control {
 }
 
 .main-body {
-    background-color: @white;
-    border: 1px solid #E0E1E2;
+    //background-color: @white;
+    //border: 1px solid #E0E1E2;
+    width: 60%;
+    float: left;
 }
 
 .main-side {
@@ -172,7 +179,7 @@ textarea.form-control {
     margin: 0 -15px 15px;
     padding: 10px 15px;
     border-bottom: 1px solid #e0e0e0;
-    background-color: @dark-gray;
+    //background-color: @dark-gray;
     .cate-item {
         min-width: 30px;
         height: 23px;
@@ -214,14 +221,19 @@ textarea.form-control {
 }
 
 .post {
-    padding-bottom: 26px;
+    margin: 0 -15px 3px;
+    padding: 15px 15px 26px;
+    //background-color: @white;
+    border-bottom: 1px solid #e0e0e0;
+    //border-radius: 3px;
+    //box-shadow: 0 0 6px #e0e0e0;
     .post-header {
         .title-link {
             display: inline-block;
             .title {
                 font-size: 1.4em;
                 font-weight: 500;
-                color: #333;
+                //color: #333;
             }
         }
         .info {
@@ -234,7 +246,7 @@ textarea.form-control {
     .post-body {
         font-size: 1.1em;
         line-height: 1.7;
-        color: #666;
+        //color: #666;
         img {
             max-width: 650px;
         }
@@ -311,6 +323,15 @@ textarea.form-control {
     }
     .main {
         width: 100%;
+    }
+    .main-body {
+        width: 100%;
+        .cates-area {
+            margin: 0 15px 15px;
+        }
+        .post {
+            margin: 0 15px 10px;
+        }
     }
 }
 
