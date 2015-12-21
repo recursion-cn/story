@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block css-area %}
+    <link rel="stylesheet" href={{ static_url("css/grid.css") }}>
+{% end %}
+{% block main %}
+<div class="main">
+    <div class="cates-area">
+        {% if not cate_id %}
+            <a class="cate-item active" href="javascript:;">全部</a>
+            {% for cate in categories %}
+                <a class="cate-item" href={{ '/posts?cate=' + str(cate.id) }}>{{ cate.name }}</a>
+            {% end %}
+        {% else %}
+            <a class="cate-item" href="/posts">全部</a>
+            {% for cate in categories %}
+                {% if cate_id and int(cate_id) == int(cate.id) %}
+                    <a class="cate-item active" href="javascript:;">{{ cate.name }}</a>
+                {% else %}
+                    <a class="cate-item" href={{ '/posts?cate=' + str(cate.id) }}>{{ cate.name }}</a>
+                {% end %}
+            {% end %}
+        {% end %}
+    </div>
+    <div class="content-area clearfix">
+        {% if len(posts) == 0 %}
+        <div class="empty-post-notice">
+            <p>Oops, 没有找到文章</p>
+        </div>
+        {% else %}
+        {% for i in range(3) %}
+        <div class="posts-list">
+        </div>
+        {% end %}
+        {% if need_pagination %}
+        <div class="post-pagination">
+            <button class="btn btn-page btn-block" id="js-load-more" data-page="1" data-size={{ page_size }}>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 点击查看更多
+            </button>
+        </div>
+        {% end %}
+        {% end %}
+    </div>
+</div>
+<script type="text/template" id="js-post-template">
+    <div class="post">
+        <div class="post-header">
+            <a class="title-link" href="">
+                <p class="title"></p>
+            </a>
+            <div class="info">
+                <a class="author" href=""></a>
+                <span>最后发布于</span>
+                <span class="text-info"></span>
+            </div>
+        </div>
+        <div class="post-body"></div>
+    </div>
+</script>
+{% end %}

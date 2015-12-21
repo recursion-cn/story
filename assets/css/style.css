@@ -23,7 +23,7 @@ textarea.form-control {
   top: 0;
   width: 100%;
   height: 50px;
-  background-color: #33394a;
+  background-color: #ffffff;
   border-bottom: 1px solid #ccc;
   box-shadow: 0 0 6px #ccc;
 }
@@ -31,17 +31,17 @@ textarea.form-control {
   min-height: 49px;
 }
 .header .navbar-default {
-  width: 1024px;
+  width: 1069px;
   max-height: 49px;
   margin: 0 auto;
-  background-color: #33394a;
+  background-color: #ffffff;
 }
 .header .navbar-default .navbar-header a:hover {
-  color: #ffffff;
+  color: #000000;
   opacity: 1;
 }
 .header .navbar-default .navbar-nav li a:hover {
-  color: #ffffff;
+  color: #000000;
   opacity: 1;
 }
 .header .navbar-default .navbar-collapse.collapse {
@@ -51,7 +51,7 @@ textarea.form-control {
 .header .navbar-default .navbar-toggle {
   padding: 10px 10px;
   border: 0;
-  color: #ffffff;
+  color: #000000;
 }
 .header .navbar-default .sm-menu-bar {
   margin-top: 0;
@@ -65,20 +65,20 @@ textarea.form-control {
   padding-top: 5px;
   padding-bottom: 5px;
   font-weight: bold;
-  color: #ffffff;
+  color: #000000;
 }
 .header .navbar-fixed-top {
   border: 0;
 }
 .header .navbar-header a {
-  color: #ffffff;
+  color: #000000;
 }
 .header .nav.navbar-nav a {
-  color: #ffffff;
+  color: #000000;
   transition: opacity .2s;
 }
 .header .nav.navbar-nav a:focus {
-  color: #ffffff;
+  color: #000000;
 }
 .header .nav-user-panel.navbar-nav li {
   min-width: 100px;
@@ -133,7 +133,7 @@ textarea.form-control {
   background-color: #f4f7f8;
 }
 .main {
-  width: 960px;
+  width: 986px;
   margin: 0 auto;
 }
 .main-body,
@@ -149,10 +149,16 @@ textarea.form-control {
   width: 236px;
   float: right;
 }
+.content-area {
+  padding: 10px 15px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+}
 .cates-area {
   min-height: 36px;
-  margin: 0 -15px 15px;
-  padding: 10px 15px;
+  margin-bottom: 15px;
+  padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
 }
 .cates-area .cate-item {
@@ -161,7 +167,6 @@ textarea.form-control {
   line-height: 23px;
   text-align: center;
   display: inline-block;
-  margin: 0 0 5px;
   padding: 0 6px;
   border-radius: 2px;
   color: #5A6265;
@@ -173,11 +178,11 @@ textarea.form-control {
   color: #ffffff;
 }
 .cates-area .cate-item.active {
-  background-color: #4594af;
+  background-color: #1d7f9e;
   color: #ffffff;
 }
 .cates-area .cate-item.active:hover {
-  background-color: #1d7f9e;
+  background-color: #4594af;
   color: #ffffff;
 }
 .post-type {
@@ -190,8 +195,8 @@ textarea.form-control {
   font-weight: bold;
 }
 .post {
-  margin: 0 -15px 3px;
-  padding: 15px 15px 26px;
+  margin-bottom: 3px;
+  padding: 15px 0 26px;
   border-bottom: 1px solid #e0e0e0;
 }
 .post .post-header .title-link {
@@ -200,6 +205,7 @@ textarea.form-control {
 .post .post-header .title-link .title {
   font-size: 1.4em;
   font-weight: 500;
+  color: #555;
 }
 .post .post-header .info {
   padding: 0 0 5px 5px;
@@ -209,7 +215,8 @@ textarea.form-control {
 }
 .post .post-body {
   font-size: 1.1em;
-  line-height: 1.7;
+  line-height: 23px;
+  color: rgba(0, 0, 0, 0.67);
 }
 .post .post-body img {
   max-width: 650px;
@@ -225,11 +232,18 @@ textarea.form-control {
   color: #D0560A;
 }
 .side-links-panel {
-  text-align: center;
+  margin-top: 10px;
 }
-.side-links-panel .side-links {
-  width: 100%;
-  text-align: center;
+.side-links-panel .links-block {
+  background-color: #ffffff;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.side-links-panel .links-block li {
+  margin: 5px 0 0;
+}
+.side-links-panel .links-block li a {
+  color: #666;
 }
 .recommend-posts-panel .panel-nav {
   background-color: #e3e9e9;

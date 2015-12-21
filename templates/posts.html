@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block main %}
 <div class="wrapper">
-    <div class="main container-fluid clearfix">
-        <div class="row">
-            <div class="main-body">
+    <div class="main clearfix">
+        <div class="main-body">
+            <div class="content-area">
                 <div class="cates-area">
                     {% if not cate_id %}
                         <a class="cate-item active" href="javascript:;">全部</a>
@@ -27,25 +27,18 @@
                 </div>
                 {% else %}
                 {% for post in posts %}
-                <div class="post container-fluid">
-                    <div class="post-header row">
-                        <div class="col-md-12">
-                            <a class="title-link" href={{ "/posts/" + str(post.id) }}>
-                                <p class="title">{{ post.title }}</p>
-                            </a>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="info">
-                                <!--a class="author" href={{ "/users/profile/" + str(post.author.id) }}>{{ post.author.nick }}</a-->
-                                <span>最后发布于</span>
-                                <span class="text-info">{{ post.last_modified }}</span>
-                            </div>
+                <div class="post">
+                    <div class="post-header">
+                        <a class="title-link" href={{ "/posts/" + str(post.id) }}>
+                            <p class="title">{{ post.title }}</p>
+                        </a>
+                        <div class="info">
+                            <span>最后发布于</span>
+                            <span>{{ post.last_modified }}</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="post-body col-md-12">
-                            {{ post.summary }}
-                        </div>
+                    <div class="post-body">
+                        {{ post.summary }}
                     </div>
                 </div>
                 {% end %}
@@ -58,9 +51,9 @@
                 {% end %}
                 {% end %}
             </div>
-            <div class="main-side visible-lg-block visible-md-block">
-                {% include sidebar.html %}
-            </div>
+        </div>
+        <div class="main-side visible-lg-block visible-md-block">
+            {% include sidebar.html %}
         </div>
     </div>
 </div>

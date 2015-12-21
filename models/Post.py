@@ -5,6 +5,7 @@
 # date 2015/12/15
 
 from modules.db import db
+import datetime, time
 
 class Post:
 
@@ -77,31 +78,41 @@ class Post:
     @staticmethod
     def __list(table_name, visible=1, deleted=0, user_id=None, category_id=None, offset=0, size=10):
         list_sql = """
-                    select id, title, content, user_id, category_id, public, visible, created,
-                    updated, if(updated is NULL, created, updated) last_modified from {0}
+                    select id, title, content, user_id, category_id, public, visible,
+                    if(updated is NULL, created, updated) last_modified from {0}
                     where visible = %s and deleted = %s """.format(table_name)
+        list = None
         if user_id and category_id:
             list_sql += 'and user_id = %s and category_id = %s order by last_modified desc limit %s, %s'
-            return db.query(list_sql, visible, deleted, user_id, category_id, offset, size)
+            list = db.query(list_sql, visible, deleted, user_id, category_id, offset, size)
         elif user_id:
             list_sql += 'and user_id = %s order by last_modified desc limit %s, %s'
-            return db.query(list_sql, visible, deleted, user_id, offset, size)
+            list = db.query(list_sql, visible, deleted, user_id, offset, size)
         elif category_id:
             list_sql += 'and category_id = %s order by last_modified desc limit %s, %s'
-            return db.query(list_sql, visible, deleted, category_id, offset, size)
+            list = db.query(list_sql, visible, deleted, category_id, offset, size)
         else:
             list_sql += 'order by last_modified desc limit %s, %s'
-            return db.query(list_sql, visible, deleted, offset, size)
+            list = db.query(list_sql, visible, deleted, offset, size)
+        if list:
+            for post in list:
+                post['last_modified'] = time.mktime(post.last_modified.timetuple())
+
+        return list
 
     @staticmethod
     def __get_post(table_name, id=None, title=None):
         get_sql = """
-                    select id, title, content, user_id, category_id, public, visible, created,
-                    updated, if(updated is NULL, created, updated) last_modified from {0}
+                    select id, title, content, user_id, category_id, public, visible,
+                    if(updated is NULL, created, updated) last_modified from {0}
                     where deleted = 0 """.format(table_name)
+        post = None
         if id:
             get_sql += 'and id = %s'
-            return db.get(get_sql, id)
+            post = db.get(get_sql, id)
         if title:
             get_sql += 'and title = %s'
-            return db.get(get_sql, title)
+            post = db.get(get_sql, title)
+        if post:
+            post['last_modified'] = time.mktime(post.last_modified.timetuple())
+        return post

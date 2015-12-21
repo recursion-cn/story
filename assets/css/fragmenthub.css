@@ -36,7 +36,7 @@
 .edit-btn {
   margin: 13px;
   background-color: #33394a;
-  border: 1px solid #ffffff;
+  border: 0;
   color: #ffffff;
 }
 .edit-btn:hover {

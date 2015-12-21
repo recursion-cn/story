@@ -8,14 +8,6 @@
                 <a href="/posts" class="navbar-brand">FragmentHub</a>
             </div>
             <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav hidden-sm hidden-xs">
-                    <li>
-                        <button href="/users/edit" class="base-btn edit-btn">
-                            <span class="glyphicon glyphicon-edit"></span>
-                            <span>写文章</span>
-                        </button>
-                    </li>
-                </ul>
                 <ul class="nav navbar-nav hidden-md hidden-lg sm-menu-bar">
                     {% if not current_user %}
                         <li><a href="/users/login">登录</a></li>

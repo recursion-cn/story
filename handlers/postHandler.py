@@ -86,7 +86,7 @@ class ListApiHandler(baseHandler.RequestHandler):
     def get(self):
         res = {'data': None}
         need_pagination = False
-        summary_length = 200
+        summary_length = 260
         offset = self.get_query_argument('offset', 0)
         size = self.get_query_argument('size', 10)
         user_id = self.current_user.id
@@ -102,11 +102,10 @@ class ListApiHandler(baseHandler.RequestHandler):
                     _text = _text[0:summary_length] + '...'
                 post['summary'] = _text
                 post['author'] = self.current_user
-            posts = json.dumps(posts, cls=modules.utils.JSONEncoder)
-            res = {'res': {'data': posts, 'need_pagination': need_pagination}}
 
-        self.write(res)
-        self.finish()
+            data = {'posts': posts, 'need_pagination': need_pagination}
+
+            self.send_result(True, data, None)
 
 """
 get single post by id

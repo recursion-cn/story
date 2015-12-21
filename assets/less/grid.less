@@ -1,0 +1,139 @@
+@import "variable.less";
+.wrapper {
+    width: 100%;
+    min-height: 500px;
+    padding: 0 0 30px;
+    .left-side,
+    .right-side {
+        float: left;
+    }
+    .left-side {
+        width: 230px;
+        height: 100%;
+        margin-right: 20px;
+        position: fixed;
+        background-color: @white;
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    }
+    .right-side {
+        width: -webkit-calc(~"100% - 230px");
+        width: calc(~"100% - 230px");
+        margin-left: 230px;
+        padding: 20px;
+    }
+}
+
+.content-area {
+    font-size: 12px;
+    padding: 0;
+}
+
+.cates-area {
+    min-height: 36px;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e1e8ed;
+    background-color: @white;
+    box-shadow: 0 0 6px #e0e0e0;
+    .cate-item {
+        min-width: 30px;
+        height: 23px;
+        line-height: 23px;
+        text-align: center;
+        display: inline-block;
+        padding: 0 6px;
+        border-radius: 2px;
+        color: #5A6265;
+        cursor: pointer;
+    }
+    .cate-item:hover {
+        text-decoration: none;
+        background-color: @blue;
+        color: @white;
+    }
+    .cate-item.active {
+        background-color: @dark-blue;;
+        color: @white;
+    }
+    .cate-item.active:hover {
+        background-color: @blue;
+        color: @white;
+    }
+}
+
+.post-type {
+    margin-bottom: 15px;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.empty-post-notice {
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.posts-list {
+    width: 100%;
+    min-width: 450px;
+    max-width: 550px;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+    vertical-align: top;
+}
+
+.posts-list:last-child {
+    margin-right: 0;
+}
+
+.post {
+    position: relative;
+    top: 0;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 15px 15px 0;
+    background-color: #fefefe;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    text-align: justify;
+    .post-header {
+        padding-bottom: 5px;
+        .title-link {
+            display: inline-block;
+            .title {
+                font-size: 1.3em;
+                font-weight: 500;
+                color: #555;
+            }
+        }
+    }
+    .post-body {
+        padding: 10px 0;
+        font-size: 1.1em;
+        line-height: 23px;
+        color: #555;
+        img {
+            max-width: 650px;
+        }
+    }
+    .post-info {
+        height: 50px;
+        border-top: 1px solid #e0e0e0;
+    }
+    .post-btns {
+        height: 23px;
+        line-height: 23px;
+        padding-right: 25px;
+        .time-info {
+            float: right;
+        }
+    }
+}
+
+.post:last-child {
+    border-bottom: none;
+}
+
+.post-pagination {
+    width: 136px;
+    margin: 20px auto 30px;
+}

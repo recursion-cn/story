@@ -29,7 +29,7 @@ textarea.form-control {
     top: 0;
     width: 100%;
     height: 50px;
-    background-color: @header-background;
+    background-color: @white;
     border-bottom: 1px solid #ccc;
     box-shadow: 0 0 6px #ccc;
     .navbar {
@@ -39,13 +39,13 @@ textarea.form-control {
         width: @header-width;
         max-height: 49px;
         margin: 0 auto;
-        background-color: @header-background;
+        background-color: @white;
         .navbar-header a:hover {
-            color: @white;
+            color: @dark;
             opacity: 1;
         }
         .navbar-nav li a:hover {
-            color: @white;
+            color: @dark;
             opacity: 1;
         }
         .navbar-collapse.collapse {
@@ -55,7 +55,7 @@ textarea.form-control {
         .navbar-toggle {
             padding: 10px 10px;
             border: 0;
-            color: @white;
+            color: @dark;
         }
         .sm-menu-bar {
             margin-top: 0;
@@ -70,7 +70,7 @@ textarea.form-control {
                     padding-top: 5px;
                     padding-bottom: 5px;
                     font-weight: bold;
-                    color: @white;
+                    color: @dark;
                 }
             }
         }
@@ -80,17 +80,16 @@ textarea.form-control {
     }
     .navbar-header {
         a {
-            color: @white;
+            color: @dark;
         }
     }
     .nav.navbar-nav {
         a {
-            color: @white;
-            //opacity: .7;
+            color: @dark;
             transition: opacity .2s;
         }
         a:focus {
-            color: @white;
+            color: @dark;
         }
     }
     .nav-user-panel.navbar-nav {
@@ -163,8 +162,6 @@ textarea.form-control {
 }
 
 .main-body {
-    //background-color: @white;
-    //border: 1px solid #E0E1E2;
     width: 60%;
     float: left;
 }
@@ -174,19 +171,24 @@ textarea.form-control {
     float: right;
 }
 
+.content-area {
+    padding: 10px 15px;
+    background-color: @white;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+}
+
 .cates-area {
     min-height: 36px;
-    margin: 0 -15px 15px;
-    padding: 10px 15px;
+    margin-bottom: 15px;
+    padding: 10px 0;
     border-bottom: 1px solid #e0e0e0;
-    //background-color: @dark-gray;
     .cate-item {
         min-width: 30px;
         height: 23px;
         line-height: 23px;
         text-align: center;
         display: inline-block;
-        margin: 0 0 5px;
         padding: 0 6px;
         border-radius: 2px;
         color: #5A6265;
@@ -195,16 +197,14 @@ textarea.form-control {
     .cate-item:hover {
         text-decoration: none;
         background-color: @blue;
-        //border-color: @dark-blue;
         color: @white;
     }
     .cate-item.active {
-        //border-color: @dark-blue;
-        background-color: @blue;
+        background-color: @dark-blue;
         color: @white;
     }
     .cate-item.active:hover {
-        background-color: @dark-blue;
+        background-color: @blue;
         color: @white;
     }
 }
@@ -221,19 +221,16 @@ textarea.form-control {
 }
 
 .post {
-    margin: 0 -15px 3px;
-    padding: 15px 15px 26px;
-    //background-color: @white;
+    margin-bottom: 3px;
+    padding: 15px 0 26px;
     border-bottom: 1px solid #e0e0e0;
-    //border-radius: 3px;
-    //box-shadow: 0 0 6px #e0e0e0;
     .post-header {
         .title-link {
             display: inline-block;
             .title {
                 font-size: 1.4em;
                 font-weight: 500;
-                //color: #333;
+                color: #555;
             }
         }
         .info {
@@ -245,8 +242,8 @@ textarea.form-control {
     }
     .post-body {
         font-size: 1.1em;
-        line-height: 1.7;
-        //color: #666;
+        line-height: 23px;
+        color: rgba(0,0,0,0.67);
         img {
             max-width: 650px;
         }
@@ -273,10 +270,17 @@ textarea.form-control {
 }
 
 .side-links-panel {
-    text-align: center;
-    .side-links {
-        width: 100%;
-        text-align: center;
+    margin-top: 10px;
+    .links-block {
+        background-color: @white;
+        padding: 15px;
+        border-bottom: 1px solid #e0e0e0;
+        li {
+            margin: 5px 0 0;
+            a {
+                color: #666;
+            }
+        }
     }
 }
 
