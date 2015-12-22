@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 {% block main %}
 <div class="wrapper">
-    <div class="main container-fluid clearfix">
-        <div class="row">
+    <div class="main clearfix">
             <div class="main-body">
                 <div class="cates-area">
                 {% if not cate_id %}
@@ -21,6 +20,7 @@
                     {% end %}
                 {% end %}
                 </div>
+                <div class="content-area">
                 {% if len(drafts) == 0 %}
                 <div class="empty-post-notice">
                     <p>Oops, 没有找到草稿</p>
@@ -32,11 +32,6 @@
                         <a class="title-link" href={{ "/posts/" + str(draft.id) }}>
                             <p class="title">{{ draft.title }}</p>
                         </a>
-                        <div class="info">
-                            <a class="author" href={{ "/users/" + str(draft.author.id) }}>{{ draft.author.nick }}</a>
-                            <span>最后发布于</span>
-                            <span class="text-info">{{ draft.last_modified }}</span>
-                        </div>
                     </div>
                     <div class="post-body">
                         {{ draft.summary }}
@@ -44,6 +39,7 @@
                 </div>
                 {% end %}
                 {% end %}
+                </div>
             </div>
             <div class="main-side visible-lg-block visible-md-block">
                 {% include sidebar.html %}

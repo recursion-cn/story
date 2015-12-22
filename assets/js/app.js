@@ -28,22 +28,22 @@ const pagination = function(page, pageSize) {
     const offset = (page - 1) * pageSize;
     const url = '/api/posts?offset=' + offset + '&size=' + pageSize;
     $.get(url, res => {
-        if (res && res.res && res.res.data) {
-            const data = JSON.parse(res.res.data);
-            dataBind(data);
-            showOrHidePagination(res.res.need_pagination);
+        if (res && res.data && res.data.posts) {
+            const posts = res.data.posts;
+            dataBind(posts);
+            showOrHidePagination(res.data.need_pagination);
         }
     });
 };
 
-const dataBind = function(data) {
+const dataBind = function(posts) {
     let fragment = document.createDocumentFragment();
-    for (let i = 0, len = data.length; i < len; i++) {
+    for (let i = 0, len = posts.length; i < len; i++) {
         let template = $($('#js-post-template').html());
-        const item = data[i];
+        const item = posts[i];
         template.find('.title-link').attr('href', '/posts/' + item.id).find('p').text(item.title);
-        template.find('.author').attr('href', '/users/' + item.author.id).text(item.author.nick);
-        template.find('.text-info').text(item.last_modified);
+        //template.find('.author').attr('href', '/users/' + item.author.id).text(item.author.nick);
+        //template.find('.text-info').text(item.last_modified);
         template.find('.post-body').text(item.summary);
         fragment.appendChild(template.get(0));
     }
