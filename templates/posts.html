@@ -36,7 +36,12 @@
                         </a>
                     </div>
                     <div class="post-body">
+                        {% if post.cover %}
+                        <div class="post-cover-img">{% raw post.cover %}</div>
+                        <div class="post-summary">{{ post.summary }}</div>
+                        {% else %}
                         {{ post.summary }}
+                        {% end %}
                     </div>
                 </div>
                 {% end %}

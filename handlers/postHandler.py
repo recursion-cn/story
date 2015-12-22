@@ -43,9 +43,13 @@ class ListHandler(baseHandler.RequestHandler):
             for post in posts:
                 _html = markdown.markdown(post.content)
                 soup = BeautifulSoup(_html, 'html.parser')
+                img = soup.find('img')
+                if img:
+                    img['class'] = 'inner-img-limit'
                 _text = soup.get_text()
                 if _text and len(_text) > summary_length:
                     _text = _text[0:summary_length] + '...'
+                post['cover'] = img
                 post['summary'] = _text
                 post['author'] = self.current_user
 

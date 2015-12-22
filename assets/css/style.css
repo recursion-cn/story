@@ -189,7 +189,7 @@ textarea.form-control {
   border-bottom: 1px solid #ccc;
 }
 .empty-post-notice {
-  padding: 5px 10px;
+  padding: 10px 10px;
   font-weight: bold;
 }
 .post {
@@ -205,19 +205,24 @@ textarea.form-control {
   font-weight: 500;
   color: #555;
 }
-.post .post-header .info {
-  padding: 0 0 5px 5px;
-}
-.post .post-header .info .author {
-  font-weight: bold;
-}
 .post .post-body {
   font-size: 1.0em;
   line-height: 23px;
-  color: rgba(0, 0, 0, 0.67);
+  color: #666;
+  overflow: hidden;
 }
-.post .post-body img {
-  max-width: 650px;
+.post .post-body .post-cover-img {
+  max-width: 23%;
+  max-height: 100px;
+  float: left;
+}
+.post .post-body .post-cover-img .inner-img-limit {
+  width: 100%;
+}
+.post .post-body .post-summary {
+  width: -webkit-calc(77% - 10px);
+  padding-left: 10px;
+  float: left;
 }
 .post:last-child {
   border-bottom: none;
@@ -247,21 +252,6 @@ textarea.form-control {
 }
 .side-links-panel .links-block li:first-child {
   margin: 0;
-}
-.recommend-posts-panel .panel-nav {
-  background-color: #e3e9e9;
-  font-size: 12px;
-  font-weight: normal;
-}
-.recommend-posts-panel .panel-main {
-  margin-top: 5px;
-}
-.recommend-posts-panel .recommend-posts {
-  padding: 0 10px;
-}
-.recommend-posts-panel .recommend-posts .block-item {
-  display: block;
-  color: #555;
 }
 .footer {
   width: 100%;
