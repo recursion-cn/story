@@ -23,7 +23,9 @@
                 <div class="content-area">
                 {% if len(drafts) == 0 %}
                 <div class="empty-post-notice">
-                    <p>Oops, 没有找到草稿</p>
+                    <span>Oops, 没有找到草稿</span>
+                    <span>&#124;</span>
+                    <a href="/users/edit">立刻写一篇吧</a>
                 </div>
                 {% else %}
                 {% for draft in drafts %}
@@ -34,7 +36,12 @@
                         </a>
                     </div>
                     <div class="post-body">
+                        {% if draft.cover %}
+                        <div class="post-cover-img">{% raw draft.cover %}</div>
+                        <div class="post-summary">{{ draft.summary }}</div>
+                        {% else %}
                         {{ draft.summary }}
+                        {% end %}
                     </div>
                 </div>
                 {% end %}

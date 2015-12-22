@@ -78,9 +78,13 @@ class DraftListHandler(baseHandler.RequestHandler):
             draft['author'] = self.current_user
             _html = markdown.markdown(draft.content)
             soup = BeautifulSoup(_html, 'html.parser')
+            img = soup.find('img')
+            if img:
+                img['class'] = 'inner-img-limit'
             _text = soup.get_text()
             if _text and len(_text) > summary_length:
                 _text = _text[0:summary_length] + '...'
+            draft['cover'] = img
             draft['summary'] = _text
 
         self.render('drafts.html', cate_id=cate_id, categories=categories, drafts=drafts)
