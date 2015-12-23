@@ -96,6 +96,7 @@ class Post:
             list = db.query(list_sql, visible, deleted, offset, size)
         if list:
             for post in list:
+                post['last_modified_format'] = post.last_modified.strftime('%Y-%m-%d %H:%M:%S')
                 post['last_modified'] = time.mktime(post.last_modified.timetuple())
 
         return list
@@ -114,5 +115,6 @@ class Post:
             get_sql += 'and title = %s'
             post = db.get(get_sql, title)
         if post:
+            post['last_modified_format'] = post.last_modified.strftime('%Y-%m-%d %H:%M:%S')
             post['last_modified'] = time.mktime(post.last_modified.timetuple())
         return post
