@@ -1,21 +1,21 @@
 <div class="side-links-panel">
     <ul class="list-unstyled links-block">
-        <li>
+        <!--li>
             <a href="/users/edit">
                 <span class="glyphicon glyphicon-edit"></span>
                 <span>写文章</span>
             </a>
-        </li>
-        <li>
-            <a href="/site/">
-                <span class="glyphicon glyphicon-home"></span>
-                <span>我的主页</span>
-            </a>
-        </li>
+        </li-->
         <li>
             <a href="/users/draft">
                 <span class="glyphicon glyphicon-file"></span>
                 <span>我的草稿</span>
+            </a>
+        </li>
+        <li>
+            <a href={{ "/site/" + current_user.nick }}>
+                <span class="glyphicon glyphicon-home"></span>
+                <span>我的主页</span>
             </a>
         </li>
     </ul>
@@ -39,6 +39,9 @@
             </a>
         </li>
     </ul>
+    <a class="edit-icon" href="/users/edit">
+        <span class="glyphicon glyphicon-pencil"></span>
+    </a>
     <!--div class="panel-main">
         <div class="side-links">
             <div>
