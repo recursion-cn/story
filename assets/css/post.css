@@ -5,10 +5,21 @@
 .single-post .title {
   margin-bottom: 18px;
   border-bottom: 1px dashed #e0e0e0;
-  text-align: center;
 }
 .single-post .title h3 {
   display: inline-block;
+}
+.single-post .title .focus-mode {
+  display: inline-block;
+  border: 1px solid #4594af;
+  border-radius: 2px;
+  padding: 2px 5px;
+  font-size: 12px;
+}
+.single-post .title .focus-mode:hover {
+  border-color: #1d7f9e;
+  background-color: #4594af;
+  color: #ffffff;
 }
 .single-post .content {
   padding: 10px 0;

@@ -1,13 +1,13 @@
-{% extends "layout.html" %}
+{% extends "read_layout.html" %}
 {% block css-area %}
 <link rel="stylesheet" href={{ static_url("css/post.css") }}>
 <link rel="stylesheet" href={{ static_url("lib/katex/katex.min.css") }}>
 <link rel="stylesheet" href={{ static_url("lib/editor.md/css/editormd.min.css") }}>
 {% end %}
 {% block main %}
-<div class="wrapper">
+<div class="wrapper read-wrapper">
     <div class="main clearfix">
-        <div class="main-body">
+        <div class="main-body main-body-read">
             <div class="single-post">
                 <div class="title">
                     {% if not ord(post.visible) %}
@@ -15,7 +15,7 @@
                     {% else %}
                         <h3>{{ post.title }}</h3>
                     {% end %}
-                    <a class="focus-mode" href={{ "/posts/" + str(post.id) + "?mode=focus_read" }}>专注模式</a>
+                    <a class="focus-mode" href={{ "/posts/" + str(post.id) }}>普通模式</a>
                 </div>
                 <div class="content markdown-body editormd-html-preview" id="js-content"></div>
                 <div class="assign">
@@ -46,9 +46,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
-        <div class="main-side visible-lg-block visible-md-block">
-            {% include sidebar.html %}
         </div>
     </div>
 </div>

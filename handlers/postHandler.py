@@ -121,6 +121,7 @@ get single post by id
 class PostHandler(baseHandler.RequestHandler):
 
     def get(self, id):
+        read_mode = self.get_query_argument('mode', None)
         post = Post.get_post(id)
         if post:
             if not ord(post.public):
@@ -136,7 +137,10 @@ class PostHandler(baseHandler.RequestHandler):
         else:
             raise tornado.web.HTTPError(404)
 
-        self.render('post.html', post=post)
+        template_name = 'post.html'
+        if read_mode and read_mode == 'focus_read':
+            template_name = 'read_focus.html'
+        self.render(template_name, post=post)
 
 """
 direct to the edit page
