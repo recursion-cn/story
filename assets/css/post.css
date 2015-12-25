@@ -1,12 +1,11 @@
 .single-post {
   padding: 0 15px;
   background-color: #ffffff;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
-  border-radius: 3px;
 }
 .single-post .title {
   margin-bottom: 18px;
   border-bottom: 1px dashed #e0e0e0;
+  text-align: center;
 }
 .single-post .title h3 {
   display: inline-block;

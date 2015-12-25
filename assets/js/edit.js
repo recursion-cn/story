@@ -21,7 +21,7 @@ const initMarkdownEditor = function() {
         markdown: md,
         autoLoadModules: false,
         saveHTMLToTextarea: true,
-        //tex: true,
+        tex: true,
         tocm: true,
         emoji: true,
         taskList: true,
