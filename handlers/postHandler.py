@@ -138,8 +138,11 @@ class PostHandler(baseHandler.RequestHandler):
             raise tornado.web.HTTPError(404)
 
         template_name = 'post.html'
-        if read_mode and read_mode == 'focus_read':
+        if self.is_mobile:
             template_name = 'read_focus.html'
+        elif read_mode and read_mode == 'focus_read':
+                template_name = 'read_focus.html'
+
         self.render(template_name, post=post)
 
 """

@@ -318,7 +318,8 @@ textarea.form-control {
 .side-links-panel {
     margin-top: 15px;
     position: fixed;
-    .links-block {
+    .links-block,
+    .unlogin-links-block {
         width: 200px;
         border: 1px solid #e0e0e0;
         border-radius: 3px;
@@ -334,6 +335,18 @@ textarea.form-control {
         }
         li:first-child {
             margin: 0;
+        }
+    }
+    .unlogin-links-block {
+        border-color: #91D3E6;
+        background-color: #C7EAF5;
+        p {
+            color: #0F5369;
+        }
+        a {
+            span {
+                color: #0F5369;
+            }
         }
     }
 }

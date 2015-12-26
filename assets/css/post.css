@@ -50,4 +50,7 @@
     width: 100%;
     margin: 0;
   }
+  .single-post .title .focus-mode {
+    display: none;
+  }
 }

@@ -269,21 +269,35 @@ textarea.form-control {
   margin-top: 15px;
   position: fixed;
 }
-.side-links-panel .links-block {
+.side-links-panel .links-block,
+.side-links-panel .unlogin-links-block {
   width: 200px;
   border: 1px solid #e0e0e0;
   border-radius: 3px;
   background-color: #f8f8f8;
   padding: 10px 23px;
 }
-.side-links-panel .links-block li {
+.side-links-panel .links-block li,
+.side-links-panel .unlogin-links-block li {
   margin: 9px 0 0;
 }
-.side-links-panel .links-block li a {
+.side-links-panel .links-block li a,
+.side-links-panel .unlogin-links-block li a {
   color: #666;
 }
-.side-links-panel .links-block li:first-child {
+.side-links-panel .links-block li:first-child,
+.side-links-panel .unlogin-links-block li:first-child {
   margin: 0;
+}
+.side-links-panel .unlogin-links-block {
+  border-color: #91D3E6;
+  background-color: #C7EAF5;
+}
+.side-links-panel .unlogin-links-block p {
+  color: #0F5369;
+}
+.side-links-panel .unlogin-links-block a span {
+  color: #0F5369;
 }
 .footer {
   width: 100%;

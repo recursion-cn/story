@@ -7,6 +7,13 @@ import constants
 
 class RequestHandler(tornado.web.RequestHandler):
 
+    def initialize(self):
+        user_agent = self.request.headers['User-Agent'].lower()
+        if user_agent.find('iphone') > -1 or user_agent.find('android') > -1:
+            self.is_mobile = True
+        else:
+            self.is_mobile = False
+
     def get(self):
         raise tornado.web.HTTPError(404)
 
