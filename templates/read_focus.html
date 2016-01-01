@@ -11,13 +11,15 @@
             <div class="single-post">
                 <div class="title">
                     {% if not ord(post.visible) %}
-                        <h3 class="bg-warning">{{ post.title }}</h3>
+                        <p class="bg-warning">{{ post.title }}</p>
                     {% else %}
-                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.title }}</p>
                     {% end %}
                     <a class="focus-mode" href={{ "/posts/" + str(post.id) }}>普通模式</a>
                 </div>
-                <div class="content markdown-body editormd-html-preview" id="js-content"></div>
+                <div class="content markdown-body editormd-html-preview" >
+                    {% raw post.content %}
+                </div>
                 <div class="assign">
                     <p><em>{{ post.author.nick }}</em></p>
                     <p><em>{{ post.last_modified_format }}</em></p>

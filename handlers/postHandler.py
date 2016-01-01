@@ -9,7 +9,7 @@ from modules.db import db
 import modules.utils
 from models.Post import Post
 from models.Category import Category
-import datetime
+from datetime import datetime
 import markdown
 import bleach
 from bs4 import BeautifulSoup
@@ -44,6 +44,7 @@ class ListHandler(baseHandler.RequestHandler):
                 _html = markdown.markdown(post.content)
                 soup = BeautifulSoup(_html, 'html.parser')
                 img = soup.find('img')
+                last_modified = post.last_modified
                 if img:
                     img['class'] = 'inner-img-limit'
                 _text = soup.get_text()
@@ -190,7 +191,8 @@ class InsertOrUpdateHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
         title = self.get_body_argument('title', None)
-        content = self.get_body_argument('content', None)
+        #content = self.get_body_argument('content', None)
+        content = self.get_body_argument('html_content', None)
         category_id = self.get_body_argument('category', None)
         user_id = self.current_user.id
         post_public = self.get_body_argument('privacy', None)
@@ -199,7 +201,7 @@ class InsertOrUpdateHandler(baseHandler.RequestHandler):
         visible = 1 - int(draft)
 
         if title and content and category_id:
-            now = datetime.datetime.now()
+            now = datetime.now()
             if int(post_id) != -1:
                 sql = 'update tb_post set title = %s, content = %s, public = %s, visible = %s, category_id = %s, updated = %s where id = %s and deleted = 0'
                 num = db.update(sql, title, content, int(post_public), int(visible), int(category_id), now, int(post_id))

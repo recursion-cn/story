@@ -7,14 +7,10 @@
 'use strict'
 
 const Utils = require('./utils.js');
+require('bootstrap');
 let editor;
 
 const init = () => {
-    initTooltip()
-};
-
-const initTooltip = () => {
-    $('em[data-toggle="tooltip"]').tooltip();
 };
 
 const parseMarkdown = function(md) {
@@ -40,6 +36,7 @@ const getPost = function(postId) {
         editormd.markdownToHTML('js-content', {
             markdown: md ,
             htmlDecode: 'style, script, iframe',
+            tex: true,
             //toc: false,
             tocm: true,
             //tocContainer: "#custom-toc-container",

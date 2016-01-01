@@ -8,6 +8,7 @@
 
 const Utils = require('./utils.js');
 const referer = $('input[name="referer"]').val();
+require('bootstrap');
 let editor;
 
 const init = function() {
@@ -41,24 +42,44 @@ const getPost = function() {
     post.category = $('input[name="category"]').val();
     post.title = $('input[name="title"]').val();
     post.content = editor.getMarkdown();
+    post.html_content = editor.getHTML();
     post.privacy = $('input[name="privacy"]').val();
     post.id = $('input[name="id"]').val();
 
     return post;
 };
 
+const keyMapper = {
+    'title': '标题',
+    'content': '文章内容',
+    'html_content': '文章内容',
+    'category': '文章目录'
+};
+
 const validatePost = function(post) {
     let validate = {valid: true};
     for (let key in post) {
         let value = post[key];
-        if (key !== 'privacy' && (!value || !$.trim(value))) {
+        if (key === 'privacy') {
+            continue;
+        }
+        if (!value || !$.trim(value)) {
             validate.valid = false;
-            validate.msg = key + '不允许为空';
+            if (key === 'title') {
+                validate.msg = '标题是点晴之笔，哪能空着呢?';
+            }
+            if (key === 'content' || key === 'html_content') {
+                validate.msg = '您的文章还没有内容呢';
+            }
+            if (key === 'category') {
+                validate.msg = '请为您的文章选择一个目录';
+            }
+
             return validate;
         }
         if (key === 'title' && key.length > 100) {
             validate.valid = false;
-            validate.msg = '标题超过100个字符';
+            validate.msg = '这么长的标题能';
             return validate;
         }
     }

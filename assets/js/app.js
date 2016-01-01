@@ -8,7 +8,6 @@
 'use strict'
 
 require('expose?$!expose?jQuery!jquery');
-require('bootstrap');
 
 const navigatorJudge = function() {
     if (document.documentMode) {
@@ -60,12 +59,7 @@ const showOrHidePagination = function(bol) {
     }
 };
 
-const initDateTooltip = function() {
-    $('span[data-toggle="tooltip"]').tooltip();
-};
-
 const init = function() {
-    initDateTooltip();
 };
 
 $(function() {

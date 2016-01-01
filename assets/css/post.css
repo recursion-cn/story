@@ -1,12 +1,17 @@
+.main-body {
+  border: 0;
+}
 .single-post {
-  padding: 0 15px;
+  padding: 15px;
   background-color: #ffffff;
+  border-radius: 3px;
 }
 .single-post .title {
   margin-bottom: 18px;
   border-bottom: 1px dashed #e0e0e0;
 }
-.single-post .title h3 {
+.single-post .title p {
+  font-size: 1.5em;
   display: inline-block;
 }
 .single-post .title .focus-mode {
@@ -15,6 +20,7 @@
   border-radius: 2px;
   padding: 1px 3px;
   font-size: 12px;
+  vertical-align: text-bottom;
 }
 .single-post .title .focus-mode:hover {
   border-color: #1d7f9e;
@@ -22,7 +28,8 @@
   color: #ffffff;
 }
 .single-post .content {
-  padding: 10px 0;
+  padding: 15px 0;
+  border-radius: 3px;
   font-size: 1.16em;
   line-height: 1.9;
   word-break: break-all;

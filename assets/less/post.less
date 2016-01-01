@@ -1,13 +1,18 @@
 @import "variable.less";
+.main-body {
+    border: 0;   
+}
+
 .single-post {
-    padding: 0 15px;
+    padding: 15px;
     background-color: @white;
     //box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
-    //border-radius: 3px;
+    border-radius: 3px;
     .title {
         margin-bottom: 18px;
         border-bottom: 1px dashed #e0e0e0;
-        h3 {
+        p {
+            font-size: 1.5em;
             display: inline-block;
         }
         .focus-mode {
@@ -16,6 +21,7 @@
             border-radius: 2px;
             padding: 1px 3px;
             font-size: 12px;
+            vertical-align: text-bottom;
         }
         .focus-mode:hover {
             border-color: @dark-blue;
@@ -24,7 +30,8 @@
         }
     }
     .content {
-        padding: 10px 0;
+        padding: 15px 0;
+        border-radius: 3px;
         font-size: 1.16em;
         line-height: 1.9;
         word-break: break-all;

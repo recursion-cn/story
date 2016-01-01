@@ -3,8 +3,16 @@ html {
   min-height: 100%;
 }
 body {
-  font: 13px "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, Helvetica, Arial, sans-serif;
+  font: 14px "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, Helvetica, Arial, sans-serif;
   background-color: #ffffff;
+}
+a {
+  color: #216EB9;
+  transition: color .5s;
+}
+a:hover {
+  color: #1EAEDB;
+  text-decoration: none;
 }
 input.form-control,
 textarea.form-control {
@@ -23,17 +31,17 @@ textarea.form-control {
   top: 0;
   width: 100%;
   height: 50px;
-  background-color: #ffffff;
+  background-color: white;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 }
 .header .navbar {
   min-height: 49px;
 }
 .header .navbar-default {
-  width: 1000px;
+  width: 1169px;
   max-height: 49px;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: white;
 }
 .header .navbar-default .navbar-header a:hover {
   color: #000000;
@@ -73,8 +81,7 @@ textarea.form-control {
   color: #000000;
 }
 .header .nav.navbar-nav a {
-  color: #000000;
-  transition: opacity .2s;
+  transition: color .2s;
 }
 .header .nav.navbar-nav a:focus {
   color: #000000;
@@ -89,8 +96,8 @@ textarea.form-control {
   width: 100%;
   min-width: 100px;
   min-height: 100px;
-  background-color: #fefefe;
-  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+  background-color: #f4f7f8;
+  box-shadow: 0 0 1px #999;
   border-top: 0;
   top: 55px;
   text-align: center;
@@ -101,9 +108,6 @@ textarea.form-control {
   height: 50px;
   line-height: 50px;
 }
-.header .user-panel .user-panel-header a {
-  color: #000000;
-}
 .header .user-panel .user-panel-body {
   border-top: 0;
 }
@@ -111,10 +115,10 @@ textarea.form-control {
   display: block;
   height: 36px;
   line-height: 36px;
+  font-size: 13px;
 }
 .header .user-panel .user-panel-body .user-link-item a {
   text-decoration: none;
-  color: #000000;
 }
 .header .user-panel .user-panel-body .user-link-item:last-child {
   border-bottom: none;
@@ -126,6 +130,8 @@ textarea.form-control {
   width: 100%;
   min-height: 500px;
   padding: 70px 0 30px;
+  background-color: #fff;
+  font-size: 13px;
 }
 .read-wrapper {
   width: 100%;
@@ -149,6 +155,9 @@ textarea.form-control {
 }
 .main-body {
   width: 66%;
+  background-color: #f4f7f8;
+  border-radius: 3px;
+  border: 1px solid #f6f6f6;
 }
 .main-side {
   width: 236px;
@@ -159,7 +168,6 @@ textarea.form-control {
 }
 .cates-area {
   min-height: 36px;
-  margin-bottom: 10px;
   padding: 10px 15px;
 }
 .cates-area .cate-item {
@@ -197,16 +205,25 @@ textarea.form-control {
 }
 .post {
   margin-bottom: 3px;
-  padding: 15px 0 26px;
-  border-top: 1px dashed #e0e0e0;
+  padding: 5px 3px;
+  border-bottom: 1px dashed #e0e0e0;
 }
 .post .post-header .title-link {
   display: inline-block;
 }
 .post .post-header .title-link .title {
-  font-size: 1.4em;
-  font-weight: 500;
-  color: #555;
+  font-size: 1.1em;
+}
+.post .post-header .cate {
+  margin-left: 10px;
+  display: inline-block;
+  background-color: #999;
+  border-radius: 3px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  padding: 0px 3px;
+  float: right;
 }
 .post .post-body {
   font-size: 1.0em;
@@ -266,15 +283,15 @@ textarea.form-control {
   background-color: #0F96CA;
 }
 .side-links-panel {
-  margin-top: 15px;
+  margin-top: 10px;
   position: fixed;
 }
 .side-links-panel .links-block,
 .side-links-panel .unlogin-links-block {
   width: 200px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #f6f6f6;
   border-radius: 3px;
-  background-color: #f8f8f8;
+  background-color: #f4f7f8;
   padding: 10px 23px;
 }
 .side-links-panel .links-block li,
@@ -305,9 +322,8 @@ textarea.form-control {
   padding-bottom: 30px;
   position: relative;
   bottom: 0;
-  border-top: 1px solid #e1e1e1;
   text-align: center;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 .footer .info {
   padding-top: 10px;

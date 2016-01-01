@@ -1,9 +1,38 @@
-.login-panel {
+.relative-msg {
+  position: relative;
+  top: 0;
+}
+.login-body {
+  width: 36%;
+  height: 450px;
+  margin-top: 10px;
+  float: left;
+}
+.login-body label {
+  font-size: 23px;
+  font-weight: normal;
+}
+.login-body form {
+  width: 100%;
+  margin: 15px auto 30px;
+}
+.login-body form .input-item {
+  margin: 0 3px 5px;
+}
+.login-body form .input-item .base-input {
+  width: 230px;
+  margin-left: 5px;
+}
+.login-body form .operation-tip {
+  padding: 0 0 10px 35px;
+}
+.login-body form .button-item {
+  width: 100%;
+  height: 30px;
   margin-top: 10px;
 }
-.login-panel form {
-  width: 45%;
-  margin: 0 auto 30px;
+.login-body form .button-item button {
+  margin-left: 35px;
 }
 .direct-to-signup-panel {
   margin: 30px auto 0;

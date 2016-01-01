@@ -30,19 +30,20 @@
                 {% else %}
                 {% for post in posts %}
                 <div class="post">
-                    <div class="post-header">
+                    <div class="post-header clearfix">
                         <a class="title-link" href={{ "/posts/" + str(post.id) }}>
-                            <p class="title">{{ post.title }}</p>
+                            <span class="title">{{ post.title }}</span>
                         </a>
+                        <span class="cate">{{ post.last_modified }}</span>
                     </div>
-                    <div class="post-body">
+                    <!--div class="post-body">
                         {% if post.cover %}
                         <div class="post-cover-img">{% raw post.cover %}</div>
                         <div class="post-summary">{{ post.summary }}</div>
                         {% else %}
                         {{ post.summary }}
                         {% end %}
-                    </div>
+                    </div-->
                 </div>
                 {% end %}
                 {% if need_pagination %}

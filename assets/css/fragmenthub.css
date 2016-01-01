@@ -1,14 +1,10 @@
 /* form elements */
 .base-input {
-  height: 30px;
+  height: 33px;
   padding: 0 5px;
-  width: 100%;
   border-radius: 3px;
   border: 1px solid #999;
-}
-.base-input:hover,
-.base-input:focus {
-  outline: none;
+  transition: box-shadow 0.3s;
 }
 .base-btn {
   padding: 3px 7px;
@@ -44,10 +40,10 @@
 }
 .login-btn,
 .signup-btn {
-  width: 160px;
+  width: 100px;
   height: 30px;
-  border: 1px solid #1d7f9e;
-  background-color: #4594af;
+  border: 1px solid #4594af;
+  background-color: #33bfde;
   border-radius: 3px;
   color: #ffffff;
 }
