@@ -97,7 +97,7 @@ const submitPost = function(post, asDraft) {
             Utils.showMsg('success', successTip);
             if (!asDraft) {
                 setTimeout(function() {
-                    window.location.href = referer;
+                    //window.location.href = referer;
                 }, 3000);
             }
             //window.location.href = referer;
