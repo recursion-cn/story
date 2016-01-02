@@ -42,7 +42,7 @@ const getPost = function() {
     post.category = $('input[name="category"]').val();
     post.title = $('input[name="title"]').val();
     post.content = editor.getMarkdown();
-    post.html_content = editor.getHTML();
+    post.html_content = editor.getPreviewedHTML();
     post.privacy = $('input[name="privacy"]').val();
     post.id = $('input[name="id"]').val();
 

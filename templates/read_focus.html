@@ -5,6 +5,9 @@
 <link rel="stylesheet" href={{ static_url("lib/editor.md/css/editormd.min.css") }}>
 {% end %}
 {% block main %}
+<div class="index">
+    <a href="/"><span class="glyphicon glyphicon-home"></span></a>
+</div>
 <div class="wrapper read-wrapper">
     <div class="main clearfix">
         <div class="main-body main-body-read">
@@ -18,7 +21,7 @@
                     <a class="focus-mode" href={{ "/posts/" + str(post.id) }}>普通模式</a>
                 </div>
                 <div class="content markdown-body editormd-html-preview" >
-                    {% raw post.content %}
+                    {% raw post.html_content %}
                 </div>
                 <div class="assign">
                     <p><em>{{ post.author.nick }}</em></p>
@@ -51,6 +54,9 @@
         </div>
     </div>
 </div>
+<!--div class="footer-nav">
+    <a href="/">夜行船</a>
+</div-->
 <div class="modal fade" id="js-delete-confirm-modal">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">

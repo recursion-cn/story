@@ -26,7 +26,6 @@ class ListHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
         default_size = 10
-        summary_length = 200
         need_pagination = False
         cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
@@ -41,18 +40,8 @@ class ListHandler(baseHandler.RequestHandler):
         if posts:
             need_pagination = count > len(posts)
             for post in posts:
-                _html = markdown.markdown(post.content)
-                soup = BeautifulSoup(_html, 'html.parser')
-                img = soup.find('img')
-                last_modified = post.last_modified
-                if img:
-                    img['class'] = 'inner-img-limit'
-                _text = soup.get_text()
-                if _text and len(_text) > summary_length:
-                    _text = _text[0:summary_length] + '...'
-                post['cover'] = img
-                post['summary'] = _text
                 post['author'] = self.current_user
+                post['last_modified_cn'] = modules.utils.date_distance(post.last_modified)
 
         self.render('posts.html', cate_id=cate_id, categories=categories,
             posts=posts, page_size=size, need_pagination=int(need_pagination))
@@ -64,7 +53,6 @@ class DraftListHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self):
         default_size = 10
-        summary_length = 200
         cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
         categories = Category.list(self.current_user.id)
@@ -77,16 +65,7 @@ class DraftListHandler(baseHandler.RequestHandler):
             count = Post.count_drafts(user_id)
         for draft in drafts:
             draft['author'] = self.current_user
-            _html = markdown.markdown(draft.content)
-            soup = BeautifulSoup(_html, 'html.parser')
-            img = soup.find('img')
-            if img:
-                img['class'] = 'inner-img-limit'
-            _text = soup.get_text()
-            if _text and len(_text) > summary_length:
-                _text = _text[0:summary_length] + '...'
-            draft['cover'] = img
-            draft['summary'] = _text
+            draft['last_modified_cn'] = modules.utils.date_distance(draft.last_modified)
 
         self.render('drafts.html', cate_id=cate_id, categories=categories, drafts=drafts)
 
@@ -191,8 +170,8 @@ class InsertOrUpdateHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
         title = self.get_body_argument('title', None)
-        #content = self.get_body_argument('content', None)
-        content = self.get_body_argument('html_content', None)
+        content = self.get_body_argument('content', None)
+        html_content = self.get_body_argument('html_content', None)
         category_id = self.get_body_argument('category', None)
         user_id = self.current_user.id
         post_public = self.get_body_argument('privacy', None)
@@ -203,11 +182,11 @@ class InsertOrUpdateHandler(baseHandler.RequestHandler):
         if title and content and category_id:
             now = datetime.now()
             if int(post_id) != -1:
-                sql = 'update tb_post set title = %s, content = %s, public = %s, visible = %s, category_id = %s, updated = %s where id = %s and deleted = 0'
-                num = db.update(sql, title, content, int(post_public), int(visible), int(category_id), now, int(post_id))
+                sql = 'update tb_post set title = %s, content = %s, html_content = %s, public = %s, visible = %s, category_id = %s, updated = %s where id = %s and deleted = 0'
+                num = db.update(sql, title, content, html_content, int(post_public), int(visible), int(category_id), now, int(post_id))
             else:
-                sql = 'insert into tb_post (title, content, user_id, category_id, public, visible, created) values (%s, %s, %s, %s, %s, %s, %s)'
-                num = db.insert(sql, title, content, long(user_id), int(category_id), int(post_public), int(visible), now)
+                sql = 'insert into tb_post (title, content, html_content, user_id, category_id, public, visible, created) values (%s, %s, %s, %s, %s, %s, %s, %s)'
+                num = db.insert(sql, title, content, html_content, long(user_id), int(category_id), int(post_public), int(visible), now)
             if num:
                 self.send_result(True, error_code=None)
                 return

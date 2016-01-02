@@ -34,14 +34,7 @@
                         <a class="title-link" href={{ "/posts/" + str(draft.id) }}>
                             <p class="title">{{ draft.title }}</p>
                         </a>
-                    </div>
-                    <div class="post-body">
-                        {% if draft.cover %}
-                        <div class="post-cover-img">{% raw draft.cover %}</div>
-                        <div class="post-summary">{{ draft.summary }}</div>
-                        {% else %}
-                        {{ draft.summary }}
-                        {% end %}
+                        <span class="cate">{{ draft.last_modified_cn }}</span>
                     </div>
                 </div>
                 {% end %}

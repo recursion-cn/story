@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block css-area %}
 <link rel="stylesheet" href={{ static_url("css/post.css") }}>
+<link rel="stylesheet" href={{ static_url("lib/editor.md/lib/codemirror/codemirror.min.css") }}>
+<link rel="stylesheet" href={{ static_url("lib/editor.md/lib/codemirror/addon/dialog/dialog.css") }}>
+<link rel="stylesheet" href={{ static_url("lib/editor.md/lib/codemirror/addon/search/matchesonscrollbar.css") }}>
 <link rel="stylesheet" href={{ static_url("lib/katex/katex.min.css") }}>
 <link rel="stylesheet" href={{ static_url("lib/editor.md/css/editormd.min.css") }}>
 {% end %}
@@ -18,7 +21,7 @@
                     <a class="focus-mode" href={{ "/posts/" + str(post.id) + "?mode=focus_read" }}>专注模式</a>
                 </div>
                 <div class="content markdown-body editormd-html-preview" id="#js-content">
-                    {% raw post.content %}
+                    {% raw post.html_content %}
                 </div>
                 <div class="assign">
                     <p><em>{{ post.author.nick }}</em></p>

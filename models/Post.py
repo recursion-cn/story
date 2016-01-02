@@ -78,7 +78,7 @@ class Post:
     @staticmethod
     def __list(table_name, visible=1, deleted=0, user_id=None, category_id=None, offset=0, size=10):
         list_sql = """
-                    select id, title, content, user_id, category_id, public, visible,
+                    select id, title, content, html_content, user_id, category_id, public, visible,
                     if(updated is NULL, created, updated) last_modified from {0}
                     where visible = %s and deleted = %s """.format(table_name)
         list = None
@@ -104,7 +104,7 @@ class Post:
     @staticmethod
     def __get_post(table_name, id=None, title=None):
         get_sql = """
-                    select id, title, content, user_id, category_id, public, visible,
+                    select id, title, content, html_content, user_id, category_id, public, visible,
                     if(updated is NULL, created, updated) last_modified from {0}
                     where deleted = 0 """.format(table_name)
         post = None
