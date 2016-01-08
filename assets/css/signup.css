@@ -1,15 +1,56 @@
-.signup-panel {
+html,
+body {
+  background-color: #f4f7f8;
+}
+html .footer,
+body .footer {
+  position: absolute;
+  bottom: 0;
+  background-color: #f4f7f8;
+}
+.msg-area {
+  background-color: #fff;
+}
+.relative-msg {
+  position: relative;
+  top: 0;
+}
+.signup-body {
+  position: relative;
+  width: 300px;
+  margin: 150px auto 0;
+}
+.signup-body .signup-welcome {
+  font-size: 2.3em;
+  font-weight: normal;
+  text-align: center;
+  color: #33bfde;
+}
+.signup-body .signup-welcome-follow {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}
+.signup-body .signup-main form {
+  width: 100%;
+  margin: 15px auto 30px;
+}
+.signup-body .signup-main form .input-item {
+  margin: 0 0 10px;
+}
+.signup-body .signup-main form .input-item .base-input {
+  width: 100%;
+}
+.signup-body .signup-main form .operation-tip {
+  padding: 0 0 10px 35px;
+}
+.signup-body .signup-main form .button-item {
+  width: 100%;
+  height: 30px;
   margin-top: 10px;
 }
-.signup-panel form {
-  width: 50%;
-  margin: 0 auto;
-}
-.direct-to-login-panel {
-  margin: 30px auto 0;
-  padding: 5px 0 15px;
-  text-align: center;
-  border-radius: 3px;
+.signup-body .signup-main form .button-item button {
+  width: 100%;
 }
 @media screen and (max-width: 1200px) {
   .signup-panel {

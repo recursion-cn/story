@@ -1,38 +1,56 @@
+html,
+body {
+  background-color: #f4f7f8;
+}
+html .footer,
+body .footer {
+  position: absolute;
+  bottom: 0;
+  background-color: #f4f7f8;
+}
+.msg-area {
+  background-color: #fff;
+}
 .relative-msg {
   position: relative;
   top: 0;
 }
 .login-body {
-  width: 36%;
-  height: 450px;
-  margin-top: 10px;
-  float: left;
+  position: relative;
+  width: 300px;
+  margin: 150px auto 0;
 }
-.login-body label {
-  font-size: 23px;
+.login-body .login-welcome {
+  font-size: 2.3em;
   font-weight: normal;
+  text-align: center;
+  color: #33bfde;
 }
-.login-body form {
+.login-body .login-welcome-follow {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}
+.login-body .login-main form {
   width: 100%;
   margin: 15px auto 30px;
 }
-.login-body form .input-item {
-  margin: 0 3px 5px;
+.login-body .login-main form .input-item {
+  margin: 0 0 10px;
 }
-.login-body form .input-item .base-input {
-  width: 230px;
-  margin-left: 5px;
+.login-body .login-main form .input-item .base-input {
+  width: 100%;
 }
-.login-body form .operation-tip {
+.login-body .login-main form .operation-tip {
   padding: 0 0 10px 35px;
 }
-.login-body form .button-item {
+.login-body .login-main form .button-item {
   width: 100%;
   height: 30px;
   margin-top: 10px;
 }
-.login-body form .button-item button {
-  margin-left: 35px;
+.login-body .login-main form .button-item button {
+  width: 100%;
 }
 .direct-to-signup-panel {
   margin: 30px auto 0;

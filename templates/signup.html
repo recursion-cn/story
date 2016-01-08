@@ -1,52 +1,30 @@
-{% extends "layout.html" %}
+{% extends "account_layout.html" %}
 {% block css-area %}
     <link href={{ static_url("css/signup.css") }} rel="stylesheet">
 {% end %}
 {% block main %}
-<div class="wrapper">
-    <div class="main container-fluid clearfix">
-        <div class="signup-panel base-panel col-md-7">
-            <div class="panel-nav">
-                <span>用户注册</span>
-            </div>
-            <div class="panel-main">
-                <form action="/users/signup" method="post">
-                    <div class="form-group">
-                        <input type="text" class="base-input" name="nick" placeholder="昵称，6个字符以内">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="base-input" name="password" placeholder="密码, 6~18位">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="base-input" name="password_confirm" placeholder="再次输入密码">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="base-input" name="invite_code" placeholder="输入邀请码">
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button class="signup-btn submit">注册</button>
-                        </div>
-                    </div>
-                    <!--div class="row">
-                        <div class="col-md-12">
-                            已经注册过了？<a href="/users/login">登录</a>
-                        </div>
-                    </div-->
-                </form>
-            </div>
-            <div class="panel-foot panel-notice">
-                <p>1.您的密码将会被加密存储</p>
-                <p>2.您的email等隐私信息只有您自己可见</p>
-            </div>
-        </div>
-        <div class="main-side visible-lg-block visible-md-block">
-            <div class="direct-to-login-panel base-panel">
-                <div class="panel-main">
-                    <p>已有账号？</p>
-                    <button class="login-btn" id="js-direct-to-login">立即登录</button>
+<div class="main clearfix">
+    <div class="signup-body">
+        <p class="signup-welcome">夜行船</p>
+        <p class="signup-welcome-follow">我永远在这里，涌着爱面朝沧海</p>
+        <div class="signup-main">
+            <form action="/users/signup" method="post">
+                <div class="input-item">
+                    <input type="text" class="base-input" name="nick" placeholder="昵称，6个字符以内">
                 </div>
-            </div>
+                <div class="input-item">
+                    <input type="password" class="base-input" name="password" placeholder="密码, 6~18位">
+                </div>
+                <div class="input-item">
+                    <input type="password" class="base-input" name="password_confirm" placeholder="再次输入密码">
+                </div>
+                <div class="input-item">
+                    <input type="text" class="base-input" name="invite_code" placeholder="输入邀请码">
+                </div>
+                <div class="button-item">
+                    <button class="signup-btn submit">注册</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

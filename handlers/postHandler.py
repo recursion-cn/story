@@ -10,9 +10,6 @@ import modules.utils
 from models.Post import Post
 from models.Category import Category
 from datetime import datetime
-import markdown
-import bleach
-from bs4 import BeautifulSoup
 import tornado.web
 from settings import settings
 import json
@@ -83,13 +80,8 @@ class ListApiHandler(baseHandler.RequestHandler):
         if posts:
             need_pagination = count > (int(offset) + int(size))
             for post in posts:
-                _html = markdown.markdown(post.content)
-                soup = BeautifulSoup(_html, 'html.parser')
-                _text = soup.get_text()
-                if _text and len(_text) > summary_length:
-                    _text = _text[0:summary_length] + '...'
-                post['summary'] = _text
                 post['author'] = self.current_user
+                post['last_modified_cn'] = modules.utils.date_distance(post.last_modified)
 
             data = {'posts': posts, 'need_pagination': need_pagination}
 

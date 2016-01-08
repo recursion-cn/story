@@ -31,6 +31,9 @@ const initMarkdownEditor = function() {
         htmlDecode: "style, script, iframe",
         flowChart: true,
         sequenceDiagram: true,
+        imageUpload: true,
+        imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+        imageUploadURL: "/files/upload",
         onfullscreen : function() {
             this.editor.css("border-radius", 0).css("z-index", 1000);
         },
@@ -79,7 +82,7 @@ const validatePost = function(post) {
         }
         if (key === 'title' && key.length > 100) {
             validate.valid = false;
-            validate.msg = '这么长的标题能';
+            validate.msg = '标题有点长啊';
             return validate;
         }
     }

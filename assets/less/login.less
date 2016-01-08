@@ -1,38 +1,60 @@
 @import "variable.less";
 
+html,
+body {
+    background-color: #f4f7f8;
+    .footer {
+        position: absolute;
+        bottom: 0;
+        background-color: #f4f7f8;
+    }
+}
+
+.msg-area {
+    background-color: #fff;
+}
+
 .relative-msg {
     position: relative;
     top: 0;
 }
 
 .login-body {
-    width: 36%;
-    height: 450px;
-    margin-top: 10px;
-    float: left;
-    label {
-        font-size: 23px;
+    position: relative;
+    width: 300px;
+    margin: 150px auto 0;
+    .login-welcome {
+        font-size: 2.3em;
         font-weight: normal;
+        text-align: center;
+        color: @light-blue;
     }
-    form {
-        width: 100%;
-        margin: 15px auto 30px;
-        .input-item {
-            margin: 0 3px 5px;
-            .base-input {
-                width: 230px;
-                margin-left: 5px;
-            }
-        }
-        .operation-tip {
-            padding: 0 0 10px 35px;
-        }
-        .button-item {
+    .login-welcome-follow {
+        text-align: center;
+        font-size: 18px;
+        color: #666;
+    }
+    .login-main {
+        //background-color: @white;
+        form {
             width: 100%;
-            height: 30px;
-            margin-top: 10px;
-            button {
-                margin-left: 35px;
+            margin: 15px auto 30px;
+            .input-item {
+                margin: 0 0 10px;
+                .base-input {
+                    width: 100%;
+                }
+            }
+            .operation-tip {
+                padding: 0 0 10px 35px;
+            }
+            .button-item {
+                width: 100%;
+                height: 30px;
+                margin-top: 10px;
+                button {
+                    width: 100%;
+                }
             }
         }
     }
