@@ -6,8 +6,9 @@
 
 'use strict'
 
+const ConsoleApp = require('./console/app.js');
 const Utils = require('./utils.js');
-
+/*
 // 获取文章目录
 function getCategories() {
     $.get('/api/category/list', data => {
@@ -40,4 +41,4 @@ function renderPosts(posts) {
     let postsHtml = '';
 };
 
-getCategories();
+getCategories();*/

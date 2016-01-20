@@ -3,7 +3,7 @@
 <link rel="stylesheet" href={{ static_url("css/console.css") }}>
 {% end %}
 {% block main %}
-<div class="console clearfix">
+<div class="console clearfix" ng-app="ConsoleApp" ng-controller="MainController">
     <!--div class="console-header"></div-->
     <div class="sidebar">
         <div class="logo">夜行船</div>
@@ -26,10 +26,12 @@
         </div>
         <div class="sidebar-bg"></div>
     </div>
-    <div class="sec-sidebar">
+    <div class="sec-sidebar" ng-controller="CategoryController">
         <div class="cates-header">文章目录</div>
         <div class="cates-list">
-            <div id="js-cates-list"></div>
+            <div id="js-cates-list">
+                <a class="cate" href="" ng-repeat="category in categories" ng-bind="category.name"></a>
+            </div>
             <div class="cate cate-fun">
                 <a href="javascript:;"><span class="glyphicon glyphicon-plus"></span> 添加目录</a>
             </div>

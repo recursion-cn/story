@@ -36,6 +36,8 @@
     "webpack": "^1.12.2"
   },
   "devDependencies": {
+    "angular": "^1.4.8",
+    "angular-route": "^1.4.8",
     "bootstrap": "^3.3.5",
     "bootstrap-webpack": "0.0.5",
     "jquery": "^2.1.4",
