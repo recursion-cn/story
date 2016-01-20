@@ -13,7 +13,10 @@ import time
 from datetime import datetime
 from settings import qiniu_setting
 
-class FileHandler(baseHandler.RequestHandler):
+"""
+上传图片到七牛云存储
+"""
+class ImageHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def post(self):
         access_key = qiniu_setting['qiniu_ak']
@@ -36,4 +39,15 @@ class FileHandler(baseHandler.RequestHandler):
             self.write({'success': 1, 'url': 'http://7xl7p4.com1.z0.glb.clouddn.com/' + uploaded_file_name})
         else:
             self.write({'success': 0, 'message': u'图片上传失败'})
+
+"""
+上传头像到七牛云存储
+"""
+class AvatarHandler(baseHandler.RequestHandler):
+    @tornado.web.authenticated
+    def post(self):
+        access_key = qiniu_setting['qiniu_ak']
+        secret_key = qiniu_setting['qiniu_sk']
+        bucket_name = qiniu_setting['avatar_bucket']
+        q = qiniu.Auth(access_key, secret_key)
 

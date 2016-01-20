@@ -23,13 +23,13 @@ class Member:
 
     @classmethod
     def getByNick(cls, nick):
-        query = 'select id, nick, password, created, updated from tb_user where nick = %s'
+        query = 'select id, nick, password, avatar, created, updated from tb_user where nick = %s'
         member = db.get(query, nick)
         return member
 
     @classmethod
     def getById(cls, id):
-        query = 'select id, nick, password, created, updated from tb_user where id = %s'
+        query = 'select id, nick, password, avatar, created, updated from tb_user where id = %s'
         member = db.get(query, id)
         return member
 

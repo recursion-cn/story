@@ -12,6 +12,12 @@ from modules.db import db
 from modules import utils
 import constants
 
+class ConsoleHandler(baseHandler.RequestHandler):
+
+    @tornado.web.authenticated
+    @tornado.web.asynchronous
+    def get(self):
+        self.render('console.html')
 
 class LoginHandler(baseHandler.RequestHandler):
     def get(self):

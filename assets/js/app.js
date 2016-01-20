@@ -75,4 +75,6 @@ $('body').on('click', '.nav-user-panel', (e) => {
     const params = getPaginationParams()
     const page = params.page + 1;
     pagination(page, params.pageSize)
+}).on('click', '#go-back', (e) => {
+    history.go(-1);
 });

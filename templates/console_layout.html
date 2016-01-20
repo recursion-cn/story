@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta charset="UTF-8">
+    <title>夜行船</title>
+    <link rel="stylesheet" href={{ static_url("css/bootstrap.min.css") }}>
+    <link rel="stylesheet" href={{ static_url("css/fragmenthub.css") }}>
+    <link rel="stylesheet" href={{ static_url("css/style.css") }}>
+    {% block css-area %}{% end %}
+</head>
+<body>
+    <div id="js-msg-area">
+        <div class="msg-area error-msg">
+            <strong></strong>
+        </div>
+        <div class="msg-area success-msg">
+            <strong></strong>
+        </div>
+        <div class="msg-area warning-msg">
+            <strong></strong>
+        </div>
+    </div>
+    {% block main %} 夜行船 {% end %}
+</body>
+<script type="text/javascript" src={{ static_url("dist/js/dep.js") }}></script>
+<script type="text/javascript" src={{ static_url("dist/js/app.js") }}></script>
+{% block js-area  %}{% end %}
+</html>

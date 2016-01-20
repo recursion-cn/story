@@ -22,7 +22,8 @@ settings = dict(
 qiniu_setting = dict(
     qiniu_ak = 'EFkcGh5tQUQYl53T41EB6NhmMDlaTFWwLmoztGwd',
     qiniu_sk = 'rPMggSq3Cj5ZZLA7ip1BdFyrOD-nAlt7acRuDGZM',
-    images_bucket = 'photos'
+    images_bucket = 'photos',
+    avatar_bucket = 'avatar'
 )
 
 database = dict(

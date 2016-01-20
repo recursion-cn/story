@@ -5,6 +5,7 @@ html {
 }
 
 body {
+    height: 100%;
     font: 14px @font-mac, @font-win, @font-linux, @font-common;
     background-color: @white;
 }
@@ -38,130 +39,27 @@ textarea.form-control {
     z-index: 100;
     top: 0;
     width: 100%;
-    height: 50px;
-    background-color: white;
-    border-top: 2px solid @light-blue;
-    border-bottom: 1px solid #ccc;
+    height: 45px;
+    background-color: @white;
     box-shadow: 0 3px 2px -2px rgba(200,200,200,0.2);
-    .navbar {
-        min-height: 49px;
-    }
-    .navbar-default {
+    line-height: 45px;
+    font-size: 15px;
+    .header-body {
         width: @header-width;
-        max-height: 49px;
         margin: 0 auto;
-        background-color: white;
-        .navbar-header a:hover {
-            color: @dark;
-            opacity: 1;
+        .brand {
+            width: 96px;
+            float: left;
         }
-        .navbar-nav li a:hover {
-            color: @dark;
-            opacity: 1;
+        .nav-item {
+            padding: 0 5px;
+            float: left;
         }
-        .navbar-collapse.collapse {
-            top: -2px;
-            border-top: 0;
+        .left-nav {
+            float: left;
         }
-        .navbar-toggle {
-            padding: 10px 10px;
-            border: 0;
-            color: @dark;
-        }
-        .sm-menu-bar {
-            margin-top: 0;
-            text-align: center;
-            //background-color: rgba(3, 141, 152, 1);
-            background-color: @header-background;
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-            box-shadow: 0 0 6px #e0e0e0;
-            .nav.navbar-nav {
-                a {
-                    padding-top: 5px;
-                    padding-bottom: 5px;
-                    font-weight: bold;
-                    color: @dark;
-                }
-            }
-        }
-    }
-    .navbar-fixed-top {
-        border: 0;
-        border-top: 2px solid @light-blue;
-    }
-    .navbar-header {
-        a {
-            color: #000;
-        }
-    }
-    .nav.navbar-nav {
-        a {
-            padding-top: 14px;
-            transition: color .2s;
-        }
-        a:focus {
-            color: @dark;
-        }
-    }
-    .nav-user-panel.navbar-nav {
-        li {
-            min-width: 100px;
-            text-align: center;
-            .user-avatar {
-                width: 26px;
-                height: 26px;
-                border: 1px solid #e0e0e0;
-                border-radius: 3px;
-                transition: all .5s;
-            }
-            .user-avatar:hover {
-                -webkit-transform: rotateZ(360deg);
-                transform: rotateZ(360deg);
-            }
-        }
-    }
-    .user-panel {
-        position: absolute;
-        z-index: 9999;
-        width: 100%;
-        min-width: 100px;
-        min-height: 100px;
-        background-color: #f4f7f8;
-        box-shadow: 0 0 1px #f4f7f8;
-        border-top: 0;
-        top: 55px;
-        text-align: center;
-        border-radius: 2px;
-        display: none;
-        .user-panel-header {
-            height: 50px;
-            line-height: 50px;
-            a {
-                //color: @dark;
-            }
-        }
-        .user-panel-body {
-            border-top: 0;
-            .user-link-item {
-                display: block;
-                height: 36px;
-                line-height: 36px;
-                font-size: 13px;
-                a {
-                    text-decoration: none;
-                    //color: @dark;
-                }
-            }
-            .user-link-item:last-child {
-                border-bottom: none;
-            }
-            .user-link-item:hover {
-                //background-color: @dark;
-                a {
-                    text-decoration: underline;
-                }
-            }
+        .right-nav {
+            float: right;
         }
     }
 }
@@ -169,8 +67,8 @@ textarea.form-control {
 .wrapper {
     width: 100%;
     min-height: 500px;
-    padding: 70px 0 30px;
-    background-color: #fff;
+    margin-bottom: 90px;
+    padding: 100px 0 30px;
     font-size: 13px;
 }
 
@@ -178,20 +76,20 @@ textarea.form-control {
     width: 100%;
     padding: 10px;
     position: fixed;
-    //left: 100px;
-    //top: 100px;
     bottom: 0;
-    //text-align: center;
+    font-size: 12px;
     border-top: 1px solid #e0e0e0;
-    //border-radius: 3px;
     background-color: #f4f7f8;
+    z-index: 100;
+    a {
+        color: #666;
+    }
 }
 
 .read-wrapper {
     width: 100%;
     min-height: 500px;
     padding: 0 0 30px;
-    //border-top: 2px solid @light-blue;
     .main-body {
         width: 80%;
         margin: 0 auto;
@@ -201,6 +99,7 @@ textarea.form-control {
 
 .main {
     width: @main-width;
+    height: 100%;
     margin: 0 auto;
     position: relative;
 }
@@ -214,9 +113,6 @@ textarea.form-control {
 
 .main-body {
     width: 66%;
-    //background-color: #f4f7f8;
-    //border-radius: 3px;
-    //border: 1px solid #f6f6f6;
 }
 
 .main-side {
@@ -226,19 +122,13 @@ textarea.form-control {
 
 .content-area {
     padding: 10px 15px;
-    //background-color: #fefefe;
     //border-radius: 2px;
     //box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
 }
 
 .cates-area {
     min-height: 36px;
-    //margin-bottom: 10px;
     padding: 10px 15px;
-    //box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
-    background-color: #fefefe;
-    border: 1px dashed #e0e0e0;
-    border-radius: 3px;
     .cate-item {
         min-width: 30px;
         height: 23px;
@@ -389,8 +279,8 @@ textarea.form-control {
     .links-block,
     .unlogin-links-block {
         width: 200px;
-        border: 1px solid #f6f6f6;
-        border-radius: 3px;
+        border: 1px solid #eee;
+        //border-radius: 3px;
         //box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
         background-color: #f4f7f8;
         padding: 10px 23px;
@@ -425,9 +315,9 @@ textarea.form-control {
     padding-bottom: 30px;
     position: absolute;
     bottom: 0;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid #eee;
     text-align: center;
-    background-color: #f4f7f8;
+    background-color: @white;
     .info {
         padding-top: 10px;
     }

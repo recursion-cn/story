@@ -1,40 +1,36 @@
 @import "variable.less";
-.true-words {
-    width: 100%;
-    text-align: center;
-    transition: visibility 2s;
-    p {
-        font-size: 4vw;
-        animation: fade-in;
-        animation-duration: 3s;
-        -webkit-animation:fade-in 3s;
-    }
+html {
+    //height: 100%;
 }
 
-@keyframes fade-in {
-    0% {opacity: 0;}
-    10% {opacity: 0.1;}
-    20% {opacity: 0.2;}
-    30% {opacity: 0.3;}
-    40% {opacity: 0.4;}
-    50% {opacity: 0.5;}
-    60% {opacity: 0.6;}
-    70% {opacity: 0.7;}
-    80% {opacity: 0.8;}
-    90% {opacity: 0.9;}
-    100% {opacity: 1;}
+body {
+    background-image: url(/assets/img/camera.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: @white;
 }
 
-@-webkit-keyframes fade-in {
-    0% {opacity: 0;}
-    10% {opacity: 0.1;}
-    20% {opacity: 0.2;}
-    30% {opacity: 0.3;}
-    40% {opacity: 0.4;}
-    50% {opacity: 0.5;}
-    60% {opacity: 0.6;}
-    70% {opacity: 0.7;}
-    80% {opacity: 0.8;}
-    90% {opacity: 0.9;}
-    100% {opacity: 1;}
+.user-panel {
+    width: 269px;
+    height: 136px;
+    position: absolute;
+    background-color: #fff;
+    right: 0;
+    top: 126px;
+    border-radius: 3px;
+}
+
+.site-bg-panel {
+    /*width: 450px;
+    height: 400px;
+    position: absolute;
+    top: 45%;
+    margin-top: -200px;
+    left: 50%;
+    margin-left: -225px;
+    background-image: url(/assets/img/boat.svg);
+    background-repeat: no-repeat;
+    background-size: contain;*/
 }

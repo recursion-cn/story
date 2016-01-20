@@ -24,7 +24,7 @@ class IndexHandler(baseHandler.RequestHandler):
     def get(self, nick=None):
         posts = None
         if not nick:
-            self.redirect('/posts')
+            self.render('index.html')
             return
 
         select_user = 'select id, nick from tb_user where nick = %s'

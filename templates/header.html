@@ -1,39 +1,19 @@
 <div class="header">
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <span class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
-                    <span class="glyphicon glyphicon-menu-hamburger"></span>
-                </span>
-                <a href="/posts" class="navbar-brand">夜行船</a>
+    <div class="header-body">
+        <div class="brand"><a href="/">夜行船</a></div>
+        {% if current_user and current_user.nick %}
+        <div class="right-nav">
+            <div class="nav-item"><a href="/users/console">{{ current_user.nick }}</a></div>
+        </div>
+        {% else %}
+        <div class="right-nav">
+            <div class="nav-item">
+                <a href="/users/login">登录</a>
             </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav hidden-md hidden-lg sm-menu-bar">
-                    {% if not current_user %}
-                        <li><a href="/users/login">登录</a></li>
-                    {% else %}
-                        <li><a href="/users/edit">撰写文章</a></li>
-                        <li><a href={{ "/site/" + current_user.nick }}>我的主页</a></li>
-                        <li><a href="/users/draft">我的草稿</a></li>
-                        <li><a href="/users/setting">设置</a></li>
-                        <li><a href="/invite">邀请使用</a></li>
-                        <li><a href="/users/exit">退出</a></li>
-                    {% end %}
-                </ul>
-                <ul class="nav navbar-nav navbar-right nav-user-panel">
-                    <li>
-                        {% if not current_user %}
-                            <a href="/users/login">登录</a>
-                        {% else %}
-                            <a class="hidden-sm hidden-xs" href="javascript:;">
-                                <img class="user-avatar" src="http://sfault-avatar.b0.upaiyun.com/267/896/2678964345-548566d5de696_big64" alt="">
-                                <span>{{ current_user.nick }}</span>
-                                <!--span class="caret"></span-->
-                            </a>
-                        {% end %}
-                    </li>
-                </ul>
+            <div class="nav-item">
+                <a href="/users/signup">注册</a>
             </div>
         </div>
+        {% end %}
     </div>
 </div>

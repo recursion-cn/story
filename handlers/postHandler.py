@@ -10,30 +10,69 @@ import modules.utils
 from models.Post import Post
 from models.Category import Category
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor
 import tornado.web
+import tornado.ioloop
+import tornado.concurrent
+import tornado.gen
 from settings import settings
 import json
 import constants
+
+class BaseListHandler(baseHandler.RequestHandler):
+
+    executor = ThreadPoolExecutor(3)
+    io_loop = tornado.ioloop.IOLoop.current()
+
+    # 'post' or 'draft'
+    def init_post_type(self, type='post'):
+        self.post_type = type
+
+    @tornado.concurrent.run_on_executor
+    def fetch_categories(self):
+        return Category.list(self.current_user.id)
+
+    @tornado.concurrent.run_on_executor
+    def fetch_posts(self, user_id, cate_id, size):
+        if self.post_type == 'post':
+            if cate_id:
+                return Post.list_by_category(user_id, int(cate_id), 0, int(size))
+            return Post.list(user_id, 0, int(size))
+        else:
+            if cate_id:
+                return Post.drafts_by_category(user_id, int(cate_id), 0, int(size))
+            return Post.drafts(user_id, 0, int(size))
+
+    @tornado.concurrent.run_on_executor
+    def get_count(self, user_id, cate_id, size):
+        if self.post_type == 'post':
+            if cate_id:
+                return Post.count_posts_by_category(user_id, cate_id)
+            return Post.count_posts(user_id)
+        else:
+            if cate_id:
+                return Post.count_drafts_by_category(user_id, cate_id)
+            return Post.count_drafts(user_id)
 
 """
 get the current user's posts list, need login.
 @return posts list
 """
-class ListHandler(baseHandler.RequestHandler):
+class ListHandler(BaseListHandler):
+
     @tornado.web.authenticated
+    @tornado.web.asynchronous
+    @tornado.gen.engine
     def get(self):
-        default_size = 10
+        super(ListHandler, self).init_post_type()
+        default_size = 100
         need_pagination = False
         cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
-        categories = Category.list(self.current_user.id)
         user_id = self.current_user.id
-        if cate_id:
-            posts = Post.list_by_category(user_id, int(cate_id), 0, int(size))
-            count = Post.count_posts_by_category(user_id, cate_id)
-        else:
-            count = Post.count_posts(user_id)
-            posts = Post.list(user_id, 0, int(size))
+        categories = yield tornado.gen.Task(self.fetch_categories)
+        posts = yield tornado.gen.Task(self.fetch_posts, user_id, cate_id, size)
+        count = yield tornado.gen.Task(self.get_count, user_id, cate_id, size)
         if posts:
             need_pagination = count > len(posts)
             for post in posts:
@@ -46,20 +85,20 @@ class ListHandler(baseHandler.RequestHandler):
 """
 get curent user's drafts, need login.
 """
-class DraftListHandler(baseHandler.RequestHandler):
+class DraftListHandler(BaseListHandler):
+
     @tornado.web.authenticated
+    @tornado.web.asynchronous
+    @tornado.gen.engine
     def get(self):
-        default_size = 10
+        super(DraftListHandler, self).init_post_type('draft')
+        default_size = 100
         cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
-        categories = Category.list(self.current_user.id)
         user_id = self.current_user.id
-        if cate_id:
-            drafts = Post.drafts_by_category(user_id, int(cate_id), 0, int(size))
-            count = Post.count_drafts_by_category(user_id, cate_id)
-        else:
-            drafts = Post.drafts(user_id, 0, int(size))
-            count = Post.count_drafts(user_id)
+        categories = yield tornado.gen.Task(self.fetch_categories)
+        drafts = yield tornado.gen.Task(self.fetch_posts, user_id, cate_id, size)
+        count = yield tornado.gen.Task(self.get_count, user_id, cate_id, size)
         for draft in drafts:
             draft['author'] = self.current_user
             draft['last_modified_cn'] = modules.utils.date_distance(draft.last_modified)

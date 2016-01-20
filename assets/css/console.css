@@ -1,0 +1,111 @@
+html,
+body {
+  height: 100%;
+  background-color: #ffffff;
+}
+.console {
+  height: 100%;
+  background-color: #f4f7f8;
+}
+.console-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 10;
+  background-color: #1d7f9e;
+  box-shadow: 0 0 3px #134656;
+}
+.sidebar {
+  width: 200px;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(40, 40, 40, 0.96);
+  box-shadow: 0 0 6px #222;
+  position: relative;
+  float: left;
+}
+.sidebar .logo {
+  width: 100%;
+  height: 50px;
+  padding-left: 20px;
+  line-height: 50px;
+  text-align: left;
+  font-size: 18px;
+  cursor: pointer;
+  border-bottom: 1px solid #3a3a3a;
+  color: #ffffff;
+}
+.sidebar .menu .menu-item {
+  width: 100%;
+  height: 45px;
+  margin-bottom: 3px;
+  padding-left: 20px;
+  line-height: 45px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.3s;
+}
+.sidebar .menu .menu-item a {
+  color: #33bfde;
+}
+.sidebar .menu .menu-item:hover {
+  background-color: #fafafa;
+}
+.sidebar .sidebar-bg {
+  width: 100%;
+  height: 200px;
+  position: absolute;
+  bottom: 0;
+  background-image: url(/assets/img/boat.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.sec-sidebar,
+.thr-sidebar {
+  width: 236px;
+  height: 100%;
+  float: left;
+  position: relative;
+  z-index: 1;
+  margin-right: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 0 2px #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+}
+.sec-sidebar .cates-header,
+.thr-sidebar .cates-header,
+.sec-sidebar .posts-header,
+.thr-sidebar .posts-header {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background-color: #f4f7f8;
+  border-bottom: 1px solid #e0e0e0;
+}
+.sec-sidebar .cates-list,
+.thr-sidebar .cates-list {
+  text-align: center;
+  font-size: 13px;
+}
+.sec-sidebar .cates-list .cate,
+.thr-sidebar .cates-list .cate {
+  display: block;
+  height: 45px;
+  line-height: 45px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  color: #000;
+  font-weight: bold;
+}
+.sec-sidebar .cates-list .cate:hover,
+.thr-sidebar .cates-list .cate:hover {
+  background-color: #f4f7f8;
+  color: #333;
+}
+.thr-sidebar {
+  width: 326px;
+  border-left: 1px solid #e0e0e0;
+}

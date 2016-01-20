@@ -9,7 +9,8 @@ module.exports = {
         login: './assets/js/login.js',
         post: './assets/js/post.js',
         invite: './assets/js/invite.js',
-        setting: './assets/js/setting.js'
+        setting: './assets/js/setting.js',
+        console: './assets/js/console.js'
     },
     output: {
         path: './assets/dist/js',

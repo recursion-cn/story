@@ -3,6 +3,7 @@ html {
   min-height: 100%;
 }
 body {
+  height: 100%;
   font: 14px "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, Helvetica, Arial, sans-serif;
   background-color: #ffffff;
 }
@@ -30,122 +31,35 @@ textarea.form-control {
   z-index: 100;
   top: 0;
   width: 100%;
-  height: 50px;
-  background-color: white;
-  border-top: 2px solid #33bfde;
-  border-bottom: 1px solid #ccc;
+  height: 45px;
+  background-color: #ffffff;
   box-shadow: 0 3px 2px -2px rgba(200, 200, 200, 0.2);
+  line-height: 45px;
+  font-size: 15px;
 }
-.header .navbar {
-  min-height: 49px;
-}
-.header .navbar-default {
-  width: 1069px;
-  max-height: 49px;
+.header .header-body {
+  width: 1096px;
   margin: 0 auto;
-  background-color: white;
 }
-.header .navbar-default .navbar-header a:hover {
-  color: #000000;
-  opacity: 1;
+.header .header-body .brand {
+  width: 96px;
+  float: left;
 }
-.header .navbar-default .navbar-nav li a:hover {
-  color: #000000;
-  opacity: 1;
+.header .header-body .nav-item {
+  padding: 0 5px;
+  float: left;
 }
-.header .navbar-default .navbar-collapse.collapse {
-  top: -2px;
-  border-top: 0;
+.header .header-body .left-nav {
+  float: left;
 }
-.header .navbar-default .navbar-toggle {
-  padding: 10px 10px;
-  border: 0;
-  color: #000000;
-}
-.header .navbar-default .sm-menu-bar {
-  margin-top: 0;
-  text-align: center;
-  background-color: #33394a;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  box-shadow: 0 0 6px #e0e0e0;
-}
-.header .navbar-default .sm-menu-bar .nav.navbar-nav a {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-weight: bold;
-  color: #000000;
-}
-.header .navbar-fixed-top {
-  border: 0;
-  border-top: 2px solid #33bfde;
-}
-.header .navbar-header a {
-  color: #000;
-}
-.header .nav.navbar-nav a {
-  padding-top: 14px;
-  transition: color .2s;
-}
-.header .nav.navbar-nav a:focus {
-  color: #000000;
-}
-.header .nav-user-panel.navbar-nav li {
-  min-width: 100px;
-  text-align: center;
-}
-.header .nav-user-panel.navbar-nav li .user-avatar {
-  width: 26px;
-  height: 26px;
-  border: 1px solid #e0e0e0;
-  border-radius: 3px;
-  transition: all .5s;
-}
-.header .nav-user-panel.navbar-nav li .user-avatar:hover {
-  -webkit-transform: rotateZ(360deg);
-  transform: rotateZ(360deg);
-}
-.header .user-panel {
-  position: absolute;
-  z-index: 9999;
-  width: 100%;
-  min-width: 100px;
-  min-height: 100px;
-  background-color: #f4f7f8;
-  box-shadow: 0 0 1px #f4f7f8;
-  border-top: 0;
-  top: 55px;
-  text-align: center;
-  border-radius: 2px;
-  display: none;
-}
-.header .user-panel .user-panel-header {
-  height: 50px;
-  line-height: 50px;
-}
-.header .user-panel .user-panel-body {
-  border-top: 0;
-}
-.header .user-panel .user-panel-body .user-link-item {
-  display: block;
-  height: 36px;
-  line-height: 36px;
-  font-size: 13px;
-}
-.header .user-panel .user-panel-body .user-link-item a {
-  text-decoration: none;
-}
-.header .user-panel .user-panel-body .user-link-item:last-child {
-  border-bottom: none;
-}
-.header .user-panel .user-panel-body .user-link-item:hover a {
-  text-decoration: underline;
+.header .header-body .right-nav {
+  float: right;
 }
 .wrapper {
   width: 100%;
   min-height: 500px;
-  padding: 70px 0 30px;
-  background-color: #fff;
+  margin-bottom: 90px;
+  padding: 100px 0 30px;
   font-size: 13px;
 }
 .index {
@@ -153,8 +67,13 @@ textarea.form-control {
   padding: 10px;
   position: fixed;
   bottom: 0;
+  font-size: 12px;
   border-top: 1px solid #e0e0e0;
   background-color: #f4f7f8;
+  z-index: 100;
+}
+.index a {
+  color: #666;
 }
 .read-wrapper {
   width: 100%;
@@ -167,7 +86,8 @@ textarea.form-control {
   float: none;
 }
 .main {
-  width: 960px;
+  width: 1023px;
+  height: 100%;
   margin: 0 auto;
   position: relative;
 }
@@ -190,9 +110,6 @@ textarea.form-control {
 .cates-area {
   min-height: 36px;
   padding: 10px 15px;
-  background-color: #fefefe;
-  border: 1px dashed #e0e0e0;
-  border-radius: 3px;
 }
 .cates-area .cate-item {
   min-width: 30px;
@@ -317,8 +234,7 @@ textarea.form-control {
 .side-links-panel .links-block,
 .side-links-panel .unlogin-links-block {
   width: 200px;
-  border: 1px solid #f6f6f6;
-  border-radius: 3px;
+  border: 1px solid #eee;
   background-color: #f4f7f8;
   padding: 10px 23px;
 }
@@ -350,9 +266,9 @@ textarea.form-control {
   padding-bottom: 30px;
   position: absolute;
   bottom: 0;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid #eee;
   text-align: center;
-  background-color: #f4f7f8;
+  background-color: #ffffff;
 }
 .footer .info {
   padding-top: 10px;
