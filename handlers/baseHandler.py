@@ -4,8 +4,13 @@
 import tornado.web
 from modules.db import db
 import constants
+from concurrent.futures import ThreadPoolExecutor
+import tornado.ioloop
 
 class RequestHandler(tornado.web.RequestHandler):
+
+    #executor = ThreadPoolExecutor(3)
+    #io_loop = tornado.ioloop.IOLoop.current()
 
     def initialize(self):
         user_agent = self.request.headers.get('User-Agent')
@@ -20,13 +25,15 @@ class RequestHandler(tornado.web.RequestHandler):
         raise tornado.web.HTTPError(404)
 
     def get_current_user(self):
-        current_nick = self.get_secure_cookie('current_user')
-        current_user = None
-        if current_nick:
-            query = 'select id, nick from tb_user where nick = %s'
-            current_user = db.get(query, current_nick)
-
-        return current_user
+        cookie = self.get_secure_cookie('current_user')
+        if cookie:
+            current_user = {}
+            array = cookie.split('&')
+            for i in range(len(array)):
+                pair = array[i].split('=')
+                current_user[pair[0]] = pair[1]
+            return current_user
+        return None
 
     def write_error(self, status_code, **kwargs):
         if status_code == 403:

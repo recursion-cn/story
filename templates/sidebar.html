@@ -1,5 +1,5 @@
 <div class="side-links-panel">
-    {% if current_user and current_user.nick %}
+    {% if current_user and current_user['nick'] %}
     <ul class="list-unstyled links-block">
         <li>
             <a href="/users/edit">
@@ -14,7 +14,7 @@
             </a>
         </li>
         <li>
-            <a href={{ "/site/" + current_user.nick }}>
+            <a href={{ "/site/" + current_user['nick'] }}>
                 <span class="glyphicon glyphicon-home"></span>
                 <span>我的主页</span>
             </a>

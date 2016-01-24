@@ -43,7 +43,8 @@ class LoginHandler(baseHandler.RequestHandler):
             md5.update(password)
             password_md5 = md5.hexdigest().upper()
             if user.password.upper() == password_md5:
-                self.set_secure_cookie('current_user', nick, 10)
+                login_cookie = u'nick={0}&id={1}'.format(nick, user.id)
+                self.set_secure_cookie('current_user', login_cookie, 10)
                 user = json.dumps(user, cls=utils.JSONEncoder)
                 self.send_result(True, user, error_code=None)
             else:
@@ -143,7 +144,7 @@ class SettingHandler(baseHandler.RequestHandler):
     def get(self):
         query_category = 'select id, name from tb_category where user_id = %s'
         categories_id = []
-        categories = db.query(query_category, str(self.current_user.id))
+        categories = db.query(query_category, str(self.current_user['id']))
         if categories:
             for cate in categories:
                 categories_id.append(str(cate.id))

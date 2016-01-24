@@ -1,33 +1,49 @@
 {% extends "console_layout.html" %}
 {% block css-area %}
 <link rel="stylesheet" href={{ static_url("css/console.css") }}>
+<style>
+    @charset "UTF-8";
+    [ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+    }
+    ng\:form {
+        display: block;
+    }
+</style>
 {% end %}
 {% block main %}
-<div class="console clearfix" ng-app="ConsoleApp" ng-controller="MainController">
+<div class="console clearfix" ng-app="ConsoleApp" ng-controller="MainController" ng-click="hideDropdown()">
     <!--div class="console-header"></div-->
     <div class="sidebar">
-        <div class="logo">夜行船</div>
+        <!--div class="logo">夜行船</div-->
         <div class="menu">
             <div class="menu-item">
-                <a href="#users/posts"><span class="glyphicon glyphicon-list-alt"></span> 我的文章</a>
+                <a href="#users/posts"><span class="glyphicon glyphicon-book"></span> 我的文章</a>
             </div>
             <div class="menu-item">
-                <a href="#users/drafts"><span class="glyphicon glyphicon-file"></span> 我的草稿</a>
+                <a href="#users/posts"><span class="glyphicon glyphicon-list"></span> 目录管理</a>
             </div>
             <div class="menu-item">
-                <a href="#users/edit"><span class="glyphicon glyphicon-edit"></span> 写文章</a>
+                <a href="#users/drafts"><span class="glyphicon glyphicon-edit"></span> 我的草稿</a>
             </div>
             <div class="menu-item">
-                <a href=""><span class="glyphicon glyphicon-cog"></span> 设置</a>
+                <a href="#users/edit"><span class="glyphicon glyphicon-user"></span> 个人中心</a>
             </div>
+            <!--div class="menu-item">
+                <a href=""><span class="glyphicon glyphicon-cog"></span> 标签管理</a>
+            </div-->
             <div class="menu-item">
                 <a href="#users/trash"><span class="glyphicon glyphicon-trash"></span> 回收站</a>
             </div>
         </div>
-        <div class="sidebar-bg"></div>
+        <div class="sidebar-bg">
+            <p class="sign">--- 夜行船 ---</p>
+        </div>
     </div>
     <div class="sec-sidebar" ng-controller="CategoryController">
-        <div class="cates-header">文章目录</div>
+        <div class="cates-header">
+            <span>文章目录</span>
+        </div>
         <div class="cates-list">
             <div id="js-cates-list">
                 <a class="cate" href="" ng-repeat="category in categories" ng-bind="category.name"></a>
@@ -37,9 +53,26 @@
             </div>
         </div>
     </div>
-    <div class="thr-sidebar">
-        <div class="posts-header">文章列表</div>
-        <div class="posts-list"></div>
+    <div class="post-sidebar" ng-controller="PostController">
+        <div class="posts-header">
+            <span>文章列表</span>
+            <div class="header-dropdown" ng-click="displayCategoryDropdown()">
+                <span class="glyphicon glyphicon-option-vertical"></span>
+                <div class="dropdown-panel ng-hide" ng-show="categoryDropdownShow"></div>
+            </div>
+        </div>
+        <div class="posts-list">
+            <div class="post" ng-repeat="post in posts">
+                <div class="post-head">
+                    <div><a class="title" ng-href="#/posts" ng-bind="post.title"></a></div>
+                    <div><span class="date" ng-bind="post.last_modified_cn"></span></div>
+                </div>
+                <div class="summary" ng-bind-html="post.summary"></div>
+            </div>
+        </div>
+        <div class="posts-pagination ng-hide" ng-show="post.need_pagination">
+            <button class="next-page">下一页</button>
+        </div>
     </div>
     <div class="console-main"></div>
 </div>

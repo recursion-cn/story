@@ -4,8 +4,8 @@ import handlers.postHandler as post
 import handlers.userHandler as user
 import handlers.categoryHandler as cate
 import handlers.fileHandler as file
-import handlers.api.categoryApiHandler as cate_api
-import handlers.api.postApiHandler as post_api
+import handlers.api.categoryHandler as cate_api
+import handlers.api.postHandler as post_api
 
 main_url = [
     (r'/', main.IndexHandler),
@@ -16,9 +16,8 @@ main_url = [
 
 api_url = [
     (r'/api/users/change_password', user.PasswordModifyHandler),
-    (r'/api/posts', post.ListApiHandler),
+    (r'/api/posts', post_api.ListHandler),
     (r'/api/posts/(\d+)', post_api.PostHandler),
-    (r'/api/posts/like', post_api.LikeHandler),
     (r'/api/category/delete', cate.BatchDeleteHandler),
     (r'/api/invite/code', main.InviteGenerateHandler),
     (r'/api/category/list', cate_api.CategoryListHandler),

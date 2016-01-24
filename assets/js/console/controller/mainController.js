@@ -8,10 +8,15 @@
 'use strict';
 
 const Angular = require('angular');
-const MainControllerModule = Angular.module('MainControllerModule', []);
 
-MainControllerModule.controller('MainController', function($scope) {
-    //
+module.exports = Angular.module('MainControllerModule', [])
+.controller('MainController', function($scope) {
+
+    $scope.hideDropdown = function() {
+        if ($scope.categoryDropdownShow) {
+            $scope.categoryDropdownShow = false;
+        }
+    };
+
 });
 
-module.exports = MainControllerModule;

@@ -10,10 +10,7 @@ import modules.utils
 from models.Post import Post
 from models.Category import Category
 from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor
 import tornado.web
-import tornado.ioloop
-import tornado.concurrent
 import tornado.gen
 from settings import settings
 import json
@@ -21,18 +18,15 @@ import constants
 
 class BaseListHandler(baseHandler.RequestHandler):
 
-    executor = ThreadPoolExecutor(3)
-    io_loop = tornado.ioloop.IOLoop.current()
-
     # 'post' or 'draft'
     def init_post_type(self, type='post'):
         self.post_type = type
 
-    @tornado.concurrent.run_on_executor
+    @tornado.gen.coroutine
     def fetch_categories(self):
-        return Category.list(self.current_user.id)
+        return Category.list(self.current_user['id'])
 
-    @tornado.concurrent.run_on_executor
+    @tornado.gen.coroutine
     def fetch_posts(self, user_id, cate_id, size):
         if self.post_type == 'post':
             if cate_id:
@@ -43,7 +37,7 @@ class BaseListHandler(baseHandler.RequestHandler):
                 return Post.drafts_by_category(user_id, int(cate_id), 0, int(size))
             return Post.drafts(user_id, 0, int(size))
 
-    @tornado.concurrent.run_on_executor
+    @tornado.gen.coroutine
     def get_count(self, user_id, cate_id, size):
         if self.post_type == 'post':
             if cate_id:
@@ -69,7 +63,7 @@ class ListHandler(BaseListHandler):
         need_pagination = False
         cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
-        user_id = self.current_user.id
+        user_id = self.current_user['id']
         categories = yield tornado.gen.Task(self.fetch_categories)
         posts = yield tornado.gen.Task(self.fetch_posts, user_id, cate_id, size)
         count = yield tornado.gen.Task(self.get_count, user_id, cate_id, size)
@@ -95,7 +89,7 @@ class DraftListHandler(BaseListHandler):
         default_size = 100
         cate_id = self.get_query_argument('cate', None)
         size = self.get_query_argument('size', default_size)
-        user_id = self.current_user.id
+        user_id = self.current_user['id']
         categories = yield tornado.gen.Task(self.fetch_categories)
         drafts = yield tornado.gen.Task(self.fetch_posts, user_id, cate_id, size)
         count = yield tornado.gen.Task(self.get_count, user_id, cate_id, size)
@@ -113,7 +107,7 @@ class ListApiHandler(baseHandler.RequestHandler):
         summary_length = 260
         offset = self.get_query_argument('offset', 0)
         size = self.get_query_argument('size', 10)
-        user_id = self.current_user.id
+        user_id = self.current_user['id']
         count = Post.count_posts(user_id)
         posts = Post.list(user_id, int(offset), int(size))
         if posts:
@@ -139,7 +133,7 @@ class PostHandler(baseHandler.RequestHandler):
                 if not self.current_user:
                     raise tornado.web.HTTPError(403)
                     return
-                elif self.current_user.id != post.user_id:
+                elif self.current_user['id'] != post.user_id:
                     raise tornado.web.HTTPError(403)
                     return
             query_author = 'select id, nick from tb_user where id = %s'
@@ -162,7 +156,7 @@ direct to the edit page
 class EditHandler(baseHandler.RequestHandler):
     @tornado.web.authenticated
     def get(self, post_id=None):
-        user_id = self.current_user.id
+        user_id = self.current_user['id']
         post = None
         if post_id:
             _post = Post.get_post(post_id)
@@ -204,7 +198,7 @@ class InsertOrUpdateHandler(baseHandler.RequestHandler):
         content = self.get_body_argument('content', None)
         html_content = self.get_body_argument('html_content', None)
         category_id = self.get_body_argument('category', None)
-        user_id = self.current_user.id
+        user_id = self.current_user['id']
         post_public = self.get_body_argument('privacy', None)
         post_id = self.get_body_argument('id', -1)
         draft = self.get_body_argument('draft', 0)

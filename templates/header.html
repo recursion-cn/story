@@ -1,9 +1,9 @@
 <div class="header">
     <div class="header-body">
         <div class="brand"><a href="/">夜行船</a></div>
-        {% if current_user and current_user.nick %}
+        {% if current_user and current_user['nick'] %}
         <div class="right-nav">
-            <div class="nav-item"><a href="/users/console">{{ current_user.nick }}</a></div>
+            <div class="nav-item"><a href="/users/console">{{ current_user['nick'] }}</a></div>
         </div>
         {% else %}
         <div class="right-nav">
