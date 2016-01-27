@@ -4,7 +4,7 @@
 # author victor li nianchaoli@msn.cn
 # date 2015/12/03
 
-import baseApiHandler
+import apiHandler
 from modules.db import db
 from models.Post import Post
 import modules.utils
@@ -18,7 +18,7 @@ from settings import settings
 import json
 import constants
 
-class ListHandler(baseApiHandler.RequestHandler):
+class ListHandler(apiHandler.RequestHandler):
 
     @tornado.gen.coroutine
     def fetch_posts(self, offset, size):
@@ -56,7 +56,7 @@ class ListHandler(baseApiHandler.RequestHandler):
 """
 get single post by id
 """
-class PostHandler(baseApiHandler.RequestHandler):
+class PostHandler(apiHandler.RequestHandler):
 
     def get(self, id):
         post = Post.get_post(id)

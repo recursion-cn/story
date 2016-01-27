@@ -3,9 +3,17 @@
 html,
 body {
     height: 100%;
-    font: 14px @font-mac, @font-win, @font-linux, @font-common;
+    //font: 16px @font-mac, @font-win, @font-linux, @font-common;
     background-color: @white;
     overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+scrollbar {
+    width: 0px;
 }
 
 .console {
@@ -13,182 +21,42 @@ body {
     background-color: @white;
 }
 
-.console-header {
-    position: fixed;
-    top: 0;
+.sidebar-wrapper {
+    height: 100%;
+    .sidebar {
+        height: 100%;
+    }
+}
+
+.view-wrapper {
+    height: 100%;
+}
+
+.header-wrapper {
     width: 100%;
-    height: 50px;
-    z-index: 10;
-    background-color: @dark-blue;
-    box-shadow: 0 0 3px #134656;
+    position: fixed;
+    z-index: 99;
 }
 
-.sidebar {
-    width: 200px;
+.post-wrapper {
     height: 100%;
-    z-index: 100;
-    padding-top: 20px;
-    //background-color: rgba(40, 40, 40, .96);
-    background-color: rgba(23, 116, 171, .96);
-    //box-shadow: 0 0 6px #222;
-    position: relative;
-    float: left;
-    .menu {
-        .menu-item {
-            width: 100%;
-            height: 36px;
-            margin-bottom: 3px;
-            padding-left: 20px;
-            line-height: 36px;
-            text-align: left;
-            cursor: pointer;
-            font-size: 13px;
-            transition: background-color .3s;
-            a {
-                color: #fff;
-            }
-        }
-        .menu-item:hover {
-            background-color: @light-blue;
-        }
-    }
-    .sidebar-bg {
-        width: 100%;
-        height: 200px;
-        position: absolute;
-        bottom: 0;
-        background-image: url(/assets/img/boat.png);
-        background-repeat: no-repeat;
-        background-size: contain;
-        .sign {
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            text-align: center;
-            font-size: 12px;
-            color: @white;
-        }
-    }
 }
 
-.sec-sidebar,
-.post-sidebar {
-    width: 236px;
+.posts-list-wrapper {
     height: 100%;
-    float: left;
-    position: relative;
-    z-index: 1;
-    margin-right: 5px;
-    background-color: @white;
-    //box-shadow: 0 0 2px #e0e0e0;
+    overflow-y: auto;
     border-right: 1px solid #ececec;
-    overflow-y: scroll;
-    .cates-header,
-    .posts-header {
-        width: 100%;
-        height: 50px;
-        line-height: 50px;
-        text-align: center;
-        background-color: #f4f7f8;
-        border-bottom: 1px solid #ececec;
-        position: relative;
-        color: #888;
-        .header-dropdown {
-            width: 30px;
-            height: 30px;
-            margin-top: -15px;
-            display: inline-block;
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            line-height: 30px;
-            cursor: pointer;
-            .dropdown-panel {
-                width: 145px;
-                height: 236px;
-                position: absolute;
-                left: -22px;
-                border-radius: 3px;
-                background: #fff;
-                box-shadow: 0 0 3px #c0c0c0;
-            }
-        }
-        .header-dropdown:hover {
-            color: #000;
-        }
-    }
     .posts-list {
-        background-color: #fafafa;
-        .post {
-            padding: 10px;
-            border-bottom: 1px solid #ececec;
-            background-color: #fff;
-            cursor: pointer;
-            .post-head {
-                margin-bottom: 8px;
-            }
-            .date {
-                color: #666;
-                font-size: 13px;
-            }
-            .summary {
-                max-height: 100px;
-                color: #888;
-                font-size: 12px;
-                overflow: hidden;
-            }
-        }
-        .post:last-child {
-            border-bottom: 0;
-        }
-        .post:hover {
-            background-color: #f4f7f8;
-        }
-    }
-    .posts-pagination {
-        width: 100%;
-        height: 50px;
-        padding: 10px;
-        text-align: center;
-        .next-page {
-            width: 100px;
-            height: 30px;
-            font-size: 12px;
-            border: 1px solid @light-blue;
-            background-color: @white;
-            transition: all .3s;
-            color: @light-blue;
-        }
-        .next-page:hover {
-            border-color: @blue;
-            background-color: @light-blue;
-            color: @white;
-        }
-    }
-    .cates-list {
-        text-align: center;
-        font-size: 13px;
-        .cate {
-            display: block;
-            height: 45px;
-            line-height: 45px;
-            transition: background-color .3s;
-            cursor: pointer;
-            color: #000;
-            font-weight: bold;
-        }
-        .cate:hover {
-            background-color: #f4f7f8;
-            color: #333;
-        }
+        padding-top: 30px;
     }
 }
 
-.sec-sidebar {
-    display: none;
-}
-
-.post-sidebar {
-    width: 326px;
-    border-left: 1px solid #e0e0e0;
+.post-body-wrapper {
+    height: 100%;
+    overflow-y: auto;
+    .post-body {
+        width: 68%;
+        margin: 0 auto;
+        padding: 69px 20px;
+    }
 }

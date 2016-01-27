@@ -1,0 +1,22 @@
+<div class="post-sidebar" ng-controller="PostController">
+    <div class="posts-header">
+        <span>文章列表</span>
+        <div class="header-dropdown" ng-click="displayCategoryDropdown()">
+            <span class="glyphicon glyphicon-option-vertical"></span>
+            <div class="dropdown-panel ng-hide" ng-show="categoryDropdownShow"></div>
+        </div>
+    </div>
+    <div class="posts-list">
+        <div class="post" ng-repeat="post in posts">
+            <div class="post-head">
+                <div><a class="title" ng-href=[["#post/"+post.id]] ng-bind="post.title"></a></div>
+                <div><span class="date" ng-bind="post.last_modified_cn"></span></div>
+            </div>
+            <div class="summary" ng-bind="post.summary"></div>
+        </div>
+    </div>
+    <div class="posts-pagination ng-hide" ng-show="loadMoreDisplay">
+        <button class="next-page" ng-click="loadMore()">MORE</button>
+    </div>
+</div>
+<div class="console-main"></div>

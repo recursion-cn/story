@@ -4,7 +4,7 @@
 # author victor li nianchaoli@msn.cn
 # date 2016/01/16
 
-import baseApiHandler
+import apiHandler
 from models.Category import Category
 import modules.utils
 import tornado.web
@@ -12,7 +12,7 @@ import tornado.gen
 import json
 import constants
 
-class CategoryListHandler(baseApiHandler.RequestHandler):
+class CategoryListHandler(apiHandler.RequestHandler):
 
     @tornado.gen.coroutine
     def fetch_categories(self):

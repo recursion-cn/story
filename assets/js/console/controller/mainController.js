@@ -12,11 +12,5 @@ const Angular = require('angular');
 module.exports = Angular.module('MainControllerModule', [])
 .controller('MainController', function($scope) {
 
-    $scope.hideDropdown = function() {
-        if ($scope.categoryDropdownShow) {
-            $scope.categoryDropdownShow = false;
-        }
-    };
-
 });
 

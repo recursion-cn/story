@@ -1,0 +1,80 @@
+<!--div class="posts-wrapper" ng-controller="PostController">
+    <div class="post-sidebar">
+        <div class="wrapper-header">
+            <span>Posts List</span>
+        </div>
+        <div class="posts-list">
+            <div class="post" ng-repeat="post in posts">
+                <div class="post-head">
+                    <div><a class="title" ng-href=[["#post/"+post.id]] ng-bind="post.title"></a></div>
+                    <div><span class="date" ng-bind="post.last_modified_cn"></span></div>
+                </div>
+                <div class="summary" ng-bind="post.summary"></div>
+            </div>
+        </div>
+        <div class="posts-pagination ng-hide" ng-show="loadMoreDisplay">
+            <button class="next-page" ng-click="loadMore()">MORE</button>
+        </div>
+    </div>
+    <div class="post-detail">
+        <div class="wrapper-header">Post Body</div>
+        <div class="content-wrapper">
+            <div class="post-body">
+                <div flex-container="row" flex-gutter="24">
+                    <div flex-item>
+                        <div class="card">
+                            <div class="p+">
+                                <span class="fs-subhead tc-black-2 display-block">Lorem Ipsum</span>
+                                <div class="paragraph fs-body-1" ng-bind-html="firstPost.html">
+                                </div>
+                            </div>
+                            <div class="card__actions">
+                                <button class="btn btn--m btn--black btn--flat" lx-ripple>Share</button>
+                                <button class="btn btn--m btn--orange btn--flat" lx-ripple>Learn more</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div-->
+<div class="tc-white-1 post-wrapper" flex-container="row" ng-controller="PostController">
+    <div flex-item="3" flex-item-order="1" class="posts-list-wrapper">
+        <div class="tc-white-1" flex-container="column">
+            <div class="p+ bgc-teal-500 header-wrapper">Posts List</div>
+            <div class="p+ bgc-white-2">
+                <div flex-container="row" flex-gutter="24" flex-wrap>
+                    <div flex-item="12" class="posts-list">
+                        <ul class="list mt++">
+                            <li class="list-row list-row--multi-line list-row--has-separator" ng-repeat="post in posts">
+                                <div class="list-row__content">
+                                    <a class="fs-title display-block tc-blue-900" href="" ng-bind="post.title"></a>
+                                    <span class="fs-body-2 display-block tc-black-2">
+                                        <i class="mdi mdi-clock"></i>
+                                        <span ng-bind="post.last_modified_cn"></span>
+                                    </span>
+                                    <span class="display-block fs-body-1 tc-black-2" ng-bind="post.summary"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div flex-item="9" flex-item-order="2" class="post-body-wrapper">
+        <div class="tc-white-1" flex-container="column" flex-align="space-between">
+            <div class="p+ bgc-teal-500 header-wrapper">Posts Content</div>
+            <div class="p+ bgc-white-2">
+                <div flex-container="row" flex-gutter="24" flex-wrap>
+                    <div flex-item="7" class="post-body">
+                        <div class="fs-title tc-black" ng-bind="firstPost.title"></div>
+                        <div class="display-block fs-body-2 tc-black-2" ng-bind-html="firstPost.html"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

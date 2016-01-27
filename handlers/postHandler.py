@@ -99,27 +99,6 @@ class DraftListHandler(BaseListHandler):
 
         self.render('drafts.html', cate_id=cate_id, categories=categories, drafts=drafts)
 
-class ListApiHandler(baseHandler.RequestHandler):
-    @tornado.web.authenticated
-    def get(self):
-        res = {'data': None}
-        need_pagination = False
-        summary_length = 260
-        offset = self.get_query_argument('offset', 0)
-        size = self.get_query_argument('size', 10)
-        user_id = self.current_user['id']
-        count = Post.count_posts(user_id)
-        posts = Post.list(user_id, int(offset), int(size))
-        if posts:
-            need_pagination = count > (int(offset) + int(size))
-            for post in posts:
-                post['author'] = self.current_user
-                post['last_modified_cn'] = modules.utils.date_distance(post.last_modified)
-
-            data = {'posts': posts, 'need_pagination': need_pagination}
-
-            self.send_result(True, data, None)
-
 """
 get single post by id
 """

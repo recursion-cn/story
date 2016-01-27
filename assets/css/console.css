@@ -1,205 +1,50 @@
 html,
 body {
   height: 100%;
-  font: 14px "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, Helvetica, Arial, sans-serif;
   background-color: #ffffff;
   overflow: hidden;
+}
+::-webkit-scrollbar {
+  width: 0px;
+}
+scrollbar {
+  width: 0px;
 }
 .console {
   height: 100%;
   background-color: #ffffff;
 }
-.console-header {
+.sidebar-wrapper {
+  height: 100%;
+}
+.sidebar-wrapper .sidebar {
+  height: 100%;
+}
+.view-wrapper {
+  height: 100%;
+}
+.header-wrapper {
+  width: 100%;
   position: fixed;
-  top: 0;
-  width: 100%;
-  height: 50px;
-  z-index: 10;
-  background-color: #1d7f9e;
-  box-shadow: 0 0 3px #134656;
+  z-index: 99;
 }
-.sidebar {
-  width: 200px;
+.post-wrapper {
   height: 100%;
-  z-index: 100;
-  padding-top: 20px;
-  background-color: rgba(23, 116, 171, 0.96);
-  position: relative;
-  float: left;
 }
-.sidebar .menu .menu-item {
-  width: 100%;
-  height: 36px;
-  margin-bottom: 3px;
-  padding-left: 20px;
-  line-height: 36px;
-  text-align: left;
-  cursor: pointer;
-  font-size: 13px;
-  transition: background-color 0.3s;
-}
-.sidebar .menu .menu-item a {
-  color: #fff;
-}
-.sidebar .menu .menu-item:hover {
-  background-color: #33bfde;
-}
-.sidebar .sidebar-bg {
-  width: 100%;
-  height: 200px;
-  position: absolute;
-  bottom: 0;
-  background-image: url(/assets/img/boat.png);
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-.sidebar .sidebar-bg .sign {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  text-align: center;
-  font-size: 12px;
-  color: #ffffff;
-}
-.sec-sidebar,
-.post-sidebar {
-  width: 236px;
+.posts-list-wrapper {
   height: 100%;
-  float: left;
-  position: relative;
-  z-index: 1;
-  margin-right: 5px;
-  background-color: #ffffff;
+  overflow-y: auto;
   border-right: 1px solid #ececec;
-  overflow-y: scroll;
 }
-.sec-sidebar .cates-header,
-.post-sidebar .cates-header,
-.sec-sidebar .posts-header,
-.post-sidebar .posts-header {
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  text-align: center;
-  background-color: #f4f7f8;
-  border-bottom: 1px solid #ececec;
-  position: relative;
-  color: #888;
+.posts-list-wrapper .posts-list {
+  padding-top: 30px;
 }
-.sec-sidebar .cates-header .header-dropdown,
-.post-sidebar .cates-header .header-dropdown,
-.sec-sidebar .posts-header .header-dropdown,
-.post-sidebar .posts-header .header-dropdown {
-  width: 30px;
-  height: 30px;
-  margin-top: -15px;
-  display: inline-block;
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  line-height: 30px;
-  cursor: pointer;
+.post-body-wrapper {
+  height: 100%;
+  overflow-y: auto;
 }
-.sec-sidebar .cates-header .header-dropdown .dropdown-panel,
-.post-sidebar .cates-header .header-dropdown .dropdown-panel,
-.sec-sidebar .posts-header .header-dropdown .dropdown-panel,
-.post-sidebar .posts-header .header-dropdown .dropdown-panel {
-  width: 145px;
-  height: 236px;
-  position: absolute;
-  left: -22px;
-  border-radius: 3px;
-  background: #fff;
-  box-shadow: 0 0 3px #c0c0c0;
-}
-.sec-sidebar .cates-header .header-dropdown:hover,
-.post-sidebar .cates-header .header-dropdown:hover,
-.sec-sidebar .posts-header .header-dropdown:hover,
-.post-sidebar .posts-header .header-dropdown:hover {
-  color: #000;
-}
-.sec-sidebar .posts-list,
-.post-sidebar .posts-list {
-  background-color: #fafafa;
-}
-.sec-sidebar .posts-list .post,
-.post-sidebar .posts-list .post {
-  padding: 10px;
-  border-bottom: 1px solid #ececec;
-  background-color: #fff;
-  cursor: pointer;
-}
-.sec-sidebar .posts-list .post .post-head,
-.post-sidebar .posts-list .post .post-head {
-  margin-bottom: 8px;
-}
-.sec-sidebar .posts-list .post .date,
-.post-sidebar .posts-list .post .date {
-  color: #666;
-  font-size: 13px;
-}
-.sec-sidebar .posts-list .post .summary,
-.post-sidebar .posts-list .post .summary {
-  max-height: 100px;
-  color: #888;
-  font-size: 12px;
-  overflow: hidden;
-}
-.sec-sidebar .posts-list .post:last-child,
-.post-sidebar .posts-list .post:last-child {
-  border-bottom: 0;
-}
-.sec-sidebar .posts-list .post:hover,
-.post-sidebar .posts-list .post:hover {
-  background-color: #f4f7f8;
-}
-.sec-sidebar .posts-pagination,
-.post-sidebar .posts-pagination {
-  width: 100%;
-  height: 50px;
-  padding: 10px;
-  text-align: center;
-}
-.sec-sidebar .posts-pagination .next-page,
-.post-sidebar .posts-pagination .next-page {
-  width: 100px;
-  height: 30px;
-  font-size: 12px;
-  border: 1px solid #33bfde;
-  background-color: #ffffff;
-  transition: all .3s;
-  color: #33bfde;
-}
-.sec-sidebar .posts-pagination .next-page:hover,
-.post-sidebar .posts-pagination .next-page:hover {
-  border-color: #4594af;
-  background-color: #33bfde;
-  color: #ffffff;
-}
-.sec-sidebar .cates-list,
-.post-sidebar .cates-list {
-  text-align: center;
-  font-size: 13px;
-}
-.sec-sidebar .cates-list .cate,
-.post-sidebar .cates-list .cate {
-  display: block;
-  height: 45px;
-  line-height: 45px;
-  transition: background-color 0.3s;
-  cursor: pointer;
-  color: #000;
-  font-weight: bold;
-}
-.sec-sidebar .cates-list .cate:hover,
-.post-sidebar .cates-list .cate:hover {
-  background-color: #f4f7f8;
-  color: #333;
-}
-.sec-sidebar {
-  display: none;
-}
-.post-sidebar {
-  width: 326px;
-  border-left: 1px solid #e0e0e0;
+.post-body-wrapper .post-body {
+  width: 68%;
+  margin: 0 auto;
+  padding: 69px 20px;
 }
